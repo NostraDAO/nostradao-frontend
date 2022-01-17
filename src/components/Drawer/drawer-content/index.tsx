@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Social from "./social";
 import StakeIcon from "../../../assets/icons/stake.svg";
 import BondIcon from "../../../assets/icons/bond.svg";
-import WonderlandIcon from "../../../assets/icons/wonderland-nav-header.svg";
+import NostraIcon from "../../../assets/icons/noun-fedora-hat.svg";
 import DashboardIcon from "../../../assets/icons/dashboard.svg";
 import { trim, shorten } from "../../../helpers";
 import { useAddress } from "../../../hooks";
@@ -28,7 +28,7 @@ function NavContent() {
         if (currentPath.indexOf("stake") >= 0 && page === "stake") {
             return true;
         }
-        if (currentPath.indexOf("mints") >= 0 && page === "mints") {
+        if (currentPath.indexOf("bonds") >= 0 && page === "bonds") {
             return true;
         }
         if (currentPath.indexOf("calculator") >= 0 && page === "calculator") {
@@ -40,10 +40,10 @@ function NavContent() {
     return (
         <div className="dapp-sidebar">
             <div className="branding-header">
-                <Link href="https://wonderland.money" target="_blank">
-                    <img alt="" src={WonderlandIcon} />
+                <Link href="#" target="_blank">
+                    <img alt="Fedora Hat by iconixar from NounProject.com" className="logo-svg" src={NostraIcon} width="200" />
                 </Link>
-
+                <h1 className="title">Nostra DAO</h1>
                 {address && (
                     <div className="wallet-link">
                         <Link href={`https://cchain.explorer.avax.network/address/${address}`} target="_blank">
@@ -86,22 +86,22 @@ function NavContent() {
                     <Link
                         component={NavLink}
                         id="bond-nav"
-                        to="/mints"
+                        to="/bonds"
                         isActive={(match: any, location: any) => {
-                            return checkPage(location, "mints");
+                            return checkPage(location, "bonds");
                         }}
                         className={classnames("button-dapp-menu", { active: isActive })}
                     >
                         <div className="dapp-menu-item">
                             <img alt="" src={BondIcon} />
-                            <p>Mint</p>
+                            <p>Bond</p>
                         </div>
                     </Link>
 
                     <div className="bond-discounts">
-                        <p>Mint discounts</p>
+                        <p>Bond discounts</p>
                         {bonds.map((bond, i) => (
-                            <Link component={NavLink} to={`/mints/${bond.name}`} key={i} className={"bond"}>
+                            <Link component={NavLink} to={`/bonds/${bond.name}`} key={i} className={"bond"}>
                                 {!bond.bondDiscount ? (
                                     <Skeleton variant="text" width={"150px"} />
                                 ) : (
@@ -133,9 +133,6 @@ function NavContent() {
                 <Link href="https://wonderland.gitbook.io/wonderland/" target="_blank">
                     <img alt="" src={DocsIcon} />
                     <p>Docs</p>
-                </Link>
-                <Link href="https://legacy.wonderland.money/" target="_blank">
-                    <p>Legacy website</p>
                 </Link>
             </div>
             <Social />

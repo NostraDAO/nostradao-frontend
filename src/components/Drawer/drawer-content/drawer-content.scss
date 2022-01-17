@@ -22,6 +22,10 @@
       }
     }
   }
+  .title {
+    font-family: Montserrat SemiBold;
+    color:#FFFFFF
+  }
 
   .dapp-menu-links{
     display: flex;
@@ -158,4 +162,9 @@
       background: #181B1C;
     }
   }
+}
+
+.logo-svg {  
+
+filter: invert(92%) sepia(100%) saturate(5%) hue-rotate(137deg) brightness(104%) contrast(103%);
 }
