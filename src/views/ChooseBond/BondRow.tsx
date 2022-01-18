@@ -59,7 +59,7 @@ export function BondDataCard({ bond }: IBondProps) {
                         )}
                     </p>
                 </div>
-                <Link component={NavLink} to={`/mints/${bond.name}`}>
+                <Link component={NavLink} to={`/bonds/${bond.name}`}>
                     <div className="bond-table-btn">
                         <p>Bond {bond.displayName}</p>
                     </div>
@@ -110,7 +110,7 @@ export function BondTableData({ bond }: IBondProps) {
                 </p>
             </TableCell>
             <TableCell>
-                <Link component={NavLink} to={`/mints/${bond.name}`}>
+                <Link component={NavLink} to={`/bonds/${bond.name}`}>
                     <div className="bond-table-btn">
                         <p>Bond</p>
                     </div>
