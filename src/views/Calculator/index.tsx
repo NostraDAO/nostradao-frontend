@@ -86,7 +86,7 @@ function Calculator() {
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={4} md={4} lg={4}>
                                         <div className="calculator-card-apy">
-                                            <p className="calculator-card-metrics-title">TIME Price</p>
+                                            <p className="calculator-card-metrics-title">BOSS Price</p>
                                             <p className="calculator-card-metrics-value">{isAppLoading ? <Skeleton width="100px" /> : `$${trimeMarketPrice}`}</p>
                                         </div>
                                     </Grid>
@@ -100,8 +100,8 @@ function Calculator() {
                                     </Grid>
                                     <Grid item xs={6} sm={4} md={4} lg={4}>
                                         <div className="calculator-card-index">
-                                            <p className="calculator-card-metrics-title">Your MEMO Balance</p>
-                                            <p className="calculator-card-metrics-value">{isAppLoading ? <Skeleton width="100px" /> : <>{trimmedMemoBalance} MEMO</>}</p>
+                                            <p className="calculator-card-metrics-title">Your BOSS Balance</p>
+                                            <p className="calculator-card-metrics-value">{isAppLoading ? <Skeleton width="100px" /> : <>{trimmedMemoBalance} BOSS</>}</p>
                                         </div>
                                     </Grid>
                                 </Grid>
@@ -114,7 +114,7 @@ function Calculator() {
                                     <Grid container spacing={3}>
                                         <Grid item xs={12} sm={6}>
                                             <div className="calculator-card-action-area-inp-wrap">
-                                                <p className="calculator-card-action-area-inp-wrap-title">MEMO Amount</p>
+                                                <p className="calculator-card-action-area-inp-wrap-title">BOSS Amount</p>
                                                 <OutlinedInput
                                                     type="number"
                                                     placeholder="Amount"
@@ -154,7 +154,7 @@ function Calculator() {
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
                                             <div className="calculator-card-action-area-inp-wrap">
-                                                <p className="calculator-card-action-area-inp-wrap-title">TIME price at purchase ($)</p>
+                                                <p className="calculator-card-action-area-inp-wrap-title">BOSS price at purchase ($)</p>
                                                 <OutlinedInput
                                                     type="number"
                                                     placeholder="Amount"
@@ -174,7 +174,7 @@ function Calculator() {
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
                                             <div className="calculator-card-action-area-inp-wrap">
-                                                <p className="calculator-card-action-area-inp-wrap-title">Future TIME market price ($)</p>
+                                                <p className="calculator-card-action-area-inp-wrap-title">Future BOSS market price ($)</p>
                                                 <OutlinedInput
                                                     type="number"
                                                     placeholder="Amount"
@@ -208,8 +208,8 @@ function Calculator() {
                                         <p className="data-row-value">{isAppLoading ? <Skeleton width="80px" /> : <>${calcCurrentWealth()}</>}</p>
                                     </div>
                                     <div className="data-row">
-                                        <p className="data-row-name">TIME rewards estimation</p>
-                                        <p className="data-row-value">{isAppLoading ? <Skeleton width="80px" /> : <>{rewardsEstimation} TIME</>}</p>
+                                        <p className="data-row-name">BOSS rewards estimation</p>
+                                        <p className="data-row-value">{isAppLoading ? <Skeleton width="80px" /> : <>{rewardsEstimation} BOSS</>}</p>
                                     </div>
                                     <div className="data-row">
                                         <p className="data-row-name">Potential return</p>

@@ -93,7 +93,7 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
     const trimmedMemoBalance = trim(Number(memoBalance), 6);
     const trimmedWmemoBalance = trim(Number(wmemoBalance), 6);
 
-    const getBalance = () => (isWrap ? `${trimmedMemoBalance} MEMO` : `${trimmedWmemoBalance} wMEMO`);
+    const getBalance = () => (isWrap ? `${trimmedMemoBalance} BOSS` : `${trimmedWmemoBalance} sBOSS`);
 
     const handleOnWrap = async () => {
         if (await checkWrongNetwork()) return;
@@ -121,7 +121,7 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
                     </IconButton>
                     <div className="wrap-price" onClick={() => setIsWrapPrice(!isWrapPrice)}>
                         <p>
-                            1 {isWrapPrice ? "MEMO" : "wMEMO"} = {`${trim(wrapPrice, 4)} ${isWrapPrice ? "wMEMO" : "MEMO"}`}
+                            1 {isWrapPrice ? "BOSS" : "wBOSS"} = {`${trim(wrapPrice, 4)} ${isWrapPrice ? "wBOSS" : "BOSS"}`}
                         </p>
                     </div>
                 </div>
@@ -142,7 +142,7 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
                         startAdornment={
                             <InputAdornment position="start">
                                 <div className="wrap-action-input-text">
-                                    <p>{isWrap ? "MEMO" : "wMEMO"}</p>
+                                    <p>{isWrap ? "BOSS" : "wBOSS"}</p>
                                 </div>
                             </InputAdornment>
                         }
@@ -169,7 +169,7 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
                         startAdornment={
                             <InputAdornment position="start">
                                 <div className="wrap-action-input-text">
-                                    <p>{isWrap ? "wMEMO" : "MEMO"}</p>
+                                    <p>{isWrap ? "wBOSS" : "BOSS"}</p>
                                 </div>
                             </InputAdornment>
                         }
