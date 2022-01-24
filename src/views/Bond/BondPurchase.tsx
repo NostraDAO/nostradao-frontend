@@ -172,9 +172,9 @@ function BondPurchase({ bond, slippage }: IBondPurchaseProps) {
                     </div>
                 )}
 
-                <div className="transaction-button bond-approve-btn" onClick={handleZapinOpen}>
+                {/* <div className="transaction-button bond-approve-btn" onClick={handleZapinOpen}>
                     <p>Zap</p>
-                </div>
+                </div> */}
 
                 {!hasAllowance() && !useAvax && (
                     <div className="help-text">
@@ -226,7 +226,7 @@ function BondPurchase({ bond, slippage }: IBondPurchaseProps) {
                     </div>
                 </Box>
             </Slide>
-            <Zapin open={zapinOpen} handleClose={handleZapinClose} bond={bond} />
+            {/* <Zapin open={zapinOpen} handleClose={handleZapinClose} bond={bond} /> */}
         </Box>
     );
 }

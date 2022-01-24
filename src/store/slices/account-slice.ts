@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { getAddresses } from "../../constants";
-import { TimeTokenContract, MemoTokenContract, MimTokenContract, wMemoTokenContract } from "../../abi";
+import { BossTokenContract, sBossTokenContract, MimTokenContract, wsBossTokenContract } from "../../abi";
 import { setAll } from "../../helpers";
 
 import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
@@ -19,27 +19,27 @@ interface IGetBalances {
 
 interface IAccountBalances {
     balances: {
-        memo: string;
-        time: string;
-        wmemo: string;
+        sboss: string;
+        boss: string;
+        wsboss: string;
     };
 }
 
 export const getBalances = createAsyncThunk("account/getBalances", async ({ address, networkID, provider }: IGetBalances): Promise<IAccountBalances> => {
     const addresses = getAddresses(networkID);
 
-    const memoContract = new ethers.Contract(addresses.MEMO_ADDRESS, MemoTokenContract, provider);
-    const memoBalance = await memoContract.balanceOf(address);
-    const timeContract = new ethers.Contract(addresses.TIME_ADDRESS, TimeTokenContract, provider);
-    const timeBalance = await timeContract.balanceOf(address);
-    const wmemoContract = new ethers.Contract(addresses.WMEMO_ADDRESS, wMemoTokenContract, provider);
-    const wmemoBalance = await wmemoContract.balanceOf(address);
+    const sBossContract = new ethers.Contract(addresses.SBOSS_ADDRESS, sBossTokenContract, provider);
+    const sBossBalance = await memoContract.balanceOf(address);
+    const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, BossTokenContract, provider);
+    const bossBalance = await timeContract.balanceOf(address);
+    const wsBossContract = new ethers.Contract(addresses.WSBOSS_ADDRESS, wsBossTokenContract, provider);
+    const wsBossBalance = await wmemoContract.balanceOf(address);
 
     return {
         balances: {
-            memo: ethers.utils.formatUnits(memoBalance, "gwei"),
-            time: ethers.utils.formatUnits(timeBalance, "gwei"),
-            wmemo: ethers.utils.formatEther(wmemoBalance),
+            sboss: ethers.utils.formatUnits(sbossBalance, "gwei"),
+            boss: ethers.utils.formatUnits(bossBalance, "gwei"),
+            wsboss: ethers.utils.formatEther(wsbossBalance),
         },
     };
 });
@@ -52,64 +52,64 @@ interface ILoadAccountDetails {
 
 interface IUserAccountDetails {
     balances: {
-        time: string;
-        memo: string;
-        wmemo: string;
+        boss: string;
+        sboss: string;
+        wsboss: string;
     };
     staking: {
-        time: number;
-        memo: number;
+        boss: number;
+        sboss: number;
     };
     wrapping: {
-        memo: number;
+        sboss: number;
     };
 }
 
 export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails", async ({ networkID, provider, address }: ILoadAccountDetails): Promise<IUserAccountDetails> => {
-    let timeBalance = 0;
-    let memoBalance = 0;
+    let bossBalance = 0;
+    let sbossBalance = 0;
 
-    let wmemoBalance = 0;
-    let memoWmemoAllowance = 0;
+    let wsbossBalance = 0;
+    let sbossWsBossAllowance = 0;
 
     let stakeAllowance = 0;
     let unstakeAllowance = 0;
 
     const addresses = getAddresses(networkID);
 
-    if (addresses.TIME_ADDRESS) {
-        const timeContract = new ethers.Contract(addresses.TIME_ADDRESS, TimeTokenContract, provider);
-        timeBalance = await timeContract.balanceOf(address);
-        stakeAllowance = await timeContract.allowance(address, addresses.STAKING_HELPER_ADDRESS);
+    if (addresses.BOSS_ADDRESS) {
+        const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, BossTokenContract, provider);
+        bossBalance = await bossContract.balanceOf(address);
+        stakeAllowance = await bossContract.allowance(address, addresses.STAKING_HELPER_ADDRESS);
     }
 
-    if (addresses.MEMO_ADDRESS) {
-        const memoContract = new ethers.Contract(addresses.MEMO_ADDRESS, MemoTokenContract, provider);
-        memoBalance = await memoContract.balanceOf(address);
-        unstakeAllowance = await memoContract.allowance(address, addresses.STAKING_ADDRESS);
+    if (addresses.SBOSS_ADDRESS) {
+        const sbossContract = new ethers.Contract(addresses.SBOSS_ADDRESS, sBossTokenContract, provider);
+        sbossBalance = await sBossContract.balanceOf(address);
+        unstakeAllowance = await sBossContract.allowance(address, addresses.STAKING_ADDRESS);
 
-        if (addresses.WMEMO_ADDRESS) {
-            memoWmemoAllowance = await memoContract.allowance(address, addresses.WMEMO_ADDRESS);
+        if (addresses.WSBOSS_ADDRESS) {
+            sbossWsBossAllowance = await sbossContract.allowance(address, addresses.WSBOSS_ADDRESS);
         }
     }
 
-    if (addresses.WMEMO_ADDRESS) {
-        const wmemoContract = new ethers.Contract(addresses.WMEMO_ADDRESS, wMemoTokenContract, provider);
-        wmemoBalance = await wmemoContract.balanceOf(address);
+    if (addresses.WSBOSS_ADDRESS) {
+        const wsBossContract = new ethers.Contract(addresses.WSBOSS_ADDRESS, wsBossTokenContract, provider);
+        wsBossBalance = await wsBossContract.balanceOf(address);
     }
 
     return {
         balances: {
-            memo: ethers.utils.formatUnits(memoBalance, "gwei"),
-            time: ethers.utils.formatUnits(timeBalance, "gwei"),
-            wmemo: ethers.utils.formatEther(wmemoBalance),
+            sboss: ethers.utils.formatUnits(memoBalance, "gwei"),
+            boss: ethers.utils.formatUnits(timeBalance, "gwei"),
+            wsboss: ethers.utils.formatEther(wmemoBalance),
         },
         staking: {
-            time: Number(stakeAllowance),
-            memo: Number(unstakeAllowance),
+            boss: Number(stakeAllowance),
+            sboss: Number(unstakeAllowance),
         },
         wrapping: {
-            memo: Number(memoWmemoAllowance),
+            sboss: Number(sbossWsBossAllowance),
         },
     };
 });
