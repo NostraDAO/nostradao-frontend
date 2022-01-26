@@ -12,8 +12,8 @@ export const mim = new StableBond({
     displayName: "MIM",
     bondToken: "MIM",
     bondIconSvg: MimIcon,
-    bondContractABI: MimTokenContract,
-    reserveContractAbi: StableReserveContract,
+    bondContractABI: MIMBondDepository,
+    reserveContractAbi: MimTokenContract,
     networkAddrs: {
         [Networks.AVAX]: {
             bondAddress: "0x694738E0A438d90487b4a549b201142c1a97B556",
