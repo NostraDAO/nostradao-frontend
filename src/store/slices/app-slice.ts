@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { getAddresses } from "../../constants";
-import { StakingContract, MemoTokenContract, TimeTokenContract } from "../../abi";
+import { IStaking, sBoss, BossERC20Token } from "../../abi";
 import { setAll } from "../../helpers";
 import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
 import { JsonRpcProvider } from "@ethersproject/providers";
@@ -20,11 +20,11 @@ export const loadAppDetails = createAsyncThunk(
         const mimPrice = getTokenPrice("MIM");
         const addresses = getAddresses(networkID);
 
-        const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, provider);
+        const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, IStaking, provider);
         const currentBlock = await provider.getBlockNumber();
         const currentBlockTime = (await provider.getBlock(currentBlock)).timestamp;
         const memoContract = new ethers.Contract(addresses.MEMO_ADDRESS, MemoTokenContract, provider);
-        const timeContract = new ethers.Contract(addresses.TIME_ADDRESS, TimeTokenContract, provider);
+        const timeContract = new ethers.Contract(addresses.TIME_ADDRESS, BossERC20Token, provider);
 
         const marketPrice = ((await getMarketPrice(networkID, provider)) / Math.pow(10, 9)) * mimPrice;
 

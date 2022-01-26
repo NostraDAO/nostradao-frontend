@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { getAddresses } from "../../constants";
-import { BossTokenContract, sBossTokenContract, MimTokenContract, wsBossTokenContract } from "../../abi";
+import { BossERC20Token, sBoss, MimTokenContract, wBOSS } from "../../abi";
 import { setAll } from "../../helpers";
 
 import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
@@ -28,11 +28,11 @@ interface IAccountBalances {
 export const getBalances = createAsyncThunk("account/getBalances", async ({ address, networkID, provider }: IGetBalances): Promise<IAccountBalances> => {
     const addresses = getAddresses(networkID);
 
-    const sBossContract = new ethers.Contract(addresses.SBOSS_ADDRESS, sBossTokenContract, provider);
+    const sBossContract = new ethers.Contract(addresses.SBOSS_ADDRESS, sBoss, provider);
     const sBossBalance = await memoContract.balanceOf(address);
-    const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, BossTokenContract, provider);
+    const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, BossERC20Token, provider);
     const bossBalance = await timeContract.balanceOf(address);
-    const wsBossContract = new ethers.Contract(addresses.WSBOSS_ADDRESS, wsBossTokenContract, provider);
+    const wsBossContract = new ethers.Contract(addresses.WSBOSS_ADDRESS, wBOSS, provider);
     const wsBossBalance = await wmemoContract.balanceOf(address);
 
     return {
@@ -78,13 +78,13 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
     const addresses = getAddresses(networkID);
 
     if (addresses.BOSS_ADDRESS) {
-        const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, BossTokenContract, provider);
+        const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, BossERC20Token, provider);
         bossBalance = await bossContract.balanceOf(address);
         stakeAllowance = await bossContract.allowance(address, addresses.STAKING_HELPER_ADDRESS);
     }
 
     if (addresses.SBOSS_ADDRESS) {
-        const sbossContract = new ethers.Contract(addresses.SBOSS_ADDRESS, sBossTokenContract, provider);
+        const sbossContract = new ethers.Contract(addresses.SBOSS_ADDRESS, sBoss, provider);
         sbossBalance = await sBossContract.balanceOf(address);
         unstakeAllowance = await sBossContract.allowance(address, addresses.STAKING_ADDRESS);
 
@@ -94,7 +94,7 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
     }
 
     if (addresses.WSBOSS_ADDRESS) {
-        const wsBossContract = new ethers.Contract(addresses.WSBOSS_ADDRESS, wsBossTokenContract, provider);
+        const wsBossContract = new ethers.Contract(addresses.WSBOSS_ADDRESS, wBOSS, provider);
         wsBossBalance = await wsBossContract.balanceOf(address);
     }
 
@@ -264,9 +264,9 @@ export interface IAccountSlice {
 const initialState: IAccountSlice = {
     loading: true,
     bonds: {},
-    balances: { memo: "", time: "", wmemo: "" },
-    staking: { time: 0, memo: 0 },
-    wrapping: { memo: 0 },
+    balances: { sboss: "", boss: "", wboss: "" },
+    staking: { boss: 0, sboss: 0 },
+    wrapping: { sboss: 0 },
     tokens: {},
 };
 

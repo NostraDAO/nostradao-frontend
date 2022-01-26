@@ -1,7 +1,7 @@
 export const getMainnetURI = (): string => {
-    return "https://api.avax.network/ext/bc/C/rpc";
+    return process.env.REACT_APP_AVAX_MAINNET;
 };
 
-export const getTestnetURI = (): string | undefined => {
+export const getTestnetURI = (): string => {
     return process.env.REACT_APP_AVAX_TESTNET;
 };

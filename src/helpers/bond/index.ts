@@ -3,18 +3,16 @@ import { LPBond, CustomLPBond } from "./lp-bond";
 import { StableBond, CustomBond } from "./stable-bond";
 
 import MimIcon from "../../assets/tokens/MIM.svg";
-import AvaxIcon from "../../assets/tokens/AVAX.svg";
 import MimTimeIcon from "../../assets/tokens/TIME-MIM.svg";
-import AvaxTimeIcon from "../../assets/tokens/TIME-AVAX.svg";
 
-import { StableBondContract, LpBondContract, WavaxBondContract, StableReserveContract, LpReserveContract } from "../../abi";
-
+import { MIMBondDepository, MimTokenContract } from "../../abi";
+//  StableReserveContract, LpReserveContract
 export const mim = new StableBond({
     name: "mim",
     displayName: "MIM",
     bondToken: "MIM",
     bondIconSvg: MimIcon,
-    bondContractABI: StableBondContract,
+    bondContractABI: MimTokenContract,
     reserveContractAbi: StableReserveContract,
     networkAddrs: {
         [Networks.AVAX]: {

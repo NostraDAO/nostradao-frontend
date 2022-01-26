@@ -2,7 +2,7 @@ import React, { useState, ReactElement, useContext, useMemo, useCallback } from 
 import Web3Modal from "web3modal";
 import { StaticJsonRpcProvider, JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { getMainnetURI } from "./helpers";
+import { getMainnetURI, getTestnetURI } from "./helpers";
 import { DEFAULT_NETWORK } from "../../constants";
 import { Networks } from "../../constants";
 import { messages } from "../../constants/messages";
@@ -49,8 +49,8 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
     const dispatch = useDispatch();
 
     const [connected, setConnected] = useState(false);
-    const [chainID, setChainID] = useState(DEFAULT_NETWORK);
-    const [providerChainID, setProviderChainID] = useState(DEFAULT_NETWORK);
+    const [chainID, setChainID] = useState(DEFAULT_NETWORK || TESTNETWORK);
+    const [providerChainID, setProviderChainID] = useState(DEFAULT_NETWORK || TESTNETWORK);
     const [address, setAddress] = useState("");
 
     const [uri, setUri] = useState(getMainnetURI());
@@ -65,6 +65,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
                     options: {
                         rpc: {
                             [Networks.AVAX]: getMainnetURI(),
+                            [Networks.AVAX_TESTNET]: getTestnetURI(),
                         },
                     },
                 },
@@ -128,7 +129,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
     }, [provider, web3Modal, connected]);
 
     const checkWrongNetwork = async (): Promise<boolean> => {
-        if (providerChainID !== DEFAULT_NETWORK) {
+        if (providerChainID !== DEFAULT_NETWORK || TESTNETWORK) {
             const shouldSwitch = window.confirm(messages.switch_to_avalanche);
             if (shouldSwitch) {
                 await swithNetwork();

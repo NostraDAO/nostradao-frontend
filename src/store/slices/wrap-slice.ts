@@ -7,7 +7,7 @@ import { info, success, warning } from "./messages-slice";
 import { RootState } from "../store";
 import { ethers } from "ethers";
 import { metamaskErrorWrap } from "../../helpers/metamask-error-wrap";
-import { wMemoTokenContract } from "../../abi";
+import { wBOSS } from "../../abi";
 import { clearPendingTxn, fetchPendingTxns, getWrappingTypeText } from "./pending-txns-slice";
 import { getGasPrice } from "../../helpers/get-gas-price";
 import { fetchAccountSuccess, getBalances } from "./account-slice";
@@ -124,7 +124,7 @@ const calcWrapValue = async ({ isWrap, value, provider, networkID }: IWrapDetail
 
     let wrapValue = 0;
 
-    const wmemoContract = new ethers.Contract(addresses.WMEMO_ADDRESS, wMemoTokenContract, provider);
+    const wmemoContract = new ethers.Contract(addresses.WMEMO_ADDRESS, wBOSS, provider);
 
     if (isWrap) {
         const wmemoValue = await wmemoContract.MEMOTowMEMO(amountInWei);
