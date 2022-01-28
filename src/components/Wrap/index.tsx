@@ -26,12 +26,12 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
 
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
 
-    const memoBalance = useSelector<IReduxState, string>(state => {
-        return state.account.balances && state.account.balances.memo;
+    const sBossBalance = useSelector<IReduxState, string>(state => {
+        return state.account.balances && state.account.balances.sboss;
     });
-    const wmemoBalance = useSelector<IReduxState, string>(state => {
-        return state.account.balances && state.account.balances.wmemo;
-    });
+    // const wmemoBalance = useSelector<IReduxState, string>(state => {
+    //     return state.account.balances && state.account.balances.wmemo;
+    // });
 
     const wrapValue = useSelector<IReduxState, string>(state => {
         return state.wrapping && state.wrapping.wrapValue;
@@ -45,8 +45,8 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
         return state.pendingTransactions;
     });
 
-    const memoAllowance = useSelector<IReduxState, number>(state => {
-        return state.account.wrapping && state.account.wrapping.memo;
+    const sBossAllowance = useSelector<IReduxState, number>(state => {
+        return state.account.wrapping && state.account.wrapping.sboss;
     });
 
     const [isWrap, setIsWrap] = useState(true);
@@ -54,10 +54,11 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
 
     const setMax = () => {
         if (isWrap) {
-            setValue(memoBalance);
-        } else {
-            setValue(wmemoBalance);
+            setValue(sBossBalance);
         }
+        // else {
+        //     setValue(wmemoBalance);
+        // }
     };
 
     const handleSwap = () => {
@@ -88,12 +89,13 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
         handleClose();
     };
 
-    const hasAllowance = useCallback(() => memoAllowance > 0, [memoAllowance]);
+    const hasAllowance = useCallback(() => sBossAllowance > 0, [sBossAllowance]);
 
-    const trimmedMemoBalance = trim(Number(memoBalance), 6);
-    const trimmedWmemoBalance = trim(Number(wmemoBalance), 6);
+    const trimmedMemoBalance = trim(Number(sBossBalance), 6);
+    // const trimmedWmemoBalance = trim(Number(wmemoBalance), 6);
 
-    const getBalance = () => (isWrap ? `${trimmedMemoBalance} BOSS` : `${trimmedWmemoBalance} sBOSS`);
+    // const getBalance = () => (isWrap ? `${trimmedMemoBalance} BOSS` : `${trimmedWmemoBalance} sBOSS`);
+    const getBalance = () => (isWrap ? `${trimmedMemoBalance} BOSS` : `${trimmedMemoBalance} BOSS`);
 
     const handleOnWrap = async () => {
         if (await checkWrongNetwork()) return;

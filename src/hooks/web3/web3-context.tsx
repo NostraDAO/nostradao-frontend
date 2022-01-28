@@ -3,7 +3,7 @@ import Web3Modal from "web3modal";
 import { StaticJsonRpcProvider, JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { getMainnetURI, getTestnetURI } from "./helpers";
-import { DEFAULT_NETWORK } from "../../constants";
+import { DEFAULT_NETWORK, TESTNETWORK } from "../../constants";
 import { Networks } from "../../constants";
 import { messages } from "../../constants/messages";
 import { useDispatch } from "react-redux";

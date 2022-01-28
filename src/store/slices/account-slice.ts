@@ -21,25 +21,25 @@ interface IAccountBalances {
     balances: {
         sboss: string;
         boss: string;
-        wsboss: string;
+        // wsboss: string;
     };
 }
 
 export const getBalances = createAsyncThunk("account/getBalances", async ({ address, networkID, provider }: IGetBalances): Promise<IAccountBalances> => {
     const addresses = getAddresses(networkID);
 
-    const sBossContract = new ethers.Contract(addresses.SBOSS_ADDRESS, sBoss, provider);
-    const sBossBalance = await memoContract.balanceOf(address);
+    const sBossContract = new ethers.Contract(addresses.sBOSS_ADDRESS, sBoss, provider);
+    const sBossBalance = await sBossContract.balanceOf(address);
     const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, BossERC20Token, provider);
-    const bossBalance = await timeContract.balanceOf(address);
-    const wsBossContract = new ethers.Contract(addresses.WSBOSS_ADDRESS, wBOSS, provider);
-    const wsBossBalance = await wmemoContract.balanceOf(address);
+    const bossBalance = await bossContract.balanceOf(address);
+    // const wBossContract = new ethers.Contract(addresses.wBOSS_ADDRESS, wBOSS, provider);
+    // const wBossBalance = await wBossContract.balanceOf(address);
 
     return {
         balances: {
-            sboss: ethers.utils.formatUnits(sbossBalance, "gwei"),
+            sboss: ethers.utils.formatUnits(sBossBalance, "gwei"),
             boss: ethers.utils.formatUnits(bossBalance, "gwei"),
-            wsboss: ethers.utils.formatEther(wsbossBalance),
+            // wsboss: ethers.utils.formatEther(wsbossBalance),
         },
     };
 });
@@ -54,23 +54,23 @@ interface IUserAccountDetails {
     balances: {
         boss: string;
         sboss: string;
-        wsboss: string;
+        // wsboss: string;
     };
     staking: {
         boss: number;
         sboss: number;
     };
-    wrapping: {
-        sboss: number;
-    };
+    // wrapping: {
+    //     sboss: number;
+    // };
 }
 
 export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails", async ({ networkID, provider, address }: ILoadAccountDetails): Promise<IUserAccountDetails> => {
     let bossBalance = 0;
-    let sbossBalance = 0;
+    let sBossBalance = 0;
 
-    let wsbossBalance = 0;
-    let sbossWsBossAllowance = 0;
+    // let wsbossBalance = 0;
+    // let sbossWsBossAllowance = 0;
 
     let stakeAllowance = 0;
     let unstakeAllowance = 0;
@@ -83,34 +83,34 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
         stakeAllowance = await bossContract.allowance(address, addresses.STAKING_HELPER_ADDRESS);
     }
 
-    if (addresses.SBOSS_ADDRESS) {
-        const sbossContract = new ethers.Contract(addresses.SBOSS_ADDRESS, sBoss, provider);
-        sbossBalance = await sBossContract.balanceOf(address);
+    if (addresses.sBOSS_ADDRESS) {
+        const sBossContract = new ethers.Contract(addresses.sBOSS_ADDRESS, sBoss, provider);
+        sBossBalance = await sBossContract.balanceOf(address);
         unstakeAllowance = await sBossContract.allowance(address, addresses.STAKING_ADDRESS);
 
-        if (addresses.WSBOSS_ADDRESS) {
-            sbossWsBossAllowance = await sbossContract.allowance(address, addresses.WSBOSS_ADDRESS);
-        }
+        // if (addresses.WSBOSS_ADDRESS) {
+        //     sbossWsBossAllowance = await sbossContract.allowance(address, addresses.WSBOSS_ADDRESS);
+        // }
     }
 
-    if (addresses.WSBOSS_ADDRESS) {
-        const wsBossContract = new ethers.Contract(addresses.WSBOSS_ADDRESS, wBOSS, provider);
-        wsBossBalance = await wsBossContract.balanceOf(address);
-    }
+    // if (addresses.WSBOSS_ADDRESS) {
+    //     const wsBossContract = new ethers.Contract(addresses.WSBOSS_ADDRESS, wBOSS, provider);
+    //     wsBossBalance = await wsBossContract.balanceOf(address);
+    // }
 
     return {
         balances: {
-            sboss: ethers.utils.formatUnits(memoBalance, "gwei"),
-            boss: ethers.utils.formatUnits(timeBalance, "gwei"),
-            wsboss: ethers.utils.formatEther(wmemoBalance),
+            sboss: ethers.utils.formatUnits(sBossBalance, "gwei"),
+            boss: ethers.utils.formatUnits(bossBalance, "gwei"),
+            // wsboss: ethers.utils.formatEther(wmemoBalance),
         },
         staking: {
             boss: Number(stakeAllowance),
             sboss: Number(unstakeAllowance),
         },
-        wrapping: {
-            sboss: Number(sbossWsBossAllowance),
-        },
+        // wrapping: {
+        //     sboss: Number(sbossWsBossAllowance),
+        // },
     };
 });
 
@@ -229,7 +229,7 @@ export const calculateUserTokenDetails = createAsyncThunk("account/calculateUser
     let allowance,
         balance = "0";
 
-    allowance = await tokenContract.allowance(address, addresses.ZAPIN_ADDRESS);
+    // allowance = await tokenContract.allowance(address, addresses.ZAPIN_ADDRESS);
     balance = await tokenContract.balanceOf(address);
 
     const balanceVal = Number(balance) / Math.pow(10, token.decimals);
@@ -246,17 +246,17 @@ export const calculateUserTokenDetails = createAsyncThunk("account/calculateUser
 export interface IAccountSlice {
     bonds: { [key: string]: IUserBondDetails };
     balances: {
-        memo: string;
-        time: string;
-        wmemo: string;
+        sboss: string;
+        boss: string;
+        // wboss: string;
     };
     loading: boolean;
     staking: {
-        time: number;
-        memo: number;
+        boss: number;
+        sboss: number;
     };
     wrapping: {
-        memo: number;
+        sboss: number;
     };
     tokens: { [key: string]: IUserTokenDetails };
 }
@@ -264,7 +264,8 @@ export interface IAccountSlice {
 const initialState: IAccountSlice = {
     loading: true,
     bonds: {},
-    balances: { sboss: "", boss: "", wboss: "" },
+    // balances: { sboss: "", boss: "", wboss: "" },
+    balances: { sboss: "", boss: "" },
     staking: { boss: 0, sboss: 0 },
     wrapping: { sboss: 0 },
     tokens: {},

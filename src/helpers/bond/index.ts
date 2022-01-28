@@ -28,25 +28,25 @@ export const mim = new StableBond({
     tokensInStrategy: "60500000000000000000000000",
 });
 
-export const mimBoss = new LPBond({
-    name: "mim_boss_lp",
-    displayName: "BOSS-MIM LP",
-    bondToken: "MIM",
-    bondIconSvg: MimTimeIcon,
-    bondContractABI: LpBondContract,
-    reserveContractAbi: LpReserveContract,
-    networkAddrs: {
-        [Networks.AVAX]: {
-            bondAddress: "0xA184AE1A71EcAD20E822cB965b99c287590c4FFe",
-            reserveAddress: "0x113f413371fc4cc4c9d6416cf1de9dfd7bf747df",
-        },
-        [Networks.AVAX_TESTNET]: {
-            //todo: need to add bondAddress and reserveAddress. This is the same as the old ones
-            bondAddress: "0xA184AE1A71EcAD20E822cB965b99c287590c4FFe",
-            reserveAddress: "0x113f413371fc4cc4c9d6416cf1de9dfd7bf747df",
-        },
-    },
-    lpUrl: "https://www.traderjoexyz.com/#/pool/0x130966628846BFd36ff31a822705796e8cb8C18D/0xb54f16fB19478766A268F172C9480f8da1a7c9C3",
-});
+// export const mimBoss = new LPBond({
+//     name: "mim_boss_lp",
+//     displayName: "BOSS-MIM ",
+//     bondToken: "MIM",
+//     bondIconSvg: MimTimeIcon,
+//     bondContractABI: LpBondContract,
+//     reserveContractAbi: LpReserveContract,
+//     networkAddrs: {
+//         [Networks.AVAX]: {
+//             bondAddress: "0xA184AE1A71EcAD20E822cB965b99c287590c4FFe",
+//             reserveAddress: "0x113f413371fc4cc4c9d6416cf1de9dfd7bf747df",
+//         },
+//         [Networks.AVAX_TESTNET]: {
+//             //todo: need to add bondAddress and reserveAddress. This is the same as the old ones
+//             bondAddress: "0xA184AE1A71EcAD20E822cB965b99c287590c4FFe",
+//             reserveAddress: "0x113f413371fc4cc4c9d6416cf1de9dfd7bf747df",
+//         },
+//     },
+//     lpUrl: "https://www.traderjoexyz.com/#/pool/0x130966628846BFd36ff31a822705796e8cb8C18D/0xb54f16fB19478766A268F172C9480f8da1a7c9C3",
+// });
 
-export default [mim, mimBoss];
+export default [mim];
