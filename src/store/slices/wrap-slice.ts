@@ -26,7 +26,7 @@ export const changeApproval = createAsyncThunk("wrapping/changeApproval", async 
 
     const addresses = getAddresses(networkID);
     const signer = provider.getSigner();
-    const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, wMemoTokenContract, signer);
+    const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, wBOSS, signer);
 
     let approveTx;
     try {
@@ -78,7 +78,7 @@ export const changeWrap = createAsyncThunk("wrapping/changeWrap", async ({ isWra
     const addresses = getAddresses(networkID);
     const signer = provider.getSigner();
     const amountInWei = isWrap ? ethers.utils.parseUnits(value, "gwei") : ethers.utils.parseEther(value);
-    const wbossContract = new ethers.Contract(addresses.wBOSS_ADDRESS, wMemoTokenContract, signer);
+    const wbossContract = new ethers.Contract(addresses.wBOSS_ADDRESS, wBOSS, signer);
 
     let wrapTx;
 
@@ -86,9 +86,9 @@ export const changeWrap = createAsyncThunk("wrapping/changeWrap", async ({ isWra
         const gasPrice = await getGasPrice(provider);
 
         if (isWrap) {
-            wrapTx = await wmemoContract.wrap(amountInWei, { gasPrice });
+            wrapTx = await wBossContract.wrap(amountInWei, { gasPrice });
         } else {
-            wrapTx = await wmemoContract.unwrap(amountInWei, { gasPrice });
+            wrapTx = await wBossContract.unwrap(amountInWei, { gasPrice });
         }
 
         const pendingTxnType = isWrap ? "wrapping" : "unwrapping";
@@ -124,14 +124,14 @@ const calcWrapValue = async ({ isWrap, value, provider, networkID }: IWrapDetail
 
     let wrapValue = 0;
 
-    const wmemoContract = new ethers.Contract(addresses.WMEMO_ADDRESS, wBOSS, provider);
+    const wBossContract = new ethers.Contract(addresses.wBOSS_ADDRESS, wBOSS, provider);
 
     if (isWrap) {
-        const wmemoValue = await wmemoContract.MEMOTowMEMO(amountInWei);
-        wrapValue = wmemoValue / Math.pow(10, 18);
+        const wBossValue = await wBossContract.BOSSTowBOSS(amountInWei);
+        wrapValue = wBossValue / Math.pow(10, 18);
     } else {
-        const memoValue = await wmemoContract.wMEMOToMEMO(amountInWei);
-        wrapValue = memoValue / Math.pow(10, 9);
+        const bossValue = await wBossContract.wBOSSToBOSS(amountInWei);
+        wrapValue = bossValue / Math.pow(10, 9);
     }
 
     return wrapValue;
