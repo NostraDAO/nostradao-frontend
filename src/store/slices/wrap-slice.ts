@@ -26,13 +26,13 @@ export const changeApproval = createAsyncThunk("wrapping/changeApproval", async 
 
     const addresses = getAddresses(networkID);
     const signer = provider.getSigner();
-    const memoContract = new ethers.Contract(addresses.MEMO_ADDRESS, wMemoTokenContract, signer);
+    const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, wMemoTokenContract, signer);
 
     let approveTx;
     try {
         const gasPrice = await getGasPrice(provider);
 
-        approveTx = await memoContract.approve(addresses.WMEMO_ADDRESS, ethers.constants.MaxUint256, { gasPrice });
+        approveTx = await bossContract.approve(addresses.wBOSS_ADDRESS, ethers.constants.MaxUint256, { gasPrice });
 
         const text = "Approve Wrapping";
         const pendingTxnType = "approve_wrapping";
@@ -50,12 +50,12 @@ export const changeApproval = createAsyncThunk("wrapping/changeApproval", async 
 
     await sleep(2);
 
-    const wmemoAllowance = await memoContract.allowance(address, addresses.WMEMO_ADDRESS);
+    const wbossAllowance = await bossContract.allowance(address, addresses.wBOSS_ADDRESS);
 
     return dispatch(
         fetchAccountSuccess({
             wrapping: {
-                wmemo: Number(wmemoAllowance),
+                wboss: Number(wbossAllowance),
             },
         }),
     );
@@ -78,7 +78,7 @@ export const changeWrap = createAsyncThunk("wrapping/changeWrap", async ({ isWra
     const addresses = getAddresses(networkID);
     const signer = provider.getSigner();
     const amountInWei = isWrap ? ethers.utils.parseUnits(value, "gwei") : ethers.utils.parseEther(value);
-    const wmemoContract = new ethers.Contract(addresses.WMEMO_ADDRESS, wMemoTokenContract, signer);
+    const wbossContract = new ethers.Contract(addresses.wBOSS_ADDRESS, wMemoTokenContract, signer);
 
     let wrapTx;
 

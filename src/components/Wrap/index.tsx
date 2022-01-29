@@ -29,9 +29,9 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
     const sBossBalance = useSelector<IReduxState, string>(state => {
         return state.account.balances && state.account.balances.sboss;
     });
-    // const wmemoBalance = useSelector<IReduxState, string>(state => {
-    //     return state.account.balances && state.account.balances.wmemo;
-    // });
+    const wBossBalance = useSelector<IReduxState, string>(state => {
+        return state.account.balances && state.account.balances.wboss;
+    });
 
     const wrapValue = useSelector<IReduxState, string>(state => {
         return state.wrapping && state.wrapping.wrapValue;
@@ -92,9 +92,9 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
     const hasAllowance = useCallback(() => sBossAllowance > 0, [sBossAllowance]);
 
     const trimmedMemoBalance = trim(Number(sBossBalance), 6);
-    // const trimmedWmemoBalance = trim(Number(wmemoBalance), 6);
+     const trimmedWmemoBalance = trim(Number(wBossBalance), 6);
 
-    // const getBalance = () => (isWrap ? `${trimmedMemoBalance} BOSS` : `${trimmedWmemoBalance} sBOSS`);
+    const getBalance = () => (isWrap ? `${trimmedMemoBalance} BOSS` : `${trimmedWmemoBalance} sBOSS`);
     const getBalance = () => (isWrap ? `${trimmedMemoBalance} BOSS` : `${trimmedMemoBalance} BOSS`);
 
     const handleOnWrap = async () => {

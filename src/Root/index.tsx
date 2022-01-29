@@ -9,7 +9,7 @@ function Root() {
     const isApp = (): boolean => {
         return true; //window.location.host.includes("app");
     };
-
+    console.log(process.env.REACT_APP_AVAX_TESTNET);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
