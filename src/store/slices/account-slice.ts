@@ -248,7 +248,7 @@ export interface IAccountSlice {
     balances: {
         sboss: string;
         boss: string;
-        // wboss: string;
+        wboss: string;
     };
     loading: boolean;
     staking: {
@@ -264,8 +264,7 @@ export interface IAccountSlice {
 const initialState: IAccountSlice = {
     loading: true,
     bonds: {},
-    // balances: { sboss: "", boss: "", wboss: "" },
-    balances: { sboss: "", boss: "" },
+    balances: { sboss: "", boss: "", wboss: "" },
     staking: { boss: 0, sboss: 0 },
     wrapping: { sboss: 0 },
     tokens: {},

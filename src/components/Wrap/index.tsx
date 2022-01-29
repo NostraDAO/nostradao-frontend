@@ -23,7 +23,6 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
     const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
 
     const [value, setValue] = useState("");
-
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
 
     const sBossBalance = useSelector<IReduxState, string>(state => {
@@ -92,10 +91,9 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
     const hasAllowance = useCallback(() => sBossAllowance > 0, [sBossAllowance]);
 
     const trimmedMemoBalance = trim(Number(sBossBalance), 6);
-     const trimmedWmemoBalance = trim(Number(wBossBalance), 6);
+    const trimmedWmemoBalance = trim(Number(wBossBalance), 6);
 
-    const getBalance = () => (isWrap ? `${trimmedMemoBalance} BOSS` : `${trimmedWmemoBalance} sBOSS`);
-    const getBalance = () => (isWrap ? `${trimmedMemoBalance} BOSS` : `${trimmedMemoBalance} BOSS`);
+    const getBalance = () => (isWrap ? `${trimmedMemoBalance} sBOSS` : `${trimmedWmemoBalance} wBOSS`);
 
     const handleOnWrap = async () => {
         if (await checkWrongNetwork()) return;
