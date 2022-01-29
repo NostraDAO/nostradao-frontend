@@ -27,19 +27,19 @@ export const changeApproval = createAsyncThunk("stake/changeApproval", async ({ 
     const addresses = getAddresses(networkID);
 
     const signer = provider.getSigner();
-    const timeContract = new ethers.Contract(addresses.TIME_ADDRESS, BossERC20Token, signer);
-    const memoContract = new ethers.Contract(addresses.MEMO_ADDRESS, sBoss, signer);
+    const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, BossERC20Token, signer);
+    const sBossContract = new ethers.Contract(addresses.sBOSS_ADDRESS, sBoss, signer);
 
     let approveTx;
     try {
         const gasPrice = await getGasPrice(provider);
 
-        if (token === "time") {
-            approveTx = await timeContract.approve(addresses.STAKING_HELPER_ADDRESS, ethers.constants.MaxUint256, { gasPrice });
+        if (token === "boss") {
+            approveTx = await bossContract.approve(addresses.STAKING_HELPER_ADDRESS, ethers.constants.MaxUint256, { gasPrice });
         }
 
-        if (token === "memo") {
-            approveTx = await memoContract.approve(addresses.STAKING_ADDRESS, ethers.constants.MaxUint256, { gasPrice });
+        if (token === "sBoss") {
+            approveTx = await sBossContract.approve(addresses.STAKING_ADDRESS, ethers.constants.MaxUint256, { gasPrice });
         }
 
         const text = "Approve " + (token === "time" ? "Staking" : "Unstaking");
@@ -58,8 +58,8 @@ export const changeApproval = createAsyncThunk("stake/changeApproval", async ({ 
 
     await sleep(2);
 
-    const stakeAllowance = await timeContract.allowance(address, addresses.STAKING_HELPER_ADDRESS);
-    const unstakeAllowance = await memoContract.allowance(address, addresses.STAKING_ADDRESS);
+    const stakeAllowance = await bossContract.allowance(address, addresses.STAKING_HELPER_ADDRESS);
+    const unstakeAllowance = await sBossContract.allowance(address, addresses.STAKING_ADDRESS);
 
     return dispatch(
         fetchAccountSuccess({
@@ -86,7 +86,7 @@ export const changeStake = createAsyncThunk("stake/changeStake", async ({ action
     }
     const addresses = getAddresses(networkID);
     const signer = provider.getSigner();
-    const staking = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, signer);
+    const staking = new ethers.Contract(addresses.STAKING_ADDRESS, IStaking, signer);
     const stakingHelper = new ethers.Contract(addresses.STAKING_HELPER_ADDRESS, IStakingHelper, signer);
 
     let stakeTx;
