@@ -27,17 +27,17 @@ function Stake() {
     const fiveDayRate = useSelector<IReduxState, number>(state => {
         return state.app.fiveDayRate;
     });
-    const timeBalance = useSelector<IReduxState, string>(state => {
-        return state.account.balances && state.account.balances.time;
+    const bossBalance = useSelector<IReduxState, string>(state => {
+        return state.account.balances && state.account.balances.boss;
     });
-    const memoBalance = useSelector<IReduxState, string>(state => {
-        return state.account.balances && state.account.balances.memo;
+    const sBossBalance = useSelector<IReduxState, string>(state => {
+        return state.account.balances && state.account.balances.sboss;
     });
     const stakeAllowance = useSelector<IReduxState, number>(state => {
-        return state.account.staking && state.account.staking.time;
+        return state.account.staking && state.account.staking.boss;
     });
     const unstakeAllowance = useSelector<IReduxState, number>(state => {
-        return state.account.staking && state.account.staking.memo;
+        return state.account.staking && state.account.staking.sboss;
     });
     const stakingRebase = useSelector<IReduxState, number>(state => {
         return state.app.stakingRebase;
@@ -55,9 +55,9 @@ function Stake() {
 
     const setMax = () => {
         if (view === 0) {
-            setQuantity(timeBalance);
+            setQuantity(bossBalance);
         } else {
-            setQuantity(memoBalance);
+            setQuantity(sBossBalance);
         }
     };
 
@@ -79,8 +79,8 @@ function Stake() {
 
     const hasAllowance = useCallback(
         token => {
-            if (token === "time") return stakeAllowance > 0;
-            if (token === "memo") return unstakeAllowance > 0;
+            if (token === "boss") return stakeAllowance > 0;
+            if (token === "sboss") return unstakeAllowance > 0;
             return 0;
         },
         [stakeAllowance],
@@ -91,10 +91,10 @@ function Stake() {
         setQuantity("");
     };
 
-    const trimmedMemoBalance = trim(Number(memoBalance), 6);
+    const trimmedsBossBalance = trim(Number(sBossBalance), 6);
     const trimmedStakingAPY = trim(stakingAPY * 100, 1);
     const stakingRebasePercentage = trim(stakingRebase * 100, 4);
-    const nextRewardValue = trim((Number(stakingRebasePercentage) / 100) * Number(trimmedMemoBalance), 6);
+    const nextRewardValue = trim((Number(stakingRebasePercentage) / 100) * Number(trimmedsBossBalance), 6);
 
     return (
         <div className="stake-view">
@@ -252,12 +252,12 @@ function Stake() {
                                     <div className="stake-user-data">
                                         <div className="data-row">
                                             <p className="data-row-name">Your Balance</p>
-                                            <p className="data-row-value">{isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(timeBalance), 4)} BOSS</>}</p>
+                                            <p className="data-row-value">{isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(bossBalance), 4)} BOSS</>}</p>
                                         </div>
 
                                         <div className="data-row">
                                             <p className="data-row-name">Your Staked Balance</p>
-                                            <p className="data-row-value">{isAppLoading ? <Skeleton width="80px" /> : <>{trimmedMemoBalance} sBOSS</>}</p>
+                                            <p className="data-row-value">{isAppLoading ? <Skeleton width="80px" /> : <>{trimmedsBossBalance} sBOSS</>}</p>
                                         </div>
 
                                         <div className="data-row">

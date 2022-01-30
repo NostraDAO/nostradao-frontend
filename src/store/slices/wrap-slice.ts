@@ -86,9 +86,9 @@ export const changeWrap = createAsyncThunk("wrapping/changeWrap", async ({ isWra
         const gasPrice = await getGasPrice(provider);
 
         if (isWrap) {
-            wrapTx = await wBossContract.wrap(amountInWei, { gasPrice });
+            wrapTx = await wbossContract.wrap(amountInWei, { gasPrice });
         } else {
-            wrapTx = await wBossContract.unwrap(amountInWei, { gasPrice });
+            wrapTx = await wbossContract.unwrap(amountInWei, { gasPrice });
         }
 
         const pendingTxnType = isWrap ? "wrapping" : "unwrapping";
