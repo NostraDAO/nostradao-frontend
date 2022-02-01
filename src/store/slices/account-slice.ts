@@ -69,8 +69,8 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
     let bossBalance = 0;
     let sBossBalance = 0;
 
-    // let wsbossBalance = 0;
-    // let sbossWsBossAllowance = 0;
+    let wsbossBalance = 0;
+    let sbossWsBossAllowance = 0;
 
     let stakeAllowance = 0;
     let unstakeAllowance = 0;

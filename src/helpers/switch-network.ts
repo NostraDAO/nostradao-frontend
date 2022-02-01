@@ -36,6 +36,7 @@ export const swithNetwork = async () => {
                     await addChainRequest();
                     await switchRequest();
                 } catch (addError) {
+                    console.log("got here");
                     console.log(error);
                 }
             }
