@@ -63,6 +63,27 @@ export const avax: IToken = {
     decimals: 18,
 };
 
+const boss: IToken = {
+    name: "BOSS",
+    address: "0xF0bBA5F301E4a8F4C6632a1c3277f7bc24A791E0",
+    img: "",
+    decimals: 18,
+};
+
+const sboss: IToken = {
+    name: "sBOSS",
+    address: "0x1f4dEd676C3214c001e38087F36A5D2B289849F7",
+    img: "",
+    decimals: 18,
+};
+
+const wboss: IToken = {
+    name: "wBOSS",
+    address: "0x6033319cB196f3f86433CCAB3B373ebc554FB1E1",
+    img: "",
+    decimals: 18,
+};
+
 const aave: IToken = {
     name: "AAVE.e",
     address: "0x63a72806098Bd3D9520cC43356dD78afe5D386D9",

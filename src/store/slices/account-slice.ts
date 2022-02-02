@@ -66,10 +66,11 @@ interface IUserAccountDetails {
 }
 
 export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails", async ({ networkID, provider, address }: ILoadAccountDetails): Promise<IUserAccountDetails> => {
+    console.log("loadAccountDetails", address, provider, networkID);
     let bossBalance = 0;
     let sBossBalance = 0;
 
-    let wsbossBalance = 0;
+    let wBossBalance = 0;
     let sbossWsBossAllowance = 0;
 
     let stakeAllowance = 0;
