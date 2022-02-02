@@ -32,6 +32,8 @@ export const changeApproval = createAsyncThunk("bonding/changeApproval", async (
     }
 
     const signer = provider.getSigner();
+    console.log("provider", provider);
+    console.log("signer", signer);
     const reserveContract = bond.getContractForReserve(networkID, signer);
 
     let approveTx;
