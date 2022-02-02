@@ -21,7 +21,7 @@ interface IAccountBalances {
     balances: {
         sboss: string;
         boss: string;
-        // wsboss: string;
+        wsboss: string;
     };
 }
 
@@ -32,14 +32,14 @@ export const getBalances = createAsyncThunk("account/getBalances", async ({ addr
     const sBossBalance = await sBossContract.balanceOf(address);
     const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, BossERC20Token, provider);
     const bossBalance = await bossContract.balanceOf(address);
-    // const wBossContract = new ethers.Contract(addresses.wBOSS_ADDRESS, wBOSS, provider);
-    // const wBossBalance = await wBossContract.balanceOf(address);
+    const wBossContract = new ethers.Contract(addresses.wBOSS_ADDRESS, wBOSS, provider);
+    const wBossBalance = await wBossContract.balanceOf(address);
 
     return {
         balances: {
             sboss: ethers.utils.formatUnits(sBossBalance, "gwei"),
             boss: ethers.utils.formatUnits(bossBalance, "gwei"),
-            // wsboss: ethers.utils.formatEther(wsbossBalance),
+            wsboss: ethers.utils.formatEther(wBossBalance),
         },
     };
 });
@@ -54,15 +54,15 @@ interface IUserAccountDetails {
     balances: {
         boss: string;
         sboss: string;
-        // wsboss: string;
+        wsboss: string;
     };
     staking: {
         boss: number;
         sboss: number;
     };
-    // wrapping: {
-    //     sboss: number;
-    // };
+    wrapping: {
+        sboss: number;
+    };
 }
 
 export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails", async ({ networkID, provider, address }: ILoadAccountDetails): Promise<IUserAccountDetails> => {
@@ -88,29 +88,29 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
         sBossBalance = await sBossContract.balanceOf(address);
         unstakeAllowance = await sBossContract.allowance(address, addresses.STAKING_ADDRESS);
 
-        // if (addresses.WSBOSS_ADDRESS) {
-        //     sbossWsBossAllowance = await sbossContract.allowance(address, addresses.WSBOSS_ADDRESS);
-        // }
+        if (addresses.wBOSS_ADDRESS) {
+            sbossWsBossAllowance = await sBossContract.allowance(address, addresses.wBOSS_ADDRESS);
+        }
     }
 
-    // if (addresses.WSBOSS_ADDRESS) {
-    //     const wsBossContract = new ethers.Contract(addresses.WSBOSS_ADDRESS, wBOSS, provider);
-    //     wsBossBalance = await wsBossContract.balanceOf(address);
-    // }
+    if (addresses.wBOSS_ADDRESS) {
+        const wBossContract = new ethers.Contract(addresses.wBOSS_ADDRESS, wBOSS, provider);
+        wBossBalance = await wBossContract.balanceOf(address);
+    }
 
     return {
         balances: {
             sboss: ethers.utils.formatUnits(sBossBalance, "gwei"),
             boss: ethers.utils.formatUnits(bossBalance, "gwei"),
-            // wsboss: ethers.utils.formatEther(wmemoBalance),
+            wsboss: ethers.utils.formatEther(wBossBalance),
         },
         staking: {
             boss: Number(stakeAllowance),
             sboss: Number(unstakeAllowance),
         },
-        // wrapping: {
-        //     sboss: Number(sbossWsBossAllowance),
-        // },
+        wrapping: {
+            sboss: Number(sbossWsBossAllowance),
+        },
     };
 });
 
@@ -229,7 +229,7 @@ export const calculateUserTokenDetails = createAsyncThunk("account/calculateUser
     let allowance,
         balance = "0";
 
-    // allowance = await tokenContract.allowance(address, addresses.ZAPIN_ADDRESS);
+    //allowance = await tokenContract.allowance(address, addresses.ZAPIN_ADDRESS);
     balance = await tokenContract.balanceOf(address);
 
     const balanceVal = Number(balance) / Math.pow(10, token.decimals);
@@ -238,11 +238,10 @@ export const calculateUserTokenDetails = createAsyncThunk("account/calculateUser
         token: token.name,
         address: token.address,
         img: token.img,
-        allowance: Number(allowance),
         balance: Number(balanceVal),
     };
 });
-
+// allowance: Number(allowance),
 export interface IAccountSlice {
     bonds: { [key: string]: IUserBondDetails };
     balances: {
