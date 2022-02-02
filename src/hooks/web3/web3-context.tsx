@@ -49,11 +49,11 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
     const dispatch = useDispatch();
 
     const [connected, setConnected] = useState(false);
-    const [chainID, setChainID] = useState(DEFAULT_NETWORK || TESTNETWORK);
-    const [providerChainID, setProviderChainID] = useState(DEFAULT_NETWORK || TESTNETWORK);
+    const [chainID, setChainID] = useState(TESTNETWORK); // DEFAULT_NETWORK ||  this was before the testnet
+    const [providerChainID, setProviderChainID] = useState(TESTNETWORK); // this was before the testnet DEFAULT_NETWORK
     const [address, setAddress] = useState("");
 
-    const [uri, setUri] = useState(getMainnetURI() || getTestnetURI());
+    const [uri, setUri] = useState(getTestnetURI()); // || getMainnetURI() this was inclused here before the test net
     const [provider, setProvider] = useState<JsonRpcProvider>(new StaticJsonRpcProvider(uri));
 
     const [web3Modal] = useState<Web3Modal>(
@@ -64,7 +64,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
                     package: WalletConnectProvider,
                     options: {
                         rpc: {
-                            [Networks.AVAX]: getMainnetURI(),
+                            // [Networks.AVAX]: getMainnetURI(),
                             [Networks.AVAX_TESTNET]: getTestnetURI(),
                         },
                     },

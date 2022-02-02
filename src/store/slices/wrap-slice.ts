@@ -127,10 +127,10 @@ const calcWrapValue = async ({ isWrap, value, provider, networkID }: IWrapDetail
     const wBossContract = new ethers.Contract(addresses.wBOSS_ADDRESS, wBOSS, provider);
 
     if (isWrap) {
-        const wBossValue = await wBossContract.BOSSTowBOSS(amountInWei);
+        const wBossValue = await wBossContract.wrapFromBOSS(amountInWei);
         wrapValue = wBossValue / Math.pow(10, 18);
     } else {
-        const bossValue = await wBossContract.wBOSSToBOSS(amountInWei);
+        const bossValue = await wBossContract.unwrapToBOSS(amountInWei);
         wrapValue = bossValue / Math.pow(10, 9);
     }
 
