@@ -31,6 +31,9 @@ function ConnectMenu() {
     }
 
     if ((isConnected && providerChainID !== DEFAULT_NETWORK) || (isConnected && providerChainID !== TESTNETWORK)) {
+        console.log("providerChainID", providerChainID);
+        console.log("isConnected", isConnected);
+
         buttonText = "Wrong network";
         buttonStyle = { backgroundColor: "rgb(255, 67, 67)" };
         clickFunc = () => {

@@ -28,6 +28,7 @@ const addChainRequest = () => {
 
 export const swithNetwork = async () => {
     if (window.ethereum) {
+        console.log("network");
         try {
             await switchRequest();
         } catch (error: any) {
@@ -36,7 +37,6 @@ export const swithNetwork = async () => {
                     await addChainRequest();
                     await switchRequest();
                 } catch (addError) {
-                    console.log("got here");
                     console.log(error);
                 }
             }

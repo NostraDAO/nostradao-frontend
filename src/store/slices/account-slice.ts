@@ -47,7 +47,7 @@ export const getBalances = createAsyncThunk("account/getBalances", async ({ addr
 interface ILoadAccountDetails {
     address: string;
     networkID: Networks;
-    provider: StaticJsonRpcProvider | JsonRpcProvider;
+    provider: JsonRpcProvider;
 }
 
 interface IUserAccountDetails {

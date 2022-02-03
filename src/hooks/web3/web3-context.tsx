@@ -107,7 +107,6 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
 
     const connect = useCallback(async () => {
         const rawProvider = await web3Modal.connect();
-
         _initListeners(rawProvider);
 
         const connectedProvider = new Web3Provider(rawProvider, "any");
@@ -119,7 +118,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
 
         setProviderChainID(chainId);
 
-        if (chainId === Networks.AVAX) {
+        if (chainId === Networks.AVAX || chainId === Networks.AVAX_TESTNET) {
             setProvider(connectedProvider);
         }
 
