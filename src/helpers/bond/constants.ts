@@ -11,6 +11,5 @@ export interface BondAddresses {
 }
 
 export interface NetworkAddresses {
-    [Networks.AVAX]: BondAddresses;
     [Networks.AVAX_TESTNET]: BondAddresses;
 }

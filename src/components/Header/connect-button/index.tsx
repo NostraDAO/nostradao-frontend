@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useWeb3Context } from "../../../hooks";
-import { DEFAULT_NETWORK, TESTNETWORK } from "../../../constants";
+import { TESTNETWORK } from "../../../constants";
 import { IReduxState } from "../../../store/slices/state.interface";
 import { IPendingTxn } from "../../../store/slices/pending-txns-slice";
 import "./connect-menu.scss";
@@ -30,7 +30,7 @@ function ConnectMenu() {
         clickFunc = () => {};
     }
 
-    if ((isConnected && providerChainID !== DEFAULT_NETWORK) || (isConnected && providerChainID !== TESTNETWORK)) {
+    if (isConnected && providerChainID !== TESTNETWORK) {
         console.log("providerChainID", providerChainID);
         console.log("isConnected", isConnected);
 

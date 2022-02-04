@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getAddresses, TOKEN_DECIMALS, DEFAULT_NETWORK } from "../../../constants";
+import { getAddresses, TOKEN_DECIMALS, TESTNETWORK } from "../../../constants";
 import { useSelector } from "react-redux";
 import { Link, Fade, Popper } from "@material-ui/core";
 import "./time-menu.scss";
@@ -34,7 +34,7 @@ function TimeMenu() {
     const isEthereumAPIAvailable = window.ethereum;
 
     const networkID = useSelector<IReduxState, number>(state => {
-        return (state.app && state.app.networkID) || DEFAULT_NETWORK;
+        return (state.app && state.app.networkID) || TESTNETWORK;
     });
 
     const addresses = getAddresses(networkID);

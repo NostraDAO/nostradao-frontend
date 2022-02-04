@@ -1,5 +1,5 @@
 export const messages = {
-    please_connect: "Please connect your wallet to the Avalanche network to use Nostra DAO.",
+    please_connect: "Please connect your wallet to the Avalanche network to use Nostra City.",
     please_connect_wallet: "Please connect your wallet.",
     try_mint_more: (value: string) => `You're trying to bond more than the maximum payout available! The maximum bond payout is ${value} BOSS.`,
     before_minting: "Before minting, enter a value.",

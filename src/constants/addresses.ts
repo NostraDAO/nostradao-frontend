@@ -25,7 +25,6 @@ const AVAX_FUJI = {
 };
 
 export const getAddresses = (networkID: number) => {
-    if (networkID === Networks.AVAX) return AVAX_MAINNET;
     if (networkID === Networks.AVAX_TESTNET) return AVAX_FUJI;
 
     throw Error("Network don't support");

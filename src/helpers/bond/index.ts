@@ -15,10 +15,6 @@ export const mim = new StableBond({
     bondContractABI: MIMBondDepository,
     reserveContractAbi: MimTokenContract,
     networkAddrs: {
-        [Networks.AVAX]: {
-            bondAddress: "0x694738E0A438d90487b4a549b201142c1a97B556",
-            reserveAddress: "0x130966628846BFd36ff31a822705796e8cb8C18D",
-        },
         [Networks.AVAX_TESTNET]: {
             // todo: remove this and add the actual bond address and reserve
             bondAddress: "0x694738E0A438d90487b4a549b201142c1a97B556",
