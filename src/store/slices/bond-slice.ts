@@ -10,7 +10,7 @@ import { Bond } from "../../helpers/bond/bond";
 import { Networks } from "../../constants/blockchain";
 import { getBondCalculator } from "../../helpers/bond-calculator";
 import { RootState } from "../store";
-import { mim } from "../../helpers/bond";
+import { dai } from "../../helpers/bond";
 import { error, warning, success, info } from "../slices/messages-slice";
 import { messages } from "../../constants/messages";
 import { getGasPrice } from "../../helpers/get-gas-price";
@@ -116,13 +116,13 @@ export const calcBondDetails = createAsyncThunk("bonding/calcBondDetails", async
 
     let marketPrice = await getMarketPrice(networkID, provider);
 
-    const mimPrice = getTokenPrice("MIM");
-    marketPrice = (marketPrice / Math.pow(10, 9)) * mimPrice;
+    const daiPrice = getTokenPrice("DAI");
+    marketPrice = (marketPrice / Math.pow(10, 9)) * daiPrice;
 
     try {
         bondPrice = await bondContract.bondPriceInUSD();
 
-        if (bond.name === mim.name) {
+        if (bond.name === dai.name) {
             const bossPrice = getTokenPrice("BOSS");
             bondPrice = bondPrice * bossPrice;
         }
@@ -166,7 +166,7 @@ export const calcBondDetails = createAsyncThunk("bonding/calcBondDetails", async
         purchased = await bondCalcContract.valuation(assetAddress, purchased);
         purchased = (markdown / Math.pow(10, 18)) * (purchased / Math.pow(10, 9));
 
-        if (bond.name === mim.name) {
+        if (bond.name === dai.name) {
             const bossPrice = getTokenPrice("BOSS");
             purchased = purchased * bossPrice;
         }

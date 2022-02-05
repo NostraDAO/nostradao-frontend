@@ -2,16 +2,16 @@ import { Networks } from "../../constants/blockchain";
 import { LPBond, CustomLPBond } from "./lp-bond";
 import { StableBond, CustomBond } from "./stable-bond";
 
-import MimIcon from "../../assets/tokens/MIM.svg";
+import DaiIcon from "../../assets/tokens/DAI.e.png";
 import MimTimeIcon from "../../assets/tokens/TIME-MIM.svg";
 
 import { MIMBondDepository, MimTokenContract } from "../../abi";
 //  StableReserveContract, LpReserveContract
-export const mim = new StableBond({
-    name: "mim",
-    displayName: "MIM",
-    bondToken: "MIM",
-    bondIconSvg: MimIcon,
+export const dai = new StableBond({
+    name: "dai",
+    displayName: "DAI",
+    bondToken: "DAI",
+    bondIconSvg: DaiIcon,
     bondContractABI: MIMBondDepository,
     reserveContractAbi: MimTokenContract,
     networkAddrs: {
@@ -45,4 +45,4 @@ export const mim = new StableBond({
 //     lpUrl: "https://www.traderjoexyz.com/#/pool/0x130966628846BFd36ff31a822705796e8cb8C18D/0xb54f16fB19478766A268F172C9480f8da1a7c9C3",
 // });
 
-export default [mim];
+export default [dai];

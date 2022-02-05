@@ -39,7 +39,7 @@ function TimeMenu() {
 
     const addresses = getAddresses(networkID);
 
-    const MIM_ADDRESS = addresses.MIM_ADDRESS;
+    const DAI_ADDRESS = addresses.DAI_ADDRESS;
     const BOSS_ADDRESS = addresses.BOSS_ADDRESS;
 
     const handleClick = (event: any) => {
@@ -70,8 +70,8 @@ function TimeMenu() {
                                     <div className="tooltip-item" onClick={addTokenToWallet("BOSS", BOSS_ADDRESS)}>
                                         <p>BOSS</p>
                                     </div>
-                                    <div className="tooltip-item" onClick={addTokenToWallet("MIM", MIM_ADDRESS)}>
-                                        <p>MIM</p>
+                                    <div className="tooltip-item" onClick={addTokenToWallet("DAI", DAI_ADDRESS)}>
+                                        <p>DAI</p>
                                     </div>
                                 </div>
                             )}
