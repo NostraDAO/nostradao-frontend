@@ -23,9 +23,14 @@
     }
   }
   .title {
-    font-family: Montserrat SemiBold;
-    color:#FFFFFF
+    font-family: Corleone;
+    color:#FFFFFF;
+    font-size: 2em;  
   }
+  .title span {
+    color: #FF0000;
+  }
+
 
   .dapp-menu-links{
     display: flex;

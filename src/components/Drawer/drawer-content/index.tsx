@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Social from "./social";
 import StakeIcon from "../../../assets/icons/stake.svg";
 import BondIcon from "../../../assets/icons/bond.svg";
-import NostraIcon from "../../../assets/icons/noun-fedora-hat.svg";
+import NostraIcon from "../../../assets/icons/fedora.png";
 import DashboardIcon from "../../../assets/icons/dashboard.svg";
 import { trim, shorten } from "../../../helpers";
 import { useAddress } from "../../../hooks";
@@ -43,7 +43,9 @@ function NavContent() {
                 <Link href="#" target="_blank">
                     <img alt="Fedora Hat by iconixar from NounProject.com" className="logo-svg" src={NostraIcon} width="200" />
                 </Link>
-                <h1 className="title">Nostra City</h1>
+                <p className="title">
+                    Nostra<span className="red">City</span>
+                </p>
                 {address && (
                     <div className="wallet-link">
                         <Link href={`https://cchain.explorer.avax.network/address/${address}`} target="_blank">
