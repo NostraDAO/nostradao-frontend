@@ -6,7 +6,7 @@ import { Skeleton } from "@material-ui/lab";
 import { IReduxState } from "../../store/slices/state.interface";
 import { IAppSlice } from "../../store/slices/app-slice";
 
-import { useTranslation } from "react-i18n";
+import { useTranslation } from "react-i18next";
 
 function Dashboard() {
     const { t } = useTranslation();

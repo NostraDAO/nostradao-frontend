@@ -4,6 +4,7 @@ import Landing from "./Landing";
 import { HashRouter } from "react-router-dom";
 import { loadTokenPrices } from "../helpers";
 import Loading from "../components/Loader";
+import "../i18n/config";
 
 function Root() {
     const isApp = (): boolean => {
