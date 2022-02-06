@@ -47,6 +47,7 @@ module.exports = api => {
       ],
     ].filter(Boolean),
     plugins: [
+      'i18next-extract',
       'lodash',
       'babel-plugin-macros',
       '@babel/plugin-syntax-dynamic-import',
