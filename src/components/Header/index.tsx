@@ -7,7 +7,7 @@ import ConnectButton from "./connect-button";
 import WrapButton from "./wrap-button";
 import "./header.scss";
 import { DRAWER_WIDTH, TRANSITION_DURATION } from "../../constants/style";
-
+import LocaleSwitcher from "./locale-switcher";
 interface IHeader {
     handleDrawerToggle: () => void;
     drawe: boolean;
@@ -56,6 +56,7 @@ function Header({ handleDrawerToggle, drawe }: IHeader) {
                     <div className="dapp-topbar-btns-wrap">
                         {!isVerySmallScreen && <TimeMenu />}
                         {!isWrapShow && <WrapButton />}
+                        <LocaleSwitcher />
                         <ConnectButton />
                     </div>
                 </Toolbar>

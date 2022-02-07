@@ -1,3 +1,11 @@
 {
-    
+    "BOSS Price": "BOSS Price",
+    "TVL": "TVL",
+    "APY": "APY",
+    "Current Index": "Current Index",
+    "Treasury Balance": "Treasury Balance",
+    "Backing per $BOSS":   "Backing per $BOSS",
+    "Runway": "Runway",
+    "Days": "Days"
+
 }
