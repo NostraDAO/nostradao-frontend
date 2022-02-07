@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, Fade, Popper } from "@material-ui/core";
+import { useTranslation } from "react-i18next";
+import Flag from "react-world-flags";
+
 import "./localeSwitcher.scss";
 import { IReduxState } from "../../../store/slices/state.interface";
-
-import { useTranslation } from "react-i18next";
 
 function LocaleSwitcher() {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -24,7 +25,7 @@ function LocaleSwitcher() {
     return (
         <div className="time-menu-root" onMouseEnter={e => handleClick(e)} onMouseLeave={e => handleClick(e)}>
             <div className="time-menu-btn">
-                <p>Language</p>
+                <Flag code={840} height="16" />
             </div>
 
             <Popper className="time-menu-popper" open={open} anchorEl={anchorEl} transition>
@@ -33,13 +34,16 @@ function LocaleSwitcher() {
                         <div className="tooltip">
                             <div className="add-tokens">
                                 <div className="tooltip-item" onClick={e => changeLanguage("en", e)}>
-                                    <p>English</p>
+                                    <Flag code={840} height="16" />
                                 </div>
                                 <div className="tooltip-item" onClick={e => changeLanguage("ch", e)}>
-                                    <p>Chinese</p>
+                                    <Flag code={156} height="16" />
                                 </div>
                                 <div className="tooltip-item" onClick={e => changeLanguage("pt", e)}>
-                                    <p>Portuguese</p>
+                                    <Flag code={076} height="16" />
+                                </div>
+                                <div className="tooltip-item" onClick={e => changeLanguage("pt", e)}>
+                                    <Flag code={250} height="16" />
                                 </div>
                             </div>
                         </div>
