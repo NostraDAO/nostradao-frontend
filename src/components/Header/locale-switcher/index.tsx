@@ -40,7 +40,7 @@ function LocaleSwitcher() {
                                     <Flag code={156} height="16" />
                                 </div>
                                 <div className="tooltip-item" onClick={e => changeLanguage("pt", e)}>
-                                    <Flag code={076} height="16" />
+                                    <Flag code={620} height="16" />
                                 </div>
                                 <div className="tooltip-item" onClick={e => changeLanguage("pt", e)}>
                                     <Flag code={250} height="16" />
