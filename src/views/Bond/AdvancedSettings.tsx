@@ -2,6 +2,7 @@ import { Box, Modal, Paper, SvgIcon, IconButton, FormControl, OutlinedInput, Inp
 import { useEffect, useState } from "react";
 import { ReactComponent as XIcon } from "../../assets/icons/x.svg";
 import "./bondSettings.scss";
+import { useTranslation } from "react-i18next";
 
 interface IAdvancedSettingsProps {
     open: boolean;
@@ -12,7 +13,7 @@ interface IAdvancedSettingsProps {
 
 function AdvancedSettings({ open, handleClose, slippage, onSlippageChange }: IAdvancedSettingsProps) {
     const [value, setValue] = useState(slippage);
-
+    const { t } = useTranslation();
     useEffect(() => {
         let timeount: any = null;
         clearTimeout(timeount);
@@ -30,11 +31,11 @@ function AdvancedSettings({ open, handleClose, slippage, onSlippageChange }: IAd
                     </IconButton>
                 </div>
 
-                <p className="hades-title">Settings</p>
+                <p className="hades-title">{t("Settings")}</p>
 
                 <Box className="card-content">
                     <InputLabel htmlFor="slippage">
-                        <p className="input-lable">Slippage</p>
+                        <p className="input-lable">{t("Slippage")}</p>
                     </InputLabel>
                     <FormControl variant="outlined" color="primary" fullWidth>
                         <OutlinedInput
@@ -51,7 +52,7 @@ function AdvancedSettings({ open, handleClose, slippage, onSlippageChange }: IAd
                             }
                         />
                         <div className="help-text">
-                            <p className="text-bond-desc">Transaction may revert if price changes by more than slippage %</p>
+                            <p className="text-bond-desc">{t("Transaction may revert if price changes by more than slippage %")}</p>
                         </div>
                     </FormControl>
                 </Box>

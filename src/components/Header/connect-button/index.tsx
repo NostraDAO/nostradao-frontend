@@ -6,8 +6,10 @@ import { IReduxState } from "../../../store/slices/state.interface";
 import { IPendingTxn } from "../../../store/slices/pending-txns-slice";
 import "./connect-menu.scss";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { useTranslation, Trans } from "react-i18next";
 
 function ConnectMenu() {
+    const { t } = useTranslation();
     const { connect, disconnect, connected, web3, providerChainID, checkWrongNetwork } = useWeb3Context();
     const dispatch = useDispatch();
     const [isConnected, setConnected] = useState(connected);
@@ -16,17 +18,17 @@ function ConnectMenu() {
         return state.pendingTransactions;
     });
 
-    let buttonText = "Connect Wallet";
+    let buttonText = t("Connect Wallet");
     let clickFunc: any = connect;
     let buttonStyle = {};
 
     if (isConnected) {
-        buttonText = "Disconnect";
+        buttonText = t("Disconnect");
         clickFunc = disconnect;
     }
 
     if (pendingTransactions && pendingTransactions.length > 0) {
-        buttonText = `${pendingTransactions.length} Pending `;
+        buttonText = `${pendingTransactions.length} ${t("Pending")}`;
         clickFunc = () => {};
     }
 
@@ -34,7 +36,7 @@ function ConnectMenu() {
         console.log("providerChainID", providerChainID);
         console.log("isConnected", isConnected);
 
-        buttonText = "Wrong network";
+        buttonText = t("Wrong network");
         buttonStyle = { backgroundColor: "rgb(255, 67, 67)" };
         clickFunc = () => {
             checkWrongNetwork();

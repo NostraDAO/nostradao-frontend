@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./wrap-button.scss";
 import Wrap from "../../../components/Wrap";
+import { useTranslation } from "react-i18next";
 
 function WrapButton() {
+    const { t } = useTranslation();
     const [showWrap, setShowWrap] = useState(false);
 
     const handelOpenWrap = () => {
@@ -16,7 +18,7 @@ function WrapButton() {
     return (
         <div>
             <div className="wrap-button" onClick={handelOpenWrap}>
-                <p>Wrap</p>
+                <p>{t("Wrap")}</p>
             </div>
             <Wrap open={showWrap} handleClose={handelCloseWrap} />
         </div>

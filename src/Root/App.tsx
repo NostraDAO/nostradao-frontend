@@ -12,8 +12,10 @@ import ViewBase from "../components/ViewBase";
 import { Stake, ChooseBond, Bond, Dashboard, NotFound, Calculator } from "../views";
 import "./style.scss";
 import useTokens from "../hooks/tokens";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 function App() {
+    const [toggleDark, settoggleDark] = useState(false);
     const dispatch = useDispatch();
 
     const { connect, provider, hasCachedProvider, chainID, connected } = useWeb3Context();
@@ -26,6 +28,13 @@ function App() {
 
     const { bonds } = useBonds();
     const { tokens } = useTokens();
+
+    const nostraTheme = createMuiTheme({
+        // Theme settings
+        palette: {
+            type: toggleDark ? "dark" : "light",
+        },
+    });
 
     async function loadDetails(whichDetails: string) {
         let loadProvider = provider;
@@ -105,38 +114,40 @@ function App() {
     if (isAppLoading) return <Loading />;
 
     return (
-        <ViewBase>
-            <Switch>
-                <Route exact path="/dashboard">
-                    <Dashboard />
-                </Route>
+        <ThemeProvider theme={nostraTheme}>
+            <ViewBase>
+                <Switch>
+                    <Route exact path="/dashboard">
+                        <Dashboard />
+                    </Route>
 
-                <Route exact path="/">
-                    <Redirect to="/stake" />
-                </Route>
+                    <Route exact path="/">
+                        <Redirect to="/stake" />
+                    </Route>
 
-                <Route path="/stake">
-                    <Stake />
-                </Route>
+                    <Route path="/stake">
+                        <Stake />
+                    </Route>
 
-                <Route path="/bonds">
-                    {bonds.map(bond => {
-                        return (
-                            <Route exact key={bond.name} path={`/bonds/${bond.name}`}>
-                                <Bond bond={bond} />
-                            </Route>
-                        );
-                    })}
-                    <ChooseBond />
-                </Route>
+                    <Route path="/bonds">
+                        {bonds.map(bond => {
+                            return (
+                                <Route exact key={bond.name} path={`/bonds/${bond.name}`}>
+                                    <Bond bond={bond} />
+                                </Route>
+                            );
+                        })}
+                        <ChooseBond />
+                    </Route>
 
-                <Route path="/calculator">
-                    <Calculator />
-                </Route>
+                    <Route path="/calculator">
+                        <Calculator />
+                    </Route>
 
-                <Route component={NotFound} />
-            </Switch>
-        </ViewBase>
+                    <Route component={NotFound} />
+                </Switch>
+            </ViewBase>
+        </ThemeProvider>
     );
 }
 

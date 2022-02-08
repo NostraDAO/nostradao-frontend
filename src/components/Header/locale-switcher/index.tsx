@@ -9,11 +9,23 @@ import { IReduxState } from "../../../store/slices/state.interface";
 
 function LocaleSwitcher() {
     const [anchorEl, setAnchorEl] = useState(null);
-
+    const [activeFlag, setActiveFlag] = useState(840);
     const { i18n } = useTranslation();
 
     function changeLanguage(value: string, e) {
         i18n.changeLanguage(value);
+        if (value === "en") {
+            setActiveFlag(840);
+        }
+        if (value === "ch") {
+            setActiveFlag(156);
+        }
+        if (value === "pt") {
+            setActiveFlag(620);
+        }
+        if (value === "fr") {
+            setActiveFlag(250);
+        }
     }
 
     const handleClick = e => {
@@ -25,7 +37,7 @@ function LocaleSwitcher() {
     return (
         <div className="time-menu-root" onMouseEnter={e => handleClick(e)} onMouseLeave={e => handleClick(e)}>
             <div className="time-menu-btn">
-                <Flag code={840} height="16" />
+                <Flag code={activeFlag} height="16" />
             </div>
 
             <Popper className="time-menu-popper" open={open} anchorEl={anchorEl} transition>
@@ -42,7 +54,7 @@ function LocaleSwitcher() {
                                 <div className="tooltip-item" onClick={e => changeLanguage("pt", e)}>
                                     <Flag code={620} height="16" />
                                 </div>
-                                <div className="tooltip-item" onClick={e => changeLanguage("pt", e)}>
+                                <div className="tooltip-item" onClick={e => changeLanguage("fr", e)}>
                                     <Flag code={250} height="16" />
                                 </div>
                             </div>

@@ -5,10 +5,11 @@ import { Link, Fade, Popper } from "@material-ui/core";
 import "./time-menu.scss";
 import { IReduxState } from "../../../store/slices/state.interface";
 import { getTokenUrl } from "../../../helpers";
+import { useTranslation } from "react-i18next";
 
 const addTokenToWallet = (tokenSymbol: string, tokenAddress: string) => async () => {
     const tokenImage = getTokenUrl(tokenSymbol.toLowerCase());
-
+    const { t } = useTranslation();
     if (window.ethereum) {
         try {
             await window.ethereum.request({
@@ -59,13 +60,13 @@ function TimeMenu() {
                     <Fade {...TransitionProps} timeout={200}>
                         <div className="tooltip">
                             <Link className="tooltip-item" href={`https://www.traderjoexyz.com/#/trade?inputCurrency=&outputCurrency=${BOSS_ADDRESS}`} target="_blank">
-                                <p>Buy on Trader Joe</p>
+                                <p>t('Buy on Trader Joe')</p>
                             </Link>
 
                             {isEthereumAPIAvailable && (
                                 <div className="add-tokens">
                                     <div className="divider" />
-                                    <p className="add-tokens-title">ADD TOKEN TO WALLET</p>
+                                    <p className="add-tokens-title">t('ADD TOKEN TO WALLET')</p>
                                     <div className="divider" />
                                     <div className="tooltip-item" onClick={addTokenToWallet("BOSS", BOSS_ADDRESS)}>
                                         <p>BOSS</p>

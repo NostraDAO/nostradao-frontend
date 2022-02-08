@@ -12,6 +12,7 @@ import { useWeb3Context } from "../../hooks";
 import { warning } from "../../store/slices/messages-slice";
 import { messages } from "../../constants/messages";
 import { IPendingTxn, isPendingTxn, txnButtonText } from "../../store/slices/pending-txns-slice";
+import { useTranslation } from "react-i18next";
 
 interface IAdvancedSettingsProps {
     open: boolean;
@@ -20,6 +21,7 @@ interface IAdvancedSettingsProps {
 
 function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
     const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
 
     const [value, setValue] = useState("");
@@ -54,10 +56,9 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
     const setMax = () => {
         if (isWrap) {
             setValue(sBossBalance);
+        } else {
+            setValue(wBossBalance);
         }
-        // else {
-        //     setValue(wmemoBalance);
-        // }
     };
 
     const handleSwap = () => {
@@ -90,16 +91,16 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
 
     const hasAllowance = useCallback(() => sBossAllowance > 0, [sBossAllowance]);
 
-    const trimmedMemoBalance = trim(Number(sBossBalance), 6);
-    const trimmedWmemoBalance = trim(Number(wBossBalance), 6);
+    const trimmedSBossBalance = trim(Number(sBossBalance), 6);
+    const trimmedWBossBalance = trim(Number(wBossBalance), 6);
 
-    const getBalance = () => (isWrap ? `${trimmedMemoBalance} sBOSS` : `${trimmedWmemoBalance} wBOSS`);
+    const getBalance = () => (isWrap ? `${trimmedSBossBalance} sBOSS` : `${trimmedWBossBalance} wBOSS`);
 
     const handleOnWrap = async () => {
         if (await checkWrongNetwork()) return;
 
         if (value === "" || parseFloat(value) === 0) {
-            dispatch(warning({ text: isWrap ? messages.before_wrap : messages.before_unwrap }));
+            dispatch(warning({ text: isWrap ? t(`${messages.before_wrap}`) : t(`${messages.before_unwrap}`) }));
         } else {
             await dispatch(changeWrap({ isWrap, value, provider, networkID: chainID, address }));
             setValue("");
@@ -128,7 +129,9 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
 
                 <div className="wrap-header-conteiner">
                     <p className="wrap-header-title">{isWrap ? "Wrap" : "Unwrap"}</p>
-                    <p className="wrap-header-balance">Balance: {isAppLoading ? <Skeleton width="80px" /> : <>{getBalance()}</>}</p>
+                    <p className="wrap-header-balance">
+                        {t("Balance")}: {isAppLoading ? <Skeleton width="80px" /> : <>{getBalance()}</>}
+                    </p>
                 </div>
 
                 <div className="wrap-container">
@@ -149,7 +152,7 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
                         endAdornment={
                             <InputAdornment position="end">
                                 <div onClick={setMax} className="wrap-action-input-btn">
-                                    <p>Max</p>
+                                    <p>{t("Max")}</p>
                                 </div>
                             </InputAdornment>
                         }
@@ -183,7 +186,7 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
                                 handleOnWrap();
                             }}
                         >
-                            <p>{isWrap ? txnButtonText(pendingTransactions, "wrapping", "Wrap") : txnButtonText(pendingTransactions, "unwrapping", "Unwrap")}</p>
+                            <p>{isWrap ? txnButtonText(pendingTransactions, "wrapping", `${t("Wrap")}`) : txnButtonText(pendingTransactions, "unwrapping", `${t("Unwrap")}`)}</p>
                         </div>
                     ) : (
                         <div
@@ -193,14 +196,14 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
                                 onSeekApproval();
                             }}
                         >
-                            <p>{txnButtonText(pendingTransactions, "approve_wrapping", "Approve")}</p>
+                            <p>{txnButtonText(pendingTransactions, "approve_wrapping", `${t("Approve")}`)}</p>
                         </div>
                     )}
                     {!hasAllowance() && (
                         <div className="wrap-help-text">
-                            <p>Note: The "Approve" transaction is only needed when</p>
-                            <p>wrapping for the first time; subsequent wrapping only</p>
-                            <p>requires you to perform the "Wrap" transaction.</p>
+                            <p>{t('Note: The "Approve" transaction is only needed when')}</p>
+                            <p>{t("wrapping for the first time; subsequent wrapping only")}</p>
+                            <p>{t('requires you to perform the "Wrap" transaction.')}</p>
                         </div>
                     )}
                 </div>

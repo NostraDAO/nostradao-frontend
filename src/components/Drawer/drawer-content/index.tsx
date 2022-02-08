@@ -14,8 +14,10 @@ import "./drawer-content.scss";
 import DocsIcon from "../../../assets/icons/stake.svg";
 import GlobeIcon from "../../../assets/icons/wonderglobe.svg";
 import classnames from "classnames";
+import { useTranslation } from "react-i18next";
 
 function NavContent() {
+    const { t } = useTranslation();
     const [isActive] = useState();
     const address = useAddress();
     const { bonds } = useBonds();
@@ -67,7 +69,7 @@ function NavContent() {
                     >
                         <div className="dapp-menu-item">
                             <img alt="" src={DashboardIcon} />
-                            <p>Dashboard</p>
+                            <p>{t("Dashboard")}</p>
                         </div>
                     </Link>
 
@@ -81,7 +83,7 @@ function NavContent() {
                     >
                         <div className="dapp-menu-item">
                             <img alt="" src={StakeIcon} />
-                            <p>Stake</p>
+                            <p>{t("Stake")}</p>
                         </div>
                     </Link>
 
@@ -96,12 +98,12 @@ function NavContent() {
                     >
                         <div className="dapp-menu-item">
                             <img alt="" src={BondIcon} />
-                            <p>Bond</p>
+                            <p>{t("Bond")}</p>
                         </div>
                     </Link>
 
                     <div className="bond-discounts">
-                        <p>Bond discounts</p>
+                        <p>{t("Bond discounts")}</p>
                         {bonds.map((bond, i) => (
                             <Link component={NavLink} to={`/bonds/${bond.name}`} key={i} className={"bond"}>
                                 {!bond.bondDiscount ? (
@@ -126,7 +128,7 @@ function NavContent() {
                     >
                         <div className="dapp-menu-item">
                             <img alt="" src={GlobeIcon} />
-                            <p>Calculator</p>
+                            <p>{t("Calculator")}</p>
                         </div>
                     </Link>
                 </div>
@@ -134,7 +136,7 @@ function NavContent() {
             <div className="dapp-menu-doc-link">
                 <Link href="https://nostradao.gitbook.io/nostradao/" target="_blank">
                     <img alt="" src={DocsIcon} />
-                    <p>Docs</p>
+                    <p>{t("Docs")}</p>
                 </Link>
             </div>
             <Social />

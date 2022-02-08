@@ -10,12 +10,14 @@ import { IAllBondData } from "../../hooks/bonds";
 import { IUserBondDetails } from "../../store/slices/account-slice";
 import { messages } from "../../constants/messages";
 import { warning } from "../../store/slices/messages-slice";
+import { useTranslation } from "react-i18next";
 
 interface IBondRedeem {
     bond: IAllBondData;
 }
 
 function BondRedeem({ bond }: IBondRedeem) {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
 
