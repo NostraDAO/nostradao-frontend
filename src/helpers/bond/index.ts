@@ -6,7 +6,7 @@ import DaiIcon from "../../assets/tokens/DAI.e.png";
 import MimTimeIcon from "../../assets/tokens/TIME-MIM.svg";
 
 import { MIMBondDepository, MimTokenContract } from "../../abi";
-//  StableReserveContract, LpReserveContract
+
 export const dai = new StableBond({
     name: "dai",
     displayName: "DAI",
@@ -17,32 +17,11 @@ export const dai = new StableBond({
     networkAddrs: {
         [Networks.AVAX_TESTNET]: {
             // todo: remove this and add the actual bond address and reserve
-            bondAddress: "0x694738E0A438d90487b4a549b201142c1a97B556",
+            bondAddress: "0xE6234E0C1D40c945be40a2acFd77eFC4c514ECe7",
             reserveAddress: "0x130966628846BFd36ff31a822705796e8cb8C18D",
         },
     },
     tokensInStrategy: "60500000000000000000000000",
 });
-
-// export const mimBoss = new LPBond({
-//     name: "mim_boss_lp",
-//     displayName: "BOSS-MIM ",
-//     bondToken: "MIM",
-//     bondIconSvg: MimTimeIcon,
-//     bondContractABI: LpBondContract,
-//     reserveContractAbi: LpReserveContract,
-//     networkAddrs: {
-//         [Networks.AVAX]: {
-//             bondAddress: "0xA184AE1A71EcAD20E822cB965b99c287590c4FFe",
-//             reserveAddress: "0x113f413371fc4cc4c9d6416cf1de9dfd7bf747df",
-//         },
-//         [Networks.AVAX_TESTNET]: {
-//             //todo: need to add bondAddress and reserveAddress. This is the same as the old ones
-//             bondAddress: "0xA184AE1A71EcAD20E822cB965b99c287590c4FFe",
-//             reserveAddress: "0x113f413371fc4cc4c9d6416cf1de9dfd7bf747df",
-//         },
-//     },
-//     lpUrl: "https://www.traderjoexyz.com/#/pool/0x130966628846BFd36ff31a822705796e8cb8C18D/0xb54f16fB19478766A268F172C9480f8da1a7c9C3",
-// });
 
 export default [dai];

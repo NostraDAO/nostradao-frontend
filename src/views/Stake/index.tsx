@@ -12,8 +12,10 @@ import { IReduxState } from "../../store/slices/state.interface";
 import { messages } from "../../constants/messages";
 import classnames from "classnames";
 import { warning } from "../../store/slices/messages-slice";
+import { useTranslation } from "react-i18next";
 
 function Stake() {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const { provider, address, connect, chainID, checkWrongNetwork } = useWeb3Context();
 
@@ -103,7 +105,7 @@ function Stake() {
                     <Grid className="stake-card-grid" container direction="column" spacing={2}>
                         <Grid item>
                             <div className="stake-card-header">
-                                <p className="stake-card-header-title">BOSS Staking (🕴🏻,🕴🏻)</p>
+                                <p className="stake-card-header-title">{t("BOSS Staking")} (💼,💼)</p>
                                 <RebaseTimer />
                             </div>
                         </Grid>
@@ -140,7 +142,7 @@ function Stake() {
 
                                     <Grid item xs={6} sm={4} md={4} lg={4}>
                                         <div className="stake-card-index">
-                                            <p className="stake-card-metrics-title">Current Index</p>
+                                            <p className="stake-card-metrics-title">{t("Current Index")}</p>
                                             <p className="stake-card-metrics-value">{currentIndex ? <>{trim(Number(currentIndex), 2)} BOSS</> : <Skeleton width="150px" />}</p>
                                         </div>
                                     </Grid>
@@ -152,9 +154,9 @@ function Stake() {
                             {!address && (
                                 <div className="stake-card-wallet-notification">
                                     <div className="stake-card-wallet-connect-btn" onClick={connect}>
-                                        <p>Connect Wallet</p>
+                                        <p>{t("Connect Wallet")}</p>
                                     </div>
-                                    <p className="stake-card-wallet-desc-text">Connect your wallet to stake BOSS tokens!</p>
+                                    <p className="stake-card-wallet-desc-text">{t("Connect your wallet to stake BOSS tokens!")}</p>
                                 </div>
                             )}
                             {address && (
@@ -162,10 +164,10 @@ function Stake() {
                                     <div className="stake-card-action-area">
                                         <div className="stake-card-action-stage-btns-wrap">
                                             <div onClick={changeView(0)} className={classnames("stake-card-action-stage-btn", { active: !view })}>
-                                                <p>Stake</p>
+                                                <p>{t("Stake")}</p>
                                             </div>
                                             <div onClick={changeView(1)} className={classnames("stake-card-action-stage-btn", { active: view })}>
-                                                <p>Unstake</p>
+                                                <p>{t("Unstake")}</p>
                                             </div>
                                         </div>
 
@@ -180,7 +182,7 @@ function Stake() {
                                                 endAdornment={
                                                     <InputAdornment position="end">
                                                         <div onClick={setMax} className="stake-card-action-input-btn">
-                                                            <p>Max</p>
+                                                            <p>{t("Max")}</p>
                                                         </div>
                                                     </InputAdornment>
                                                 }
@@ -196,7 +198,7 @@ function Stake() {
                                                                 onChangeStake("stake");
                                                             }}
                                                         >
-                                                            <p>{txnButtonText(pendingTransactions, "staking", "Stake BOSS")}</p>
+                                                            <p>{txnButtonText(pendingTransactions, "staking", `${t("Stake BOSS")}`)}</p>
                                                         </div>
                                                     ) : (
                                                         <div
@@ -206,7 +208,7 @@ function Stake() {
                                                                 onSeekApproval("time");
                                                             }}
                                                         >
-                                                            <p>{txnButtonText(pendingTransactions, "approve_staking", "Approve")}</p>
+                                                            <p>{txnButtonText(pendingTransactions, "approve_staking", `${t("Approve")}`)}</p>
                                                         </div>
                                                     )}
                                                 </div>
@@ -222,7 +224,7 @@ function Stake() {
                                                                 onChangeStake("unstake");
                                                             }}
                                                         >
-                                                            <p>{txnButtonText(pendingTransactions, "unstaking", "Unstake BOSS")}</p>
+                                                            <p>{txnButtonText(pendingTransactions, "unstaking", `${t("Unstake BOSS")}`)}</p>
                                                         </div>
                                                     ) : (
                                                         <div
@@ -232,7 +234,7 @@ function Stake() {
                                                                 onSeekApproval("memo");
                                                             }}
                                                         >
-                                                            <p>{txnButtonText(pendingTransactions, "approve_unstaking", "Approve")}</p>
+                                                            <p>{txnButtonText(pendingTransactions, "approve_unstaking", `${t("Approve")}`)}</p>
                                                         </div>
                                                     )}
                                                 </div>
@@ -242,8 +244,9 @@ function Stake() {
                                         <div className="stake-card-action-help-text">
                                             {address && ((!hasAllowance("time") && view === 0) || (!hasAllowance("memo") && view === 1)) && (
                                                 <p>
-                                                    Note: The "Approve" transaction is only needed when staking/unstaking for the first time; subsequent staking/unstaking only
-                                                    requires you to perform the "Stake" or "Unstake" transaction.
+                                                    {t(
+                                                        "Note: The 'Approve' transaction is only needed when staking/unstaking for the first time; subsequent staking/unstaking only requires you to perform the 'Stake' or 'Unstake' transaction.",
+                                                    )}
                                                 </p>
                                             )}
                                         </div>

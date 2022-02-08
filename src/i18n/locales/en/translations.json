@@ -42,6 +42,26 @@
     "Minimum purchase": "Minimum purchase",
     "Wrap": "Wrap",
     "Approve": "Approve",
-    "Unwrap": "Unwrap"
-
+    "Unwrap": "Unwrap",
+    "to Next Rebase": "to Next Rebase",
+    "Rebasing": "Rebasing",
+    "Claim": "Claim",
+    "Claim and Autostake": "Claim and Autostake",
+    "Pending Rewards": "Pending Rewards",
+    "Claimable Rewards": "Claimable Rewards",
+    "Time until fully vested": "Time until fully vested",
+    "Bond Price": "Bond Price",
+    "Redeem": "Redeem",
+    "View Contract": "View Contract",
+    "Price": "Price",
+    "Purchased": "Purchased",
+    "Documentation": "Documentation",
+    "Enter App": "Enter App",
+    "Total Staked": "Total Staked",
+    "BOSS Staking": "BOSS Staking",
+    "Connect Wallet": "Connect Wallet",
+    "Connect your wallet to stake BOSS tokens": "Connect your wallet to stake BOSS tokens",
+    "Unstake": "Unstake",
+    "Stake BOSS": "Stake BOSS",
+    "Unstake BOSS": "Stake BOSS"
 }

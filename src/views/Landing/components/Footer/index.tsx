@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 import { IReduxState } from "../../../../store/slices/state.interface";
 import { trim } from "../../../../helpers";
 import { Skeleton } from "@material-ui/lab";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+    const { t } = useTranslation();
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
     const stakingAPY = useSelector<IReduxState, number>(state => {
         return state.app.stakingAPY;
@@ -25,7 +27,7 @@ function Footer() {
             <Grid container spacing={1}>
                 <Grid item xs={12} sm={4} md={4} lg={4}>
                     <div className="landing-footer-item-wrap">
-                        <p className="landing-footer-item-title">Total Staked</p>
+                        <p className="landing-footer-item-title">{t("Total Staked")}</p>
                         <p className="landing-footer-item-value">
                             {isAppLoading ? (
                                 <Skeleton width="180px" />
@@ -40,7 +42,7 @@ function Footer() {
                 </Grid>
                 <Grid item xs={12} sm={4} md={4} lg={4}>
                     <div className="landing-footer-item-wrap">
-                        <p className="landing-footer-item-title">Treasury Balance</p>
+                        <p className="landing-footer-item-title">{t("Treasury Balance")}</p>
                         <p className="landing-footer-item-value">
                             {isAppLoading ? (
                                 <Skeleton width="180px" />
@@ -57,7 +59,7 @@ function Footer() {
                 </Grid>
                 <Grid item xs={12} sm={4} md={4} lg={4}>
                     <div className="landing-footer-item-wrap">
-                        <p className="landing-footer-item-title">Current APY</p>
+                        <p className="landing-footer-item-title">{t("Current APY")}</p>
                         <p className="landing-footer-item-value">
                             {stakingAPY ? <>{new Intl.NumberFormat("en-US").format(Number(trimmedStakingAPY))}%</> : <Skeleton width="150px" />}
                         </p>

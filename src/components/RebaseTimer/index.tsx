@@ -30,10 +30,10 @@ function RebaseTimer() {
                 {currentBlockTime ? (
                     timeUntilRebase ? (
                         <>
-                            <strong>{timeUntilRebase}</strong> t('to Next Rebase')
+                            <strong>{timeUntilRebase}</strong> {t("to Next Rebase")}
                         </>
                     ) : (
-                        <strong>t('Rebasing')</strong>
+                        <strong>{t("Rebasing")}</strong>
                     )
                 ) : (
                     <Skeleton width="200px" />
