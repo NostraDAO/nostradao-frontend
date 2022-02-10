@@ -43,7 +43,7 @@ function NavContent() {
                 <Link href="#" target="_blank">
                     <img alt="Fedora Hat by iconixar from NounProject.com" className="logo-svg" src={NostraIcon} width="200" />
                 </Link>
-                <h1 className="title">Nostra DAO</h1>
+                <h1 className="title">Nostra City</h1>
                 {address && (
                     <div className="wallet-link">
                         <Link href={`https://cchain.explorer.avax.network/address/${address}`} target="_blank">
