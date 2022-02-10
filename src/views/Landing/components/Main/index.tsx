@@ -1,18 +1,24 @@
 import React from "react";
 import { Link } from "@material-ui/core";
 import "./main.scss";
-import Fedora from "../../../../assets/icons/noun-fedora-hat.svg";
+import Fedora from "../../../../assets/icons/fedora.png";
 import { useTranslation } from "react-i18next";
 
 function Main() {
     const { t } = useTranslation();
     return (
         <div className="landing-main">
-            <div className="landing-main-img-wrap">
-                <img src={Fedora} alt="" />
+            <div className="title">
+                <p>
+                    Nostra<span>City</span>
+                </p>
+            </div>
+            <div className="landing-main-help-text-wrap">
+                <p>{t("Lorem ipsum dolor sit amet.")}</p>
+                <p>{t("Lorem ipsum dolor sit amet consectetur.")}</p>
             </div>
             <div className="landing-main-btns-wrap">
-                <Link href="#" target="_blank" rel="noreferrer">
+                <Link href="/dashboard" target="_blank" rel="noreferrer">
                     <div className="landing-main-btn">
                         <p>{t("Enter App")}</p>
                     </div>
@@ -22,13 +28,6 @@ function Main() {
                         <p>{t("Documentation")}</p>
                     </div>
                 </Link>
-            </div>
-            <div className="landing-main-title-wrap">
-                <p>NostraCity</p>
-            </div>
-            <div className="landing-main-help-text-wrap">
-                <p>{t("Lorem ipsum dolor sit amet.")}</p>
-                <p>{t("Lorem ipsum dolor sit amet consectetur.")}</p>
             </div>
         </div>
     );

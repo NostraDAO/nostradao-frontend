@@ -12,7 +12,7 @@ import ViewBase from "../components/ViewBase";
 import { Stake, ChooseBond, Bond, Dashboard, NotFound, Calculator } from "../views";
 import "./style.scss";
 import useTokens from "../hooks/tokens";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 
 function App() {
     const [toggleDark, settoggleDark] = useState(false);
@@ -29,7 +29,7 @@ function App() {
     const { bonds } = useBonds();
     const { tokens } = useTokens();
 
-    const nostraTheme = createMuiTheme({
+    const nostraTheme = createTheme({
         // Theme settings
         palette: {
             type: toggleDark ? "dark" : "light",
