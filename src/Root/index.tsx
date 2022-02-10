@@ -8,7 +8,7 @@ import "../i18n/config";
 
 function Root() {
     const isApp = (): boolean => {
-        return true; //window.location.host.includes("app");
+        return false; //window.location.host.includes("app");
     };
     const [loading, setLoading] = useState(true);
 
