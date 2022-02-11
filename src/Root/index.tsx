@@ -5,10 +5,6 @@ import {HashRouter} from "react-router-dom";
 import {loadTokenPrices} from "../helpers";
 import Loading from "../components/Loader";
 import "../i18n/config";
-import {ThemeProvider} from "styled-components";
-import {lightTheme, darkTheme} from "../theme";
-import GlobalTheme from "../globals";
-import styled from "styled-components";
 
 function Root() {
     const isApp = (): boolean => {

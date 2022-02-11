@@ -36,6 +36,9 @@ function NavContent() {
         if (currentPath.indexOf("calculator") >= 0 && page === "calculator") {
             return true;
         }
+        if (currentPath.indexOf("business") >= 0 && page === "business") {
+            return true;
+        }
         return false;
     }, []);
 
@@ -70,6 +73,20 @@ function NavContent() {
                         <div className="dapp-menu-item">
                             <img alt="" src={DashboardIcon} />
                             <p>{t("Dashboard")}</p>
+                        </div>
+                    </Link>
+
+                    <Link
+                        component={NavLink}
+                        to="/business"
+                        isActive={(match: any, location: any) => {
+                            return checkPage(location, "business");
+                        }}
+                        className={classnames("button-dapp-menu", {active: isActive})}
+                    >
+                        <div className="dapp-menu-item">
+                            <img alt="" src={DashboardIcon} />
+                            <p>{t("Business")}</p>
                         </div>
                     </Link>
 
