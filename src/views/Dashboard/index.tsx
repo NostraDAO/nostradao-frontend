@@ -1,15 +1,15 @@
-import { useSelector } from "react-redux";
-import { Grid, Zoom } from "@material-ui/core";
-import { trim } from "../../helpers";
+import {useSelector} from "react-redux";
+import {Grid, Zoom} from "@material-ui/core";
+import {trim} from "../../helpers";
 import "./dashboard.scss";
-import { Skeleton } from "@material-ui/lab";
-import { IReduxState } from "../../store/slices/state.interface";
-import { IAppSlice } from "../../store/slices/app-slice";
+import {Skeleton} from "@material-ui/lab";
+import {IReduxState} from "../../store/slices/state.interface";
+import {IAppSlice} from "../../store/slices/app-slice";
 
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 function Dashboard() {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
     const app = useSelector<IReduxState, IAppSlice>(state => state.app);
 

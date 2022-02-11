@@ -1,11 +1,11 @@
-import { Networks } from "../../constants/blockchain";
-import { LPBond, CustomLPBond } from "./lp-bond";
-import { StableBond, CustomBond } from "./stable-bond";
+import {Networks} from "../../constants/blockchain";
+import {LPBond, CustomLPBond} from "./lp-bond";
+import {StableBond, CustomBond} from "./stable-bond";
 
 import DaiIcon from "../../assets/tokens/DAI.e.png";
 import MimTimeIcon from "../../assets/tokens/TIME-MIM.svg";
 
-import { MIMBondDepository, MimTokenContract } from "../../abi";
+import {MIMBondDepository, MimTokenContract} from "../../abi";
 
 export const dai = new StableBond({
     name: "dai",

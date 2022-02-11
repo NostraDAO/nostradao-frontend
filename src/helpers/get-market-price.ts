@@ -1,7 +1,7 @@
-import { ethers } from "ethers";
+import {ethers} from "ethers";
 // import { LpReserveContract } from "../abi";
-import { dai } from "../helpers/bond";
-import { Networks } from "../constants/blockchain";
+import {dai} from "../helpers/bond";
+import {Networks} from "../constants/blockchain";
 
 export async function getMarketPrice(networkID: Networks, provider: ethers.Signer | ethers.providers.Provider): Promise<number> {
     const daiAddress = dai.getAddressForReserve(networkID);

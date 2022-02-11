@@ -1,5 +1,5 @@
-import { JsonRpcProvider } from "@ethersproject/providers";
-import { utils } from "ethers";
+import {JsonRpcProvider} from "@ethersproject/providers";
+import {utils} from "ethers";
 
 const GAS = "5";
 

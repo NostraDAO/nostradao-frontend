@@ -1,5 +1,5 @@
-import { Color } from "@material-ui/lab/Alert";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {Color} from "@material-ui/lab/Alert";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export type Message = IMessage & {
     severity: Color;
@@ -50,6 +50,6 @@ const messagesSlice = createSlice({
     },
 });
 
-export const { error, info, close, warning, success } = messagesSlice.actions;
+export const {error, info, close, warning, success} = messagesSlice.actions;
 
 export default messagesSlice.reducer;

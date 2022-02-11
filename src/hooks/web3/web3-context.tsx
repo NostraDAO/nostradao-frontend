@@ -1,13 +1,13 @@
-import React, { useState, ReactElement, useContext, useMemo, useCallback } from "react";
+import React, {useState, ReactElement, useContext, useMemo, useCallback} from "react";
 import Web3Modal from "web3modal";
-import { StaticJsonRpcProvider, JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
+import {StaticJsonRpcProvider, JsonRpcProvider, Web3Provider} from "@ethersproject/providers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { getMainnetURI, getTestnetURI } from "./helpers";
-import { TESTNETWORK } from "../../constants";
-import { Networks } from "../../constants";
-import { messages } from "../../constants/messages";
-import { useDispatch } from "react-redux";
-import { swithNetwork } from "../../helpers/switch-network";
+import {getMainnetURI, getTestnetURI} from "./helpers";
+import {TESTNETWORK} from "../../constants";
+import {Networks} from "../../constants";
+import {messages} from "../../constants/messages";
+import {useDispatch} from "react-redux";
+import {swithNetwork} from "../../helpers/switch-network";
 
 type onChainProvider = {
     connect: () => Promise<Web3Provider>;
@@ -34,18 +34,18 @@ export const useWeb3Context = () => {
     if (!web3Context) {
         throw new Error("useWeb3Context() can only be used inside of <Web3ContextProvider />, " + "please declare it at a higher level.");
     }
-    const { onChainProvider } = web3Context;
+    const {onChainProvider} = web3Context;
     return useMemo(() => {
-        return { ...onChainProvider };
+        return {...onChainProvider};
     }, [web3Context]);
 };
 
 export const useAddress = () => {
-    const { address } = useWeb3Context();
+    const {address} = useWeb3Context();
     return address;
 };
 
-export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ children }) => {
+export const Web3ContextProvider: React.FC<{children: ReactElement}> = ({children}) => {
     const dispatch = useDispatch();
 
     const [connected, setConnected] = useState(false);
@@ -164,5 +164,5 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
         [connect, disconnect, hasCachedProvider, provider, connected, address, chainID, web3Modal, providerChainID],
     );
     //@ts-ignore
-    return <Web3Context.Provider value={{ onChainProvider }}>{children}</Web3Context.Provider>;
+    return <Web3Context.Provider value={{onChainProvider}}>{children}</Web3Context.Provider>;
 };

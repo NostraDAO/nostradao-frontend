@@ -1,9 +1,9 @@
-import { BondType, NetworkAddresses } from "./constants";
-import { Networks } from "../../constants/blockchain";
-import { ContractInterface, Contract } from "ethers";
+import {BondType, NetworkAddresses} from "./constants";
+import {Networks} from "../../constants/blockchain";
+import {ContractInterface, Contract} from "ethers";
 import React from "react";
-import { JsonRpcSigner, StaticJsonRpcProvider } from "@ethersproject/providers";
-import { getTokenPrice } from "../token-price";
+import {JsonRpcSigner, StaticJsonRpcProvider} from "@ethersproject/providers";
+import {getTokenPrice} from "../token-price";
 
 export interface BondOpts {
     readonly name: string; // Internal name used for references
@@ -33,7 +33,7 @@ export abstract class Bond {
     // Async method that returns a Promise
     public abstract getTreasuryBalance(networkID: Networks, provider: StaticJsonRpcProvider): Promise<number>;
     public abstract getTokenAmount(networkID: Networks, provider: StaticJsonRpcProvider): Promise<number>;
-    public abstract getTimeAmount(networkID: Networks, provider: StaticJsonRpcProvider): Promise<number>;
+    public abstract getBossAmount(networkID: Networks, provider: StaticJsonRpcProvider): Promise<number>;
 
     constructor(type: BondType, bondOpts: BondOpts) {
         this.name = bondOpts.name;

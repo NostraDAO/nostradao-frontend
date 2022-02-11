@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, Fade, Popper } from "@material-ui/core";
-import { useTranslation } from "react-i18next";
+import {useState} from "react";
+import {useSelector} from "react-redux";
+import {Link, Fade, Popper} from "@material-ui/core";
+import {useTranslation} from "react-i18next";
 import Flag from "react-world-flags";
 
 import "./localeSwitcher.scss";
-import { IReduxState } from "../../../store/slices/state.interface";
+import {IReduxState} from "../../../store/slices/state.interface";
 
 function LocaleSwitcher() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [activeFlag, setActiveFlag] = useState(840);
-    const { i18n } = useTranslation();
+    const {i18n} = useTranslation();
 
     function changeLanguage(value: string, e) {
         i18n.changeLanguage(value);
@@ -41,7 +41,7 @@ function LocaleSwitcher() {
             </div>
 
             <Popper className="time-menu-popper" open={open} anchorEl={anchorEl} transition>
-                {({ TransitionProps }) => (
+                {({TransitionProps}) => (
                     <Fade {...TransitionProps} timeout={200}>
                         <div className="tooltip">
                             <div className="add-tokens">

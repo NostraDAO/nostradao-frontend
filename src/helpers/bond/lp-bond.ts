@@ -1,10 +1,10 @@
-import { ContractInterface } from "ethers";
-import { Bond, BondOpts } from "./bond";
-import { BondType } from "./constants";
-import { Networks } from "../../constants/blockchain";
-import { StaticJsonRpcProvider } from "@ethersproject/providers";
-import { getBondCalculator } from "../bond-calculator";
-import { getAddresses } from "../../constants/addresses";
+import {ContractInterface} from "ethers";
+import {Bond, BondOpts} from "./bond";
+import {BondType} from "./constants";
+import {Networks} from "../../constants/blockchain";
+import {StaticJsonRpcProvider} from "@ethersproject/providers";
+import {getBondCalculator} from "../bond-calculator";
+import {getAddresses} from "../../constants/addresses";
 
 // Keep all LP specific fields/logic within the LPBond class
 export interface LPBondOpts extends BondOpts {
@@ -44,7 +44,7 @@ export class LPBond extends Bond {
         return this.getReserves(networkID, provider, true);
     }
 
-    public getTimeAmount(networkID: Networks, provider: StaticJsonRpcProvider) {
+    public getBossAmount(networkID: Networks, provider: StaticJsonRpcProvider) {
         return this.getReserves(networkID, provider, false);
     }
 

@@ -1,26 +1,26 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { trim } from "../../helpers";
-import { Grid, Backdrop, Box, Fade } from "@material-ui/core";
+import {useState} from "react";
+import {useSelector} from "react-redux";
+import {trim} from "../../helpers";
+import {Grid, Backdrop, Box, Fade} from "@material-ui/core";
 import TabPanel from "../../components/TabPanel";
 import BondHeader from "./BondHeader";
 import BondRedeem from "./BondRedeem";
 import BondPurchase from "./BondPurchase";
 import "./bond.scss";
-import { useWeb3Context } from "../../hooks";
-import { Skeleton } from "@material-ui/lab";
-import { IReduxState } from "../../store/slices/state.interface";
-import { IAllBondData } from "../../hooks/bonds";
+import {useWeb3Context} from "../../hooks";
+import {Skeleton} from "@material-ui/lab";
+import {IReduxState} from "../../store/slices/state.interface";
+import {IAllBondData} from "../../hooks/bonds";
 import classnames from "classnames";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 interface IBondProps {
     bond: IAllBondData;
 }
 
-function Bond({ bond }: IBondProps) {
-    const { t } = useTranslation();
-    const { address } = useWeb3Context();
+function Bond({bond}: IBondProps) {
+    const {t} = useTranslation();
+    const {address} = useWeb3Context();
 
     const [slippage, setSlippage] = useState(0.5);
 
@@ -58,10 +58,10 @@ function Bond({ bond }: IBondProps) {
                             </Box>
 
                             <div className="bond-one-table">
-                                <div className={classnames("bond-one-table-btn", { active: !view })} onClick={changeView(0)}>
+                                <div className={classnames("bond-one-table-btn", {active: !view})} onClick={changeView(0)}>
                                     <p>{t("Bond")}</p>
                                 </div>
-                                <div className={classnames("bond-one-table-btn", { active: view })} onClick={changeView(1)}>
+                                <div className={classnames("bond-one-table-btn", {active: view})} onClick={changeView(1)}>
                                     <p>{t("Redeem")}</p>
                                 </div>
                             </div>

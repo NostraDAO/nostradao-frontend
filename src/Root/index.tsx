@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import App from "./App";
 import Landing from "./Landing";
-import { HashRouter } from "react-router-dom";
-import { loadTokenPrices } from "../helpers";
+import {HashRouter} from "react-router-dom";
+import {loadTokenPrices} from "../helpers";
 import Loading from "../components/Loader";
 import "../i18n/config";
+import {ThemeProvider} from "styled-components";
+import {lightTheme, darkTheme} from "../theme";
+import GlobalTheme from "../globals";
+import styled from "styled-components";
 
 function Root() {
     const isApp = (): boolean => {
         // if (window.location.hash !== " ") {
         //     return true;
         // }
-        return false; //window.location.host.includes("app");
+        return true; //window.location.host.includes("app");
     };
     const [loading, setLoading] = useState(true);
 

@@ -1,15 +1,15 @@
-import { Box } from "@material-ui/core";
-import { Bond } from "../helpers/bond/bond";
+import {Box} from "@material-ui/core";
+import {Bond} from "../helpers/bond/bond";
 
 interface IBondLogoProps {
     bond: Bond;
 }
 
-function BondLogo({ bond }: IBondLogoProps) {
-    let style = { height: "32px", width: "32px" };
+function BondLogo({bond}: IBondLogoProps) {
+    let style = {height: "32px", width: "32px"};
 
     if (bond.isLP) {
-        style = { height: "30px", width: "62px" };
+        style = {height: "30px", width: "62px"};
     }
 
     return (

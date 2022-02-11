@@ -1,12 +1,12 @@
-import { AppBar, Toolbar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {AppBar, Toolbar} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import MenuIcon from "../../assets/icons/hamburger.svg";
 import TimeMenu from "./time-menu";
 import ConnectButton from "./connect-button";
 import WrapButton from "./wrap-button";
 import "./header.scss";
-import { DRAWER_WIDTH, TRANSITION_DURATION } from "../../constants/style";
+import {DRAWER_WIDTH, TRANSITION_DURATION} from "../../constants/style";
 import LocaleSwitcher from "./locale-switcher";
 interface IHeader {
     handleDrawerToggle: () => void;
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function Header({ handleDrawerToggle, drawe }: IHeader) {
+function Header({handleDrawerToggle, drawe}: IHeader) {
     const classes = useStyles();
     const isVerySmallScreen = useMediaQuery("(max-width: 400px)");
     const isWrapShow = useMediaQuery("(max-width: 480px)");

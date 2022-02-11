@@ -2,7 +2,13 @@
     height: 100vh;
     width: 100%;
     overflow: scroll;
-    background: rgb(0,0,0);
     display: flex;
+    background: rgb(0,0,0);
     flex-direction: column;
+}
+
+
+
+.white {
+    background: rgb(255,255,255);
 }

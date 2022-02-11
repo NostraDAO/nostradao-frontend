@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./wrap-button.scss";
 import Wrap from "../../../components/Wrap";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 function WrapButton() {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const [showWrap, setShowWrap] = useState(false);
 
     const handelOpenWrap = () => {

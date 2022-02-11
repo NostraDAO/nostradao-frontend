@@ -1,9 +1,10 @@
 import ReactDOM from "react-dom";
+import React from "react";
 import Root from "./Root";
 import store from "./store/store";
-import { Provider } from "react-redux";
-import { Web3ContextProvider } from "./hooks";
-import { SnackbarProvider } from "notistack";
+import {Provider} from "react-redux";
+import {Web3ContextProvider} from "./hooks";
+import {SnackbarProvider} from "notistack";
 import SnackMessage from "./components/Messages/snackbar";
 
 ReactDOM.render(

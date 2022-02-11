@@ -1,15 +1,15 @@
-import { ethers } from "ethers";
-import { getAddresses } from "../../constants";
-import { BossERC20Token, sBoss, MimTokenContract, wBOSS } from "../../abi";
-import { setAll } from "../../helpers";
+import {ethers} from "ethers";
+import {getAddresses} from "../../constants";
+import {BossERC20Token, sBoss, MimTokenContract, wBOSS} from "../../abi";
+import {setAll} from "../../helpers";
 
-import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
-import { JsonRpcProvider, StaticJsonRpcProvider } from "@ethersproject/providers";
-import { Bond } from "../../helpers/bond/bond";
-import { Networks } from "../../constants/blockchain";
+import {createSlice, createSelector, createAsyncThunk} from "@reduxjs/toolkit";
+import {JsonRpcProvider, StaticJsonRpcProvider} from "@ethersproject/providers";
+import {Bond} from "../../helpers/bond/bond";
+import {Networks} from "../../constants/blockchain";
 import React from "react";
-import { RootState } from "../store";
-import { IToken } from "../../helpers/tokens";
+import {RootState} from "../store";
+import {IToken} from "../../helpers/tokens";
 
 interface IGetBalances {
     address: string;
@@ -25,7 +25,7 @@ interface IAccountBalances {
     };
 }
 
-export const getBalances = createAsyncThunk("account/getBalances", async ({ address, networkID, provider }: IGetBalances): Promise<IAccountBalances> => {
+export const getBalances = createAsyncThunk("account/getBalances", async ({address, networkID, provider}: IGetBalances): Promise<IAccountBalances> => {
     const addresses = getAddresses(networkID);
 
     const sBossContract = new ethers.Contract(addresses.sBOSS_ADDRESS, sBoss, provider);
@@ -65,7 +65,7 @@ interface IUserAccountDetails {
     };
 }
 
-export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails", async ({ networkID, provider, address }: ILoadAccountDetails): Promise<IUserAccountDetails> => {
+export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails", async ({networkID, provider, address}: ILoadAccountDetails): Promise<IUserAccountDetails> => {
     console.log("loadAccountDetails", address, provider, networkID);
     let bossBalance = 0;
     let sBossBalance = 0;
@@ -131,7 +131,7 @@ export interface IUserBondDetails {
     pendingPayout: number; //Payout formatted in gwei.
 }
 
-export const calculateUserBondDetails = createAsyncThunk("account/calculateUserBondDetails", async ({ address, bond, networkID, provider }: ICalcUserBondDetails) => {
+export const calculateUserBondDetails = createAsyncThunk("account/calculateUserBondDetails", async ({address, bond, networkID, provider}: ICalcUserBondDetails) => {
     if (!address) {
         return new Promise<any>(resevle => {
             resevle({
@@ -198,7 +198,7 @@ export interface IUserTokenDetails {
     isAvax?: boolean;
 }
 
-export const calculateUserTokenDetails = createAsyncThunk("account/calculateUserTokenDetails", async ({ address, token, networkID, provider }: ICalcUserTokenDetails) => {
+export const calculateUserTokenDetails = createAsyncThunk("account/calculateUserTokenDetails", async ({address, token, networkID, provider}: ICalcUserTokenDetails) => {
     if (!address) {
         return new Promise<any>(resevle => {
             resevle({
@@ -244,7 +244,7 @@ export const calculateUserTokenDetails = createAsyncThunk("account/calculateUser
 });
 // allowance: Number(allowance),
 export interface IAccountSlice {
-    bonds: { [key: string]: IUserBondDetails };
+    bonds: {[key: string]: IUserBondDetails};
     balances: {
         sboss: string;
         boss: string;
@@ -258,15 +258,15 @@ export interface IAccountSlice {
     wrapping: {
         sboss: number;
     };
-    tokens: { [key: string]: IUserTokenDetails };
+    tokens: {[key: string]: IUserTokenDetails};
 }
 
 const initialState: IAccountSlice = {
     loading: true,
     bonds: {},
-    balances: { sboss: "", boss: "", wboss: "" },
-    staking: { boss: 0, sboss: 0 },
-    wrapping: { sboss: 0 },
+    balances: {sboss: "", boss: "", wboss: ""},
+    staking: {boss: 0, sboss: 0},
+    wrapping: {sboss: 0},
     tokens: {},
 };
 
@@ -287,7 +287,7 @@ const accountSlice = createSlice({
                 setAll(state, action.payload);
                 state.loading = false;
             })
-            .addCase(loadAccountDetails.rejected, (state, { error }) => {
+            .addCase(loadAccountDetails.rejected, (state, {error}) => {
                 state.loading = false;
                 console.log(error);
             })
@@ -298,7 +298,7 @@ const accountSlice = createSlice({
                 setAll(state, action.payload);
                 state.loading = false;
             })
-            .addCase(getBalances.rejected, (state, { error }) => {
+            .addCase(getBalances.rejected, (state, {error}) => {
                 state.loading = false;
                 console.log(error);
             })
@@ -311,7 +311,7 @@ const accountSlice = createSlice({
                 state.bonds[bond] = action.payload;
                 state.loading = false;
             })
-            .addCase(calculateUserBondDetails.rejected, (state, { error }) => {
+            .addCase(calculateUserBondDetails.rejected, (state, {error}) => {
                 state.loading = false;
                 console.log(error);
             })
@@ -324,7 +324,7 @@ const accountSlice = createSlice({
                 state.tokens[token] = action.payload;
                 state.loading = false;
             })
-            .addCase(calculateUserTokenDetails.rejected, (state, { error }) => {
+            .addCase(calculateUserTokenDetails.rejected, (state, {error}) => {
                 state.loading = false;
                 console.log(error);
             });
@@ -333,7 +333,7 @@ const accountSlice = createSlice({
 
 export default accountSlice.reducer;
 
-export const { fetchAccountSuccess } = accountSlice.actions;
+export const {fetchAccountSuccess} = accountSlice.actions;
 
 const baseInfo = (state: RootState) => state.account;
 

@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import {useState} from "react";
+import {NavLink, useHistory} from "react-router-dom";
 import BondLogo from "../../components/BondLogo";
 import AdvancedSettings from "./AdvancedSettings";
-import { IconButton, SvgIcon, Link } from "@material-ui/core";
-import { ReactComponent as SettingsIcon } from "../../assets/icons/settings.svg";
-import { ReactComponent as XIcon } from "../../assets/icons/x.svg";
-import { useEscape } from "../../hooks";
-import { IAllBondData } from "../../hooks/bonds";
+import {IconButton, SvgIcon, Link} from "@material-ui/core";
+import {ReactComponent as SettingsIcon} from "../../assets/icons/settings.svg";
+import {ReactComponent as XIcon} from "../../assets/icons/x.svg";
+import {useEscape} from "../../hooks";
+import {IAllBondData} from "../../hooks/bonds";
 
 interface IBondHeaderProps {
     bond: IAllBondData;
@@ -14,7 +14,7 @@ interface IBondHeaderProps {
     onSlippageChange: (e: any) => void;
 }
 
-function BondHeader({ bond, slippage, onSlippageChange }: IBondHeaderProps) {
+function BondHeader({bond, slippage, onSlippageChange}: IBondHeaderProps) {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {

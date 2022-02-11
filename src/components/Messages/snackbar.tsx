@@ -1,7 +1,7 @@
-import React, { useState, forwardRef, useCallback } from "react";
+import React, {useState, forwardRef, useCallback} from "react";
 import classnames from "classnames";
-import { makeStyles } from "@material-ui/core/styles";
-import { useSnackbar, SnackbarContent } from "notistack";
+import {makeStyles} from "@material-ui/core/styles";
+import {useSnackbar, SnackbarContent} from "notistack";
 import Collapse from "@material-ui/core/Collapse";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -12,13 +12,13 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import { Message } from "../../store/slices/messages-slice";
+import {Message} from "../../store/slices/messages-slice";
 import WarningIcon from "@material-ui/icons/Warning";
 import ErrorIcon from "@material-ui/icons/Error";
 import InfoIcon from "@material-ui/icons/Info";
 import SuccessIcon from "@material-ui/icons/CheckCircle";
-import { Color } from "@material-ui/lab/Alert";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import {Color} from "@material-ui/lab/Alert";
+import {CopyToClipboard} from "react-copy-to-clipboard";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -93,9 +93,9 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const SnackMessage = forwardRef<HTMLDivElement, { id: string | number; message: Message }>((props, ref) => {
+const SnackMessage = forwardRef<HTMLDivElement, {id: string | number; message: Message}>((props, ref) => {
     const classes = useStyles();
-    const { closeSnackbar } = useSnackbar();
+    const {closeSnackbar} = useSnackbar();
     const [expanded, setExpanded] = useState(false);
     const [isCopy, setIsCopy] = useState(false);
 
@@ -125,14 +125,14 @@ const SnackMessage = forwardRef<HTMLDivElement, { id: string | number; message: 
     return (
         <SnackbarContent ref={ref} className={classes.root}>
             <Card className={classnames(classes.card, classes[props.message.severity])}>
-                <CardActions classes={{ root: classes.actionRoot }}>
+                <CardActions classes={{root: classes.actionRoot}}>
                     {getIcon(props.message.severity)}
                     <Typography variant="subtitle2" className={classes.typography}>
                         {props.message.text}
                     </Typography>
                     <div className={classes.icons}>
                         {props.message.error && (
-                            <IconButton aria-label="Show more" className={classnames(classes.expand, { [classes.expandOpen]: expanded })} onClick={handleExpandClick}>
+                            <IconButton aria-label="Show more" className={classnames(classes.expand, {[classes.expandOpen]: expanded})} onClick={handleExpandClick}>
                                 <ExpandMoreIcon color="inherit" />
                             </IconButton>
                         )}
@@ -145,7 +145,7 @@ const SnackMessage = forwardRef<HTMLDivElement, { id: string | number; message: 
                     <Paper className={classes.collapse}>
                         <CopyToClipboard text={JSON.stringify(props.message.error)} onCopy={() => setIsCopy(true)}>
                             <Button size="small" className={classes.button}>
-                                <CheckCircleIcon className={classnames(classes.checkIcon, { [classes.checkIconCopy]: isCopy })} />
+                                <CheckCircleIcon className={classnames(classes.checkIcon, {[classes.checkIconCopy]: isCopy})} />
                                 Copy to clipboard
                             </Button>
                         </CopyToClipboard>

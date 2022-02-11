@@ -1,28 +1,28 @@
-import { Modal, Paper, SvgIcon, IconButton, OutlinedInput, InputAdornment } from "@material-ui/core";
-import { useCallback, useEffect, useState } from "react";
-import { ReactComponent as XIcon } from "../../assets/icons/x.svg";
-import { ReactComponent as ArrowsIcon } from "../../assets/icons/arrows.svg";
+import {Modal, Paper, SvgIcon, IconButton, OutlinedInput, InputAdornment} from "@material-ui/core";
+import {useCallback, useEffect, useState} from "react";
+import {ReactComponent as XIcon} from "../../assets/icons/x.svg";
+import {ReactComponent as ArrowsIcon} from "../../assets/icons/arrows.svg";
 import "./wrap.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { IReduxState } from "../../store/slices/state.interface";
-import { trim } from "../../helpers";
-import { Skeleton } from "@material-ui/lab";
-import { calcWrapDetails, changeWrap, changeApproval, calcWrapPrice } from "../../store/slices/wrap-slice";
-import { useWeb3Context } from "../../hooks";
-import { warning } from "../../store/slices/messages-slice";
-import { messages } from "../../constants/messages";
-import { IPendingTxn, isPendingTxn, txnButtonText } from "../../store/slices/pending-txns-slice";
-import { useTranslation } from "react-i18next";
+import {useDispatch, useSelector} from "react-redux";
+import {IReduxState} from "../../store/slices/state.interface";
+import {trim} from "../../helpers";
+import {Skeleton} from "@material-ui/lab";
+import {calcWrapDetails, changeWrap, changeApproval, calcWrapPrice} from "../../store/slices/wrap-slice";
+import {useWeb3Context} from "../../hooks";
+import {warning} from "../../store/slices/messages-slice";
+import {messages} from "../../constants/messages";
+import {IPendingTxn, isPendingTxn, txnButtonText} from "../../store/slices/pending-txns-slice";
+import {useTranslation} from "react-i18next";
 
 interface IAdvancedSettingsProps {
     open: boolean;
     handleClose: () => void;
 }
 
-function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
+function Wrap({open, handleClose}: IAdvancedSettingsProps) {
     const dispatch = useDispatch();
-    const { t } = useTranslation();
-    const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
+    const {t} = useTranslation();
+    const {provider, address, chainID, checkWrongNetwork} = useWeb3Context();
 
     const [value, setValue] = useState("");
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
@@ -74,18 +74,18 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
     };
 
     useEffect(() => {
-        dispatch(calcWrapDetails({ isWrap, provider, value, networkID: chainID }));
+        dispatch(calcWrapDetails({isWrap, provider, value, networkID: chainID}));
     }, [value]);
 
     useEffect(() => {
-        dispatch(calcWrapPrice({ isWrap: isWrapPrice, provider, networkID: chainID }));
+        dispatch(calcWrapPrice({isWrap: isWrapPrice, provider, networkID: chainID}));
     }, [isWrapPrice]);
 
     const onClose = () => {
         setValue("");
         setIsWrap(true);
         setIsWrapPrice(true);
-        dispatch(calcWrapDetails({ isWrap, provider, value: "", networkID: chainID }));
+        dispatch(calcWrapDetails({isWrap, provider, value: "", networkID: chainID}));
         handleClose();
     };
 
@@ -100,9 +100,9 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
         if (await checkWrongNetwork()) return;
 
         if (value === "" || parseFloat(value) === 0) {
-            dispatch(warning({ text: isWrap ? t(`${messages.before_wrap}`) : t(`${messages.before_unwrap}`) }));
+            dispatch(warning({text: isWrap ? t(`${messages.before_wrap}`) : t(`${messages.before_unwrap}`)}));
         } else {
-            await dispatch(changeWrap({ isWrap, value, provider, networkID: chainID, address }));
+            await dispatch(changeWrap({isWrap, value, provider, networkID: chainID, address}));
             setValue("");
         }
     };
@@ -110,7 +110,7 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
     const onSeekApproval = async () => {
         if (await checkWrongNetwork()) return;
 
-        await dispatch(changeApproval({ address, provider, networkID: chainID }));
+        await dispatch(changeApproval({address, provider, networkID: chainID}));
     };
 
     return (

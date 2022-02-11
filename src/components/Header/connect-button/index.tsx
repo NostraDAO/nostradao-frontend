@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useWeb3Context } from "../../../hooks";
-import { TESTNETWORK } from "../../../constants";
-import { IReduxState } from "../../../store/slices/state.interface";
-import { IPendingTxn } from "../../../store/slices/pending-txns-slice";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useWeb3Context} from "../../../hooks";
+import {TESTNETWORK} from "../../../constants";
+import {IReduxState} from "../../../store/slices/state.interface";
+import {IPendingTxn} from "../../../store/slices/pending-txns-slice";
 import "./connect-menu.scss";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { useTranslation, Trans } from "react-i18next";
+import {useTranslation, Trans} from "react-i18next";
 
 function ConnectMenu() {
-    const { t } = useTranslation();
-    const { connect, disconnect, connected, web3, providerChainID, checkWrongNetwork } = useWeb3Context();
+    const {t} = useTranslation();
+    const {connect, disconnect, connected, web3, providerChainID, checkWrongNetwork} = useWeb3Context();
     const dispatch = useDispatch();
     const [isConnected, setConnected] = useState(connected);
 
@@ -37,7 +37,7 @@ function ConnectMenu() {
         console.log("isConnected", isConnected);
 
         buttonText = t("Wrong network");
-        buttonStyle = { backgroundColor: "rgb(255, 67, 67)" };
+        buttonStyle = {backgroundColor: "rgb(255, 67, 67)"};
         clickFunc = () => {
             checkWrongNetwork();
         };

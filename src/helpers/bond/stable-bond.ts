@@ -1,10 +1,10 @@
-import { ContractInterface } from "ethers";
-import { Bond, BondOpts } from "./bond";
-import { BondType } from "./constants";
-import { Networks } from "../../constants/blockchain";
-import { StaticJsonRpcProvider } from "@ethersproject/providers";
-import { getAddresses } from "../../constants/addresses";
-import { BigNumber } from "ethers";
+import {ContractInterface} from "ethers";
+import {Bond, BondOpts} from "./bond";
+import {BondType} from "./constants";
+import {Networks} from "../../constants/blockchain";
+import {StaticJsonRpcProvider} from "@ethersproject/providers";
+import {getAddresses} from "../../constants/addresses";
+import {BigNumber} from "ethers";
 
 export interface StableBondOpts extends BondOpts {
     readonly reserveContractAbi: ContractInterface;
@@ -40,7 +40,7 @@ export class StableBond extends Bond {
         return this.getTreasuryBalance(networkID, provider);
     }
 
-    public getTimeAmount(networkID: Networks, provider: StaticJsonRpcProvider) {
+    public getBossAmount(networkID: Networks, provider: StaticJsonRpcProvider) {
         return new Promise<number>(reserve => reserve(0));
     }
 }

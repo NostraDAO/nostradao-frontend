@@ -1,28 +1,28 @@
-import { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Box, OutlinedInput, InputAdornment, Slide, FormControl } from "@material-ui/core";
-import { shorten, trim, prettifySeconds } from "../../helpers";
-import { changeApproval, bondAsset, calcBondDetails } from "../../store/slices/bond-slice";
-import { useWeb3Context } from "../../hooks";
-import { IPendingTxn, isPendingTxn, txnButtonText } from "../../store/slices/pending-txns-slice";
-import { Skeleton } from "@material-ui/lab";
-import { IReduxState } from "../../store/slices/state.interface";
-import { IAllBondData } from "../../hooks/bonds";
+import {useState, useEffect, useCallback} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {Box, OutlinedInput, InputAdornment, Slide, FormControl} from "@material-ui/core";
+import {shorten, trim, prettifySeconds} from "../../helpers";
+import {changeApproval, bondAsset, calcBondDetails} from "../../store/slices/bond-slice";
+import {useWeb3Context} from "../../hooks";
+import {IPendingTxn, isPendingTxn, txnButtonText} from "../../store/slices/pending-txns-slice";
+import {Skeleton} from "@material-ui/lab";
+import {IReduxState} from "../../store/slices/state.interface";
+import {IAllBondData} from "../../hooks/bonds";
 import useDebounce from "../../hooks/debounce";
-import { messages } from "../../constants/messages";
-import { warning } from "../../store/slices/messages-slice";
-import { useTranslation } from "react-i18next";
+import {messages} from "../../constants/messages";
+import {warning} from "../../store/slices/messages-slice";
+import {useTranslation} from "react-i18next";
 
 interface IBondPurchaseProps {
     bond: IAllBondData;
     slippage: number;
 }
 
-function BondPurchase({ bond, slippage }: IBondPurchaseProps) {
+function BondPurchase({bond, slippage}: IBondPurchaseProps) {
     const dispatch = useDispatch();
-    const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
+    const {provider, address, chainID, checkWrongNetwork} = useWeb3Context();
 
-    const { t } = useTranslation();
+    const {t} = useTranslation();
 
     const [quantity, setQuantity] = useState("");
     const [useAvax, setUseAvax] = useState(false);
@@ -41,10 +41,10 @@ function BondPurchase({ bond, slippage }: IBondPurchaseProps) {
         if (await checkWrongNetwork()) return;
 
         if (quantity === "") {
-            dispatch(warning({ text: messages.before_minting }));
+            dispatch(warning({text: messages.before_minting}));
             //@ts-ignore
         } else if (isNaN(quantity)) {
-            dispatch(warning({ text: messages.before_minting }));
+            dispatch(warning({text: messages.before_minting}));
         } else if (bond.interestDue > 0 || bond.pendingPayout > 0) {
             const shouldProceed = window.confirm(messages.existing_mint);
             if (shouldProceed) {
@@ -102,13 +102,13 @@ function BondPurchase({ bond, slippage }: IBondPurchaseProps) {
     const bondDetailsDebounce = useDebounce(quantity, 1000);
 
     useEffect(() => {
-        dispatch(calcBondDetails({ bond, value: quantity, provider, networkID: chainID }));
+        dispatch(calcBondDetails({bond, value: quantity, provider, networkID: chainID}));
     }, [bondDetailsDebounce]);
 
     const onSeekApproval = async () => {
         if (await checkWrongNetwork()) return;
 
-        dispatch(changeApproval({ address, bond, provider, networkID: chainID }));
+        dispatch(changeApproval({address, bond, provider, networkID: chainID}));
     };
 
     const displayUnits = useAvax ? "AVAX" : bond.displayUnits;
@@ -174,7 +174,7 @@ function BondPurchase({ bond, slippage }: IBondPurchaseProps) {
                 )}
             </Box>
 
-            <Slide direction="left" in={true} mountOnEnter unmountOnExit {...{ timeout: 533 }}>
+            <Slide direction="left" in={true} mountOnEnter unmountOnExit {...{timeout: 533}}>
                 <Box className="bond-data">
                     <div className="data-row">
                         <p className="bond-balance-title">{t("Your Balance")}</p>

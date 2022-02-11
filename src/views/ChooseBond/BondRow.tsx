@@ -1,19 +1,19 @@
-import { priceUnits, trim } from "../../helpers";
+import {priceUnits, trim} from "../../helpers";
 import BondLogo from "../../components/BondLogo";
-import { Paper, TableRow, TableCell, Slide, Link } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import {Paper, TableRow, TableCell, Slide, Link} from "@material-ui/core";
+import {NavLink} from "react-router-dom";
 import "./choosebond.scss";
-import { Skeleton } from "@material-ui/lab";
-import { IAllBondData } from "../../hooks/bonds";
-import { useTranslation } from "react-i18next";
+import {Skeleton} from "@material-ui/lab";
+import {IAllBondData} from "../../hooks/bonds";
+import {useTranslation} from "react-i18next";
 
 interface IBondProps {
     bond: IAllBondData;
 }
 
-export function BondDataCard({ bond }: IBondProps) {
+export function BondDataCard({bond}: IBondProps) {
     const isBondLoading = !bond.bondPrice ?? true;
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     return (
         <Slide direction="up" in={true}>
             <Paper className="bond-data-card">
@@ -70,9 +70,9 @@ export function BondDataCard({ bond }: IBondProps) {
     );
 }
 
-export function BondTableData({ bond }: IBondProps) {
+export function BondTableData({bond}: IBondProps) {
     const isBondLoading = !bond.bondPrice ?? true;
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     return (
         <TableRow>
             <TableCell align="left">

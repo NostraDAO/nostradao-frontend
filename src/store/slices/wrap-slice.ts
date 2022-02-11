@@ -1,16 +1,16 @@
-import { JsonRpcProvider, StaticJsonRpcProvider } from "@ethersproject/providers";
-import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
-import { messages } from "../../constants/messages";
-import { getAddresses, Networks } from "../../constants";
-import { setAll, sleep } from "../../helpers";
-import { info, success, warning } from "./messages-slice";
-import { RootState } from "../store";
-import { ethers } from "ethers";
-import { metamaskErrorWrap } from "../../helpers/metamask-error-wrap";
-import { wBOSS } from "../../abi";
-import { clearPendingTxn, fetchPendingTxns, getWrappingTypeText } from "./pending-txns-slice";
-import { getGasPrice } from "../../helpers/get-gas-price";
-import { fetchAccountSuccess, getBalances } from "./account-slice";
+import {JsonRpcProvider, StaticJsonRpcProvider} from "@ethersproject/providers";
+import {createSlice, createSelector, createAsyncThunk} from "@reduxjs/toolkit";
+import {messages} from "../../constants/messages";
+import {getAddresses, Networks} from "../../constants";
+import {setAll, sleep} from "../../helpers";
+import {info, success, warning} from "./messages-slice";
+import {RootState} from "../store";
+import {ethers} from "ethers";
+import {metamaskErrorWrap} from "../../helpers/metamask-error-wrap";
+import {wBOSS} from "../../abi";
+import {clearPendingTxn, fetchPendingTxns, getWrappingTypeText} from "./pending-txns-slice";
+import {getGasPrice} from "../../helpers/get-gas-price";
+import {fetchAccountSuccess, getBalances} from "./account-slice";
 
 export interface IChangeApproval {
     provider: StaticJsonRpcProvider | JsonRpcProvider;
@@ -18,9 +18,9 @@ export interface IChangeApproval {
     address: string;
 }
 
-export const changeApproval = createAsyncThunk("wrapping/changeApproval", async ({ provider, address, networkID }: IChangeApproval, { dispatch }) => {
+export const changeApproval = createAsyncThunk("wrapping/changeApproval", async ({provider, address, networkID}: IChangeApproval, {dispatch}) => {
     if (!provider) {
-        dispatch(warning({ text: messages.please_connect_wallet }));
+        dispatch(warning({text: messages.please_connect_wallet}));
         return;
     }
 
@@ -32,14 +32,14 @@ export const changeApproval = createAsyncThunk("wrapping/changeApproval", async 
     try {
         const gasPrice = await getGasPrice(provider);
 
-        approveTx = await bossContract.approve(addresses.wBOSS_ADDRESS, ethers.constants.MaxUint256, { gasPrice });
+        approveTx = await bossContract.approve(addresses.wBOSS_ADDRESS, ethers.constants.MaxUint256, {gasPrice});
 
         const text = "Approve Wrapping";
         const pendingTxnType = "approve_wrapping";
 
-        dispatch(fetchPendingTxns({ txnHash: approveTx.hash, text, type: pendingTxnType }));
+        dispatch(fetchPendingTxns({txnHash: approveTx.hash, text, type: pendingTxnType}));
         await approveTx.wait();
-        dispatch(success({ text: messages.tx_successfully_send }));
+        dispatch(success({text: messages.tx_successfully_send}));
     } catch (err: any) {
         return metamaskErrorWrap(err, dispatch);
     } finally {
@@ -69,9 +69,9 @@ export interface IChangeWrap {
     address: string;
 }
 
-export const changeWrap = createAsyncThunk("wrapping/changeWrap", async ({ isWrap, value, provider, networkID, address }: IChangeWrap, { dispatch }) => {
+export const changeWrap = createAsyncThunk("wrapping/changeWrap", async ({isWrap, value, provider, networkID, address}: IChangeWrap, {dispatch}) => {
     if (!provider) {
-        dispatch(warning({ text: messages.please_connect_wallet }));
+        dispatch(warning({text: messages.please_connect_wallet}));
         return;
     }
 
@@ -86,15 +86,15 @@ export const changeWrap = createAsyncThunk("wrapping/changeWrap", async ({ isWra
         const gasPrice = await getGasPrice(provider);
 
         if (isWrap) {
-            wrapTx = await wbossContract.wrap(amountInWei, { gasPrice });
+            wrapTx = await wbossContract.wrap(amountInWei, {gasPrice});
         } else {
-            wrapTx = await wbossContract.unwrap(amountInWei, { gasPrice });
+            wrapTx = await wbossContract.unwrap(amountInWei, {gasPrice});
         }
 
         const pendingTxnType = isWrap ? "wrapping" : "unwrapping";
-        dispatch(fetchPendingTxns({ txnHash: wrapTx.hash, text: getWrappingTypeText(isWrap), type: pendingTxnType }));
+        dispatch(fetchPendingTxns({txnHash: wrapTx.hash, text: getWrappingTypeText(isWrap), type: pendingTxnType}));
         await wrapTx.wait();
-        dispatch(success({ text: messages.tx_successfully_send }));
+        dispatch(success({text: messages.tx_successfully_send}));
     } catch (err: any) {
         return metamaskErrorWrap(err, dispatch);
     } finally {
@@ -103,10 +103,10 @@ export const changeWrap = createAsyncThunk("wrapping/changeWrap", async ({ isWra
         }
     }
 
-    dispatch(info({ text: messages.your_balance_update_soon }));
+    dispatch(info({text: messages.your_balance_update_soon}));
     await sleep(10);
-    await dispatch(getBalances({ address, networkID, provider }));
-    dispatch(info({ text: messages.your_balance_updated }));
+    await dispatch(getBalances({address, networkID, provider}));
+    dispatch(info({text: messages.your_balance_updated}));
     return;
 });
 
@@ -117,7 +117,7 @@ export interface IWrapDetails {
     networkID: Networks;
 }
 
-const calcWrapValue = async ({ isWrap, value, provider, networkID }: IWrapDetails): Promise<number> => {
+const calcWrapValue = async ({isWrap, value, provider, networkID}: IWrapDetails): Promise<number> => {
     const addresses = getAddresses(networkID);
 
     const amountInWei = isWrap ? ethers.utils.parseUnits(value, "gwei") : ethers.utils.parseEther(value);
@@ -137,9 +137,9 @@ const calcWrapValue = async ({ isWrap, value, provider, networkID }: IWrapDetail
     return wrapValue;
 };
 
-export const calcWrapDetails = createAsyncThunk("wrapping/calcWrapDetails", async ({ isWrap, value, provider, networkID }: IWrapDetails, { dispatch }) => {
+export const calcWrapDetails = createAsyncThunk("wrapping/calcWrapDetails", async ({isWrap, value, provider, networkID}: IWrapDetails, {dispatch}) => {
     if (!provider) {
-        dispatch(warning({ text: messages.please_connect_wallet }));
+        dispatch(warning({text: messages.please_connect_wallet}));
         return;
     }
 
@@ -151,7 +151,7 @@ export const calcWrapDetails = createAsyncThunk("wrapping/calcWrapDetails", asyn
         );
     }
 
-    const wrapValue = await calcWrapValue({ isWrap, value, provider, networkID });
+    const wrapValue = await calcWrapValue({isWrap, value, provider, networkID});
 
     return {
         wrapValue,
@@ -164,13 +164,13 @@ export interface IWrapPrice {
     networkID: Networks;
 }
 
-export const calcWrapPrice = createAsyncThunk("wrapping/calcWrapPrice", async ({ isWrap, provider, networkID }: IWrapPrice, { dispatch }) => {
+export const calcWrapPrice = createAsyncThunk("wrapping/calcWrapPrice", async ({isWrap, provider, networkID}: IWrapPrice, {dispatch}) => {
     if (!provider) {
-        dispatch(warning({ text: messages.please_connect_wallet }));
+        dispatch(warning({text: messages.please_connect_wallet}));
         return;
     }
 
-    const wrapPrice = await calcWrapValue({ isWrap, value: "1", provider, networkID });
+    const wrapPrice = await calcWrapValue({isWrap, value: "1", provider, networkID});
 
     return {
         wrapPrice,
@@ -206,7 +206,7 @@ const wrapSlice = createSlice({
                 setAll(state, action.payload);
                 state.loading = false;
             })
-            .addCase(calcWrapDetails.rejected, (state, { error }) => {
+            .addCase(calcWrapDetails.rejected, (state, {error}) => {
                 state.loading = false;
                 console.log(error);
             })
@@ -217,7 +217,7 @@ const wrapSlice = createSlice({
                 setAll(state, action.payload);
                 state.loading = false;
             })
-            .addCase(calcWrapPrice.rejected, (state, { error }) => {
+            .addCase(calcWrapPrice.rejected, (state, {error}) => {
                 state.loading = false;
                 console.log(error);
             });
@@ -226,7 +226,7 @@ const wrapSlice = createSlice({
 
 export default wrapSlice.reducer;
 
-export const { fetchWrapSuccess } = wrapSlice.actions;
+export const {fetchWrapSuccess} = wrapSlice.actions;
 
 const baseInfo = (state: RootState) => state.wrapping;
 

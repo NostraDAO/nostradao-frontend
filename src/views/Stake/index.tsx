@@ -1,23 +1,23 @@
-import { useState, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Grid, InputAdornment, OutlinedInput, Zoom } from "@material-ui/core";
+import {useState, useCallback} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {Grid, InputAdornment, OutlinedInput, Zoom} from "@material-ui/core";
 import RebaseTimer from "../../components/RebaseTimer";
-import { trim } from "../../helpers";
-import { changeStake, changeApproval } from "../../store/slices/stake-thunk";
+import {trim} from "../../helpers";
+import {changeStake, changeApproval} from "../../store/slices/stake-thunk";
 import "./stake.scss";
-import { useWeb3Context } from "../../hooks";
-import { IPendingTxn, isPendingTxn, txnButtonText } from "../../store/slices/pending-txns-slice";
-import { Skeleton } from "@material-ui/lab";
-import { IReduxState } from "../../store/slices/state.interface";
-import { messages } from "../../constants/messages";
+import {useWeb3Context} from "../../hooks";
+import {IPendingTxn, isPendingTxn, txnButtonText} from "../../store/slices/pending-txns-slice";
+import {Skeleton} from "@material-ui/lab";
+import {IReduxState} from "../../store/slices/state.interface";
+import {messages} from "../../constants/messages";
 import classnames from "classnames";
-import { warning } from "../../store/slices/messages-slice";
-import { useTranslation } from "react-i18next";
+import {warning} from "../../store/slices/messages-slice";
+import {useTranslation} from "react-i18next";
 
 function Stake() {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const dispatch = useDispatch();
-    const { provider, address, connect, chainID, checkWrongNetwork } = useWeb3Context();
+    const {provider, address, connect, chainID, checkWrongNetwork} = useWeb3Context();
 
     const [view, setView] = useState(0);
     const [quantity, setQuantity] = useState<string>("");
@@ -66,15 +66,15 @@ function Stake() {
     const onSeekApproval = async (token: string) => {
         if (await checkWrongNetwork()) return;
 
-        await dispatch(changeApproval({ address, token, provider, networkID: chainID }));
+        await dispatch(changeApproval({address, token, provider, networkID: chainID}));
     };
 
     const onChangeStake = async (action: string) => {
         if (await checkWrongNetwork()) return;
         if (quantity === "" || parseFloat(quantity) === 0) {
-            dispatch(warning({ text: action === "stake" ? messages.before_stake : messages.before_unstake }));
+            dispatch(warning({text: action === "stake" ? messages.before_stake : messages.before_unstake}));
         } else {
-            await dispatch(changeStake({ address, action, value: String(quantity), provider, networkID: chainID }));
+            await dispatch(changeStake({address, action, value: String(quantity), provider, networkID: chainID}));
             setQuantity("");
         }
     };
@@ -163,10 +163,10 @@ function Stake() {
                                 <div>
                                     <div className="stake-card-action-area">
                                         <div className="stake-card-action-stage-btns-wrap">
-                                            <div onClick={changeView(0)} className={classnames("stake-card-action-stage-btn", { active: !view })}>
+                                            <div onClick={changeView(0)} className={classnames("stake-card-action-stage-btn", {active: !view})}>
                                                 <p>{t("Stake")}</p>
                                             </div>
-                                            <div onClick={changeView(1)} className={classnames("stake-card-action-stage-btn", { active: view })}>
+                                            <div onClick={changeView(1)} className={classnames("stake-card-action-stage-btn", {active: view})}>
                                                 <p>{t("Unstake")}</p>
                                             </div>
                                         </div>

@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
 import allBonds from "../helpers/bond";
-import { IUserBondDetails } from "../store/slices/account-slice";
-import { Bond } from "../helpers/bond/bond";
-import { IBondDetails, IBondSlice } from "../store/slices/bond-slice";
-import { IReduxState } from "../store/slices/state.interface";
+import {IUserBondDetails} from "../store/slices/account-slice";
+import {Bond} from "../helpers/bond/bond";
+import {IBondDetails, IBondSlice} from "../store/slices/bond-slice";
+import {IReduxState} from "../store/slices/state.interface";
 
 // Smash all the interfaces together to get the BondData Type
 export interface IAllBondData extends Bond, IBondDetails, IUserBondDetails {}
@@ -14,7 +14,7 @@ const initialBondArray = allBonds;
 function useBonds() {
     const bondLoading = useSelector<IReduxState, boolean>(state => state.bonding.loading);
     const bondState = useSelector<IReduxState, IBondSlice>(state => state.bonding);
-    const accountBondsState = useSelector<IReduxState, { [key: string]: IUserBondDetails }>(state => state.account.bonds);
+    const accountBondsState = useSelector<IReduxState, {[key: string]: IUserBondDetails}>(state => state.account.bonds);
     //@ts-ignore
     const [bonds, setBonds] = useState<IAllBondData[]>(initialBondArray);
 
@@ -41,7 +41,7 @@ function useBonds() {
         setBonds(mostProfitableBonds);
     }, [bondState, accountBondsState, bondLoading]);
 
-    return { bonds, loading: bondLoading };
+    return {bonds, loading: bondLoading};
 }
 
 export default useBonds;

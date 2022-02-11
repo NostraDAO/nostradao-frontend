@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { getAddresses, TOKEN_DECIMALS, TESTNETWORK } from "../../../constants";
-import { useSelector } from "react-redux";
-import { Link, Fade, Popper } from "@material-ui/core";
+import {useState} from "react";
+import {getAddresses, TOKEN_DECIMALS, TESTNETWORK} from "../../../constants";
+import {useSelector} from "react-redux";
+import {Link, Fade, Popper} from "@material-ui/core";
 import "./time-menu.scss";
-import { IReduxState } from "../../../store/slices/state.interface";
-import { getTokenUrl } from "../../../helpers";
-import { useTranslation } from "react-i18next";
+import {IReduxState} from "../../../store/slices/state.interface";
+import {getTokenUrl} from "../../../helpers";
+import {useTranslation} from "react-i18next";
 
 const addTokenToWallet = (tokenSymbol: string, tokenAddress: string) => async () => {
     const tokenImage = getTokenUrl(tokenSymbol.toLowerCase());
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     if (window.ethereum) {
         try {
             await window.ethereum.request({
@@ -56,7 +56,7 @@ function TimeMenu() {
             </div>
 
             <Popper className="time-menu-popper" open={open} anchorEl={anchorEl} transition>
-                {({ TransitionProps }) => (
+                {({TransitionProps}) => (
                     <Fade {...TransitionProps} timeout={200}>
                         <div className="tooltip">
                             <Link className="tooltip-item" href={`https://www.traderjoexyz.com/#/trade?inputCurrency=&outputCurrency=${BOSS_ADDRESS}`} target="_blank">

@@ -1,11 +1,11 @@
-import { ethers } from "ethers";
-import { getAddresses } from "../../constants";
-import { IStaking, sBoss, BossERC20Token } from "../../abi";
-import { setAll } from "../../helpers";
-import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
-import { JsonRpcProvider } from "@ethersproject/providers";
-import { getMarketPrice, getTokenPrice } from "../../helpers";
-import { RootState } from "../store";
+import {ethers} from "ethers";
+import {getAddresses} from "../../constants";
+import {IStaking, sBoss, BossERC20Token} from "../../abi";
+import {setAll} from "../../helpers";
+import {createSlice, createSelector, createAsyncThunk} from "@reduxjs/toolkit";
+import {JsonRpcProvider} from "@ethersproject/providers";
+import {getMarketPrice, getTokenPrice} from "../../helpers";
+import {RootState} from "../store";
 import allBonds from "../../helpers/bond";
 
 interface ILoadAppDetails {
@@ -16,7 +16,7 @@ interface ILoadAppDetails {
 export const loadAppDetails = createAsyncThunk(
     "app/loadAppDetails",
     //@ts-ignore
-    async ({ networkID, provider }: ILoadAppDetails) => {
+    async ({networkID, provider}: ILoadAppDetails) => {
         const mimPrice = getTokenPrice("MIM");
         const addresses = getAddresses(networkID);
 
@@ -42,7 +42,7 @@ export const loadAppDetails = createAsyncThunk(
         const tokenAmounts = await Promise.all(tokenAmountsPromises);
         const rfvTreasury = tokenAmounts.reduce((tokenAmount0, tokenAmount1) => tokenAmount0 + tokenAmount1, 0);
 
-        const timeBondsAmountsPromises = allBonds.map(bond => bond.getTimeAmount(networkID, provider));
+        const timeBondsAmountsPromises = allBonds.map(bond => bond.getBossAmount(networkID, provider));
         const timeBondsAmounts = await Promise.all(timeBondsAmountsPromises);
         const timeAmount = timeBondsAmounts.reduce((timeAmount0, timeAmount1) => timeAmount0 + timeAmount1, 0);
         const timeSupply = totalSupply - timeAmount;
@@ -123,7 +123,7 @@ const appSlice = createSlice({
                 setAll(state, action.payload);
                 state.loading = false;
             })
-            .addCase(loadAppDetails.rejected, (state, { error }) => {
+            .addCase(loadAppDetails.rejected, (state, {error}) => {
                 state.loading = false;
                 console.log(error);
             });
@@ -134,6 +134,6 @@ const baseInfo = (state: RootState) => state.app;
 
 export default appSlice.reducer;
 
-export const { fetchAppSuccess } = appSlice.actions;
+export const {fetchAppSuccess} = appSlice.actions;
 
 export const getAppState = createSelector(baseInfo, app => app);

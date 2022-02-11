@@ -1,7 +1,7 @@
-import { makeStyles } from "@material-ui/core/styles";
-import { Drawer } from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import {Drawer} from "@material-ui/core";
 import DrawerContent from "./drawer-content";
-import { DRAWER_WIDTH } from "../../constants/style";
+import {DRAWER_WIDTH} from "../../constants/style";
 
 const useStyles = makeStyles(theme => ({
     drawer: {
@@ -21,7 +21,7 @@ interface INavDrawer {
     handleDrawerToggle: () => void;
 }
 
-function NavDrawer({ mobileOpen, handleDrawerToggle }: INavDrawer) {
+function NavDrawer({mobileOpen, handleDrawerToggle}: INavDrawer) {
     const classes = useStyles();
 
     return (

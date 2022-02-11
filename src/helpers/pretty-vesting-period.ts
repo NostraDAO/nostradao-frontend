@@ -1,5 +1,5 @@
-import { prettifySeconds } from "./prettify-seconds";
-import { secondsUntilBlock } from "./seconds-until-block";
+import {prettifySeconds} from "./prettify-seconds";
+import {secondsUntilBlock} from "./seconds-until-block";
 
 export const prettyVestingPeriod = (currentBlock: number, vestingBlock: number) => {
     if (vestingBlock === 0) {

@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./calculator.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { useWeb3Context } from "../../hooks";
-import { Grid, InputAdornment, OutlinedInput, Zoom, Slider } from "@material-ui/core";
-import { IReduxState } from "../../store/slices/state.interface";
-import { trim } from "../../helpers";
-import { Skeleton } from "@material-ui/lab";
-import { useTranslation } from "react-i18next";
+import {useSelector, useDispatch} from "react-redux";
+import {useWeb3Context} from "../../hooks";
+import {Grid, InputAdornment, OutlinedInput, Zoom, Slider} from "@material-ui/core";
+import {IReduxState} from "../../store/slices/state.interface";
+import {trim} from "../../helpers";
+import {Skeleton} from "@material-ui/lab";
+import {useTranslation} from "react-i18next";
 
 function Calculator() {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
     const marketPrice = useSelector<IReduxState, number>(state => {
         return state.app.marketPrice;

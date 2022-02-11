@@ -1,4 +1,4 @@
-import { Networks } from "./blockchain";
+import {Networks} from "./blockchain";
 
 const AVAX_MAINNET = {
     DAO_ADDRESS: "0x6c6CCDC0749D74bE9345E83Aa669fE329fBB88E6",

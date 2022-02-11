@@ -1,8 +1,8 @@
 import "./notfound.scss";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 function NotFound() {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     return (
         <div className="not-found-page">
             <p>{t("Page not found")}</p>

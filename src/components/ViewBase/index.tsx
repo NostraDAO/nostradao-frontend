@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./view-base.scss";
 import Header from "../Header";
-import { Hidden, makeStyles, useMediaQuery } from "@material-ui/core";
-import { DRAWER_WIDTH, TRANSITION_DURATION } from "../../constants/style";
+import {Hidden, makeStyles, useMediaQuery} from "@material-ui/core";
+import {DRAWER_WIDTH, TRANSITION_DURATION} from "../../constants/style";
 import MobileDrawer from "../Drawer/mobile-drawer";
 import Drawer from "../Drawer";
-import { cubesImage } from "src/constants/img";
+import {cubesImage} from "src/constants/img";
 import Messages from "../Messages";
 
 interface IViewBaseProps {
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function ViewBase({ children }: IViewBaseProps) {
+function ViewBase({children}: IViewBaseProps) {
     const classes = useStyles();
 
     const [mobileOpen, setMobileOpen] = useState(false);

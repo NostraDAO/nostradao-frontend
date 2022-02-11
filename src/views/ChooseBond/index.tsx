@@ -1,17 +1,17 @@
-import { useSelector } from "react-redux";
-import { Paper, Grid, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Zoom } from "@material-ui/core";
-import { BondTableData, BondDataCard } from "./BondRow";
+import {useSelector} from "react-redux";
+import {Paper, Grid, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Zoom} from "@material-ui/core";
+import {BondTableData, BondDataCard} from "./BondRow";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { trim } from "../../helpers";
+import {trim} from "../../helpers";
 import useBonds from "../../hooks/bonds";
 import "./choosebond.scss";
-import { Skeleton } from "@material-ui/lab";
-import { IReduxState } from "../../store/slices/state.interface";
-import { useTranslation } from "react-i18next";
+import {Skeleton} from "@material-ui/lab";
+import {IReduxState} from "../../store/slices/state.interface";
+import {useTranslation} from "react-i18next";
 
 function ChooseBond() {
-    const { t } = useTranslation();
-    const { bonds } = useBonds();
+    const {t} = useTranslation();
+    const {bonds} = useBonds();
     const isSmallScreen = useMediaQuery("(max-width: 733px)"); // change to breakpoint query
 
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);

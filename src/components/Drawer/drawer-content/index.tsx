@@ -1,26 +1,26 @@
-import { useCallback, useState } from "react";
-import { NavLink } from "react-router-dom";
+import {useCallback, useState} from "react";
+import {NavLink} from "react-router-dom";
 import Social from "./social";
 import StakeIcon from "../../../assets/icons/stake.svg";
 import BondIcon from "../../../assets/icons/bond.svg";
 import NostraIcon from "../../../assets/icons/fedora.png";
 import DashboardIcon from "../../../assets/icons/dashboard.svg";
-import { trim, shorten } from "../../../helpers";
-import { useAddress } from "../../../hooks";
+import {trim, shorten} from "../../../helpers";
+import {useAddress} from "../../../hooks";
 import useBonds from "../../../hooks/bonds";
-import { Link } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+import {Link} from "@material-ui/core";
+import {Skeleton} from "@material-ui/lab";
 import "./drawer-content.scss";
 import DocsIcon from "../../../assets/icons/stake.svg";
 import GlobeIcon from "../../../assets/icons/wonderglobe.svg";
 import classnames from "classnames";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 function NavContent() {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const [isActive] = useState();
     const address = useAddress();
-    const { bonds } = useBonds();
+    const {bonds} = useBonds();
 
     const checkPage = useCallback((location: any, page: string): boolean => {
         const currentPath = location.pathname.replace("/", "");
@@ -65,7 +65,7 @@ function NavContent() {
                         isActive={(match: any, location: any) => {
                             return checkPage(location, "dashboard");
                         }}
-                        className={classnames("button-dapp-menu", { active: isActive })}
+                        className={classnames("button-dapp-menu", {active: isActive})}
                     >
                         <div className="dapp-menu-item">
                             <img alt="" src={DashboardIcon} />
@@ -79,7 +79,7 @@ function NavContent() {
                         isActive={(match: any, location: any) => {
                             return checkPage(location, "stake");
                         }}
-                        className={classnames("button-dapp-menu", { active: isActive })}
+                        className={classnames("button-dapp-menu", {active: isActive})}
                     >
                         <div className="dapp-menu-item">
                             <img alt="" src={StakeIcon} />
@@ -94,7 +94,7 @@ function NavContent() {
                         isActive={(match: any, location: any) => {
                             return checkPage(location, "bonds");
                         }}
-                        className={classnames("button-dapp-menu", { active: isActive })}
+                        className={classnames("button-dapp-menu", {active: isActive})}
                     >
                         <div className="dapp-menu-item">
                             <img alt="" src={BondIcon} />
@@ -124,7 +124,7 @@ function NavContent() {
                         isActive={(match: any, location: any) => {
                             return checkPage(location, "calculator");
                         }}
-                        className={classnames("button-dapp-menu", { active: isActive })}
+                        className={classnames("button-dapp-menu", {active: isActive})}
                     >
                         <div className="dapp-menu-item">
                             <img alt="" src={GlobeIcon} />

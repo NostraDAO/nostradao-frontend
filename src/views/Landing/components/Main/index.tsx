@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "@material-ui/core";
+import {Link} from "@material-ui/core";
 import "./main.scss";
 import Fedora from "../../../../assets/icons/fedora.png";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 function Main() {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     return (
         <div className="landing-main">
             <div className="title">

@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
 
 import accountReducer from "./slices/account-slice";
 import bondingReducer from "./slices/bond-slice";
@@ -16,7 +16,7 @@ const store = configureStore({
         messages: messagesReducer,
         wrapping: wrappingReducer,
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false }),
+    middleware: getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false}),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

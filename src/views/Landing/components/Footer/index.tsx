@@ -1,14 +1,14 @@
 import React from "react";
 import "./footer.scss";
-import { Grid } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { IReduxState } from "../../../../store/slices/state.interface";
-import { trim } from "../../../../helpers";
-import { Skeleton } from "@material-ui/lab";
-import { useTranslation } from "react-i18next";
+import {Grid} from "@material-ui/core";
+import {useSelector} from "react-redux";
+import {IReduxState} from "../../../../store/slices/state.interface";
+import {trim} from "../../../../helpers";
+import {Skeleton} from "@material-ui/lab";
+import {useTranslation} from "react-i18next";
 
 function Footer() {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
     const stakingAPY = useSelector<IReduxState, number>(state => {
         return state.app.stakingAPY;

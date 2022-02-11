@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export interface IPendingTxn {
     readonly txnHash: string;
@@ -40,6 +40,6 @@ export const txnButtonText = (pendingTransactions: IPendingTxn[], type: string, 
     return isPendingTxn(pendingTransactions, type) ? "Pending..." : defaultText;
 };
 
-export const { fetchPendingTxns, clearPendingTxn } = pendingTxnsSlice.actions;
+export const {fetchPendingTxns, clearPendingTxn} = pendingTxnsSlice.actions;
 
 export default pendingTxnsSlice.reducer;

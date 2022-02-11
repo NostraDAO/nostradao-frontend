@@ -1,8 +1,8 @@
-import { Box, Modal, Paper, SvgIcon, IconButton, FormControl, OutlinedInput, InputLabel, InputAdornment } from "@material-ui/core";
-import { useEffect, useState } from "react";
-import { ReactComponent as XIcon } from "../../assets/icons/x.svg";
+import {Box, Modal, Paper, SvgIcon, IconButton, FormControl, OutlinedInput, InputLabel, InputAdornment} from "@material-ui/core";
+import {useEffect, useState} from "react";
+import {ReactComponent as XIcon} from "../../assets/icons/x.svg";
 import "./bondSettings.scss";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 interface IAdvancedSettingsProps {
     open: boolean;
@@ -11,9 +11,9 @@ interface IAdvancedSettingsProps {
     onSlippageChange: (e: any) => void;
 }
 
-function AdvancedSettings({ open, handleClose, slippage, onSlippageChange }: IAdvancedSettingsProps) {
+function AdvancedSettings({open, handleClose, slippage, onSlippageChange}: IAdvancedSettingsProps) {
     const [value, setValue] = useState(slippage);
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     useEffect(() => {
         let timeount: any = null;
         clearTimeout(timeount);

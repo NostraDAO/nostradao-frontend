@@ -1,25 +1,25 @@
-import { useSelector, useDispatch } from "react-redux";
-import { Box, Slide } from "@material-ui/core";
-import { IBondDetails, redeemBond } from "../../store/slices/bond-slice";
-import { useWeb3Context } from "../../hooks";
-import { trim, prettifySeconds, prettyVestingPeriod } from "../../helpers";
-import { IPendingTxn, isPendingTxn, txnButtonText } from "../../store/slices/pending-txns-slice";
-import { Skeleton } from "@material-ui/lab";
-import { IReduxState } from "../../store/slices/state.interface";
-import { IAllBondData } from "../../hooks/bonds";
-import { IUserBondDetails } from "../../store/slices/account-slice";
-import { messages } from "../../constants/messages";
-import { warning } from "../../store/slices/messages-slice";
-import { useTranslation } from "react-i18next";
+import {useSelector, useDispatch} from "react-redux";
+import {Box, Slide} from "@material-ui/core";
+import {IBondDetails, redeemBond} from "../../store/slices/bond-slice";
+import {useWeb3Context} from "../../hooks";
+import {trim, prettifySeconds, prettyVestingPeriod} from "../../helpers";
+import {IPendingTxn, isPendingTxn, txnButtonText} from "../../store/slices/pending-txns-slice";
+import {Skeleton} from "@material-ui/lab";
+import {IReduxState} from "../../store/slices/state.interface";
+import {IAllBondData} from "../../hooks/bonds";
+import {IUserBondDetails} from "../../store/slices/account-slice";
+import {messages} from "../../constants/messages";
+import {warning} from "../../store/slices/messages-slice";
+import {useTranslation} from "react-i18next";
 
 interface IBondRedeem {
     bond: IAllBondData;
 }
 
-function BondRedeem({ bond }: IBondRedeem) {
-    const { t } = useTranslation();
+function BondRedeem({bond}: IBondRedeem) {
+    const {t} = useTranslation();
     const dispatch = useDispatch();
-    const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
+    const {provider, address, chainID, checkWrongNetwork} = useWeb3Context();
 
     const isBondLoading = useSelector<IReduxState, boolean>(state => state.bonding.loading ?? true);
 
@@ -43,11 +43,11 @@ function BondRedeem({ bond }: IBondRedeem) {
         if (await checkWrongNetwork()) return;
 
         if (bond.interestDue === 0 || bond.pendingPayout === 0) {
-            dispatch(warning({ text: messages.nothing_to_claim }));
+            dispatch(warning({text: messages.nothing_to_claim}));
             return;
         }
 
-        await dispatch(redeemBond({ address, bond, networkID: chainID, provider, autostake }));
+        await dispatch(redeemBond({address, bond, networkID: chainID, provider, autostake}));
     }
 
     const vestingTime = () => {
@@ -84,7 +84,7 @@ function BondRedeem({ bond }: IBondRedeem) {
                 </div>
             </Box>
 
-            <Slide direction="right" in={true} mountOnEnter unmountOnExit {...{ timeout: 533 }}>
+            <Slide direction="right" in={true} mountOnEnter unmountOnExit {...{timeout: 533}}>
                 <Box className="bond-data">
                     <div className="data-row">
                         <p className="bond-balance-title">{t("Pending Rewards")}</p>

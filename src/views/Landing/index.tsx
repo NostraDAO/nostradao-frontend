@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./landing.scss";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -7,12 +7,14 @@ import Background from "./components/Background";
 
 function Landing() {
     return (
-        <div className="landing-root">
-            <Header />
-            <Main />
-            <Footer />
-            <Background />
-        </div>
+        <>
+            <div className="landing-root">
+                <Header />
+                <Main />
+                <Footer />
+                <Background />
+            </div>
+        </>
     );
 }
 
