@@ -39,6 +39,9 @@ function NavContent() {
         if (currentPath.indexOf("business") >= 0 && page === "business") {
             return true;
         }
+        if (currentPath.indexOf("nfts") >= 0 && page === "nfts") {
+            return true;
+        }
         return false;
     }, []);
 
@@ -90,6 +93,19 @@ function NavContent() {
                         </div>
                     </Link>
 
+                    <Link
+                        component={NavLink}
+                        to="/nfts"
+                        isActive={(match: any, location: any) => {
+                            return checkPage(location, "nfts");
+                        }}
+                        className={classnames("button-dapp-menu", {active: isActive})}
+                    >
+                        <div className="dapp-menu-item">
+                            <img alt="" src={DashboardIcon} />
+                            <p>{t("My NFTs")}</p>
+                        </div>
+                    </Link>
                     <Link
                         component={NavLink}
                         to="/stake"

@@ -42,6 +42,7 @@
     "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "^16.14.0",
     "react-i18next": "^11.15.3",
+    "react-img-mapper-extended": "^1.0.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",

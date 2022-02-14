@@ -1,0 +1,20 @@
+[
+    {
+        "title": "BarberShop",
+        "shape": "circle",
+        "fillColor": "#ff0000",
+        "coords": [446, 311, 10]
+    },
+    {
+        "title": "Diner",
+        "shape": "circle",
+        "fillColor": "#ff0000",
+        "coords": [374, 404, 10]
+    },
+    {
+        "title": "Grocery",
+        "shape": "circle",
+        "fillColor": "#ff0000",
+        "coords": [187, 410, 10]
+    }
+]

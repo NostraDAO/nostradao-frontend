@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {Zoom} from "@material-ui/core";
 import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
@@ -17,106 +18,115 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import {useTranslation} from "react-i18next";
+import {useWeb3Context} from "../../hooks";
+import BusinessMap from "../../assets/icons/map_ref.png";
+import Overlay from "../../assets/icons/overlay.png";
 
-function Business() {
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import ImageMapper from "react-img-mapper-extended";
+import Areas from "./areas.json";
+import {BusinessMint} from "./BusinessMint";
+import Input from "@mui/material/Input";
+
+const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "black",
+    color: "white",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+};
+
+function Business(props: any) {
+    const {provider, address, connect, chainID, checkWrongNetwork} = useWeb3Context();
     const {t} = useTranslation();
-    const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
-    const app = useSelector<IReduxState, IAppSlice>(state => state.app);
-
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const style = {
-        position: "absolute" as "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: 400,
-        height:300,
-        bgcolor: "background.paper",
-        border: "2px solid #000",
-        boxShadow: 24,
-        p: 4,
+    const [openMint, setOpenMint] = useState(false);
+    const handleOpenMint = () => setOpenMint(true);
+    const handleCloseMint = () => setOpenMint(false);
+    const [businessOpen, setBusinessOpen] = useState('none');
+    const ariaLabel = { 'aria-label': 'description' };
+    const MAP = {
+        name: "Map",
+        areas: Areas,
     };
 
+    function handleOverlayClick(event, index) {
+        console.log("event", event.title);
+        if (event.title == "Diner") {
+           setBusinessOpen('diner');
+           setOpenMint(true);
+
+        }
+        if (event.title == "Grocery") {
+            setBusinessOpen('grocery');
+            setOpenMint(true);
+
+        }
+        if (event.title == "BarberShop") {
+            setBusinessOpen('barbershop');
+            setOpenMint(true);
+        }
+    }
+
+    function hadnleMint(){
+        console.log('minted');
+    }
+
     return (
-        <div className="dashboard-view">
-            <div className="dashboard-infos-wrap">
-                <Zoom in={true}>
-                    <Stack direction="row" spacing={4}>
-                        <Card className="dashboard-card">
-                            <CardMedia component="img" height="140" image="https://picsum.photos/140" alt="green iguana" />
-                            <CardContent>
-                                <p className="card-title">{t("Business 1")}</p>
-                                <p className="card-value">{t("Lorem ipsum dolor sit amet consectetur. ")}</p>
-                            </CardContent>
-                            <CardActions>
-                                <Button onClick={handleOpen}>Learn more</Button>
-                                <div>
+        <div className="stake-view">
+            <Zoom in={true}>
+                <div className="stake-card">
+                    <Grid className="stake-card-grid" container direction="column" spacing={2}>
+                        <Grid item>
+                            <div className="stake-card-header">
+                                <p className="stake-card-header-title">{t("Choose a Business")} </p>
+                            </div>
+                        </Grid>
+                        <Grid item>
+                            {!address && (
+                                <div className="stake-card-wallet-notification">
+                                    <div className="stake-card-wallet-connect-btn" onClick={connect}>
+                                        <p>{t("Connect Wallet")}</p>
+                                    </div>
+                                    <p className="stake-card-wallet-desc-text">{t("Connect your wallet to stake BOSS tokens!")}</p>
+                                </div>
+                            )}
+                            {address && (
+                                <div className="stake-card-action-area">
+                                    <div onClick={handleOpen}>
+                                        <img src={BusinessMap} width="100%" />
+                                    </div>
                                     <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                                         <Box sx={style}>
-                                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                                Business 1
-                                            </Typography>
-                                            <Typography id="modal-modal-description" sx={{mt: 2}}>
-                                                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                                            </Typography>
+                                            <div className="overlay"></div>
+                                            <ImageMapper src={BusinessMap} map={MAP} onClick={event => handleOverlayClick(event, props)} />
+                                            
+                                            <BusinessMint isOpen={openMint} handleClose={handleCloseMint} handleMint={handleMint} title={t("business.mint.title")}>
+                                                <>
+                                                <p>{t("business.mint.Imagen")}</p>
+                                                <p>{t("business.mint.description")}</p>
+                                                </>
+                                            </BusinessMint>
+                                            
                                         </Box>
                                     </Modal>
                                 </div>
-                            </CardActions>
-                        </Card>
-                        <Card className="dashboard-card">
-                            <CardMedia component="img" height="140" image="https://picsum.photos/140" alt="green iguana" />
-
-                            <CardContent>
-                                <p className="card-title">{t("Business 2")}</p>
-                                <p className="card-value">Lorem ipsum dolor sit amet consectetur. </p>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small" onClick={handleOpen}  >Learn More</Button>
-                                <div>
-                                    <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-                                        <Box sx={style}>
-                                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                                Business 2
-                                            </Typography>
-                                            <Typography id="modal-modal-description" sx={{mt: 2}}>
-                                                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                                            </Typography>
-                                        </Box>
-                                    </Modal>
-                                </div>
-                            </CardActions>
-                        </Card>
-
-                        <Card className="dashboard-card">
-                            <CardMedia component="img" height="140" image="https://picsum.photos/140" alt="green iguana" />
-
-                            <CardContent>
-                                <p className="card-title">{t("Business 3")}</p>
-                                <p className="card-value">Lorem ipsum dolor sit amet consectetur. </p>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small" onClick={handleOpen} >Learn More</Button>
-                                <div>
-                                    <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-                                        <Box sx={style}>
-                                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                               Business 3
-                                            </Typography>
-                                            <Typography id="modal-modal-description" sx={{mt: 2}}>
-                                                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                                            </Typography>
-                                        </Box>
-                                    </Modal>
-                                </div>
-                            </CardActions>
-                        </Card>
-                    </Stack>
-                </Zoom>
-            </div>
+                            )}
+                        </Grid>
+                    </Grid>
+                </div>
+            </Zoom>
         </div>
     );
 }
