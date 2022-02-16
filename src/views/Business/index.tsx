@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from "react";
 import {useSelector} from "react-redux";
-import {Zoom} from "@material-ui/core";
+import {Zoom, Backdrop } from "@material-ui/core";
 import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -79,35 +79,35 @@ function Business(props: any) {
         }
     }
 
-    function hadnleMint(){
+    function handleMint(){
         console.log('minted');
     }
 
     return (
-        <div className="stake-view">
+        <div className="business-view">
             <Zoom in={true}>
-                <div className="stake-card">
-                    <Grid className="stake-card-grid" container direction="column" spacing={2}>
+                <div className="business-card">
+                    <Grid className="business-card-grid" container direction="column" spacing={2}>
                         <Grid item>
-                            <div className="stake-card-header">
-                                <p className="stake-card-header-title">{t("Choose a Business")} </p>
+                            <div className="business-card-header">
+                                <p className="business-card-header-title">{t("Choose a Business")} </p>
                             </div>
                         </Grid>
                         <Grid item>
                             {!address && (
-                                <div className="stake-card-wallet-notification">
-                                    <div className="stake-card-wallet-connect-btn" onClick={connect}>
+                                <div className="business-card-wallet-notification">
+                                    <div className="business-card-wallet-connect-btn" onClick={connect}>
                                         <p>{t("Connect Wallet")}</p>
                                     </div>
-                                    <p className="stake-card-wallet-desc-text">{t("Connect your wallet to stake BOSS tokens!")}</p>
+                                    <p className="business-card-wallet-desc-text">{t("Connect your wallet to stake BOSS tokens!")}</p>
                                 </div>
                             )}
                             {address && (
-                                <div className="stake-card-action-area">
-                                    <div onClick={handleOpen}>
-                                        <img src={BusinessMap} width="100%" />
+                                <div className="business-card-action-area">
+                                    <div className="business-image-wrapper" onClick={handleOpen}>
+                                        <img src={BusinessMap} width="90%" />
                                     </div>
-                                    <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                                    <Modal  open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                                         <Box sx={style}>
                                             <div className="overlay"></div>
                                             <ImageMapper src={BusinessMap} map={MAP} onClick={event => handleOverlayClick(event, props)} />

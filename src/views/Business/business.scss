@@ -6,7 +6,8 @@
     width: 89%;
     max-width: 833px;
     margin: auto;
-  
+    background: rgba(36, 39, 41, 0.1);
+    border-radius: 10px;  
     .business-card{
         display: flex;
         flex-direction: column;
@@ -47,11 +48,16 @@
     
     
   }
+  .business-image-wrapper {
+    display:flex;
+    align-items: center;
+    justify-content: center;    
+  }
 
-  .stake-card-wallet-notification{
+  .business-card-wallet-notification{
     text-align: center;
 
-    .stake-card-wallet-connect-btn{
+    .business-card-wallet-connect-btn{
       background: rgba(255, 255, 255, 0.2);
       box-shadow: 0px 0px 10px rgba(44, 39, 109, 0.1);
       border-radius: 10px;
@@ -69,7 +75,7 @@
       }
     }
 
-    .stake-card-wallet-desc-text{
+    .business-card-wallet-desc-text{
       font-family: Montserrat Light;
       font-weight: 300;
       font-size: 14px;
@@ -79,17 +85,32 @@
     }
   }
 
-  .stake-card-header{
-    .stake-card-header-title{
+  .business-card-header{
+    .business-card-header-title{
       font-family: Montserrat Bold;
       font-weight: bold;
       font-size: 20px;
       color: #FFFFFF;
-      margin-bottom: 4px;
+      margin: 8px;
     }
   }
 
   .overlay {
     position:absolute;
-    z-index: 9999;;
+    z-index: 9999;
+  }
+
+  @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .MuiBackdrop-root {
+      background: rgba(100, 100, 100, 0.1) !important;
+      backdrop-filter: blur(33px) !important;
+      -webkit-backdrop-filter: blur(33px) !important;
+    }
+  }
+
+  /* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
+  @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .MuiBackdrop-root {
+      background: rgba(0, 0, 0, 0.8);
+    }
   }
