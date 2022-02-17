@@ -6,3 +6,5 @@ export {default as NotFound} from "./404";
 export {default as Calculator} from "./Calculator";
 export {default as Business} from "./Business";
 export {default as NFTList} from "./NFTList";
+export {default as Ranking} from "./Ranking";
+export {default as Seasons} from "./Seasons";

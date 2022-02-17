@@ -17,8 +17,10 @@ import classnames from "classnames";
 import {useTranslation} from "react-i18next";
 import Icon from "@material-ui/core/Icon";
 import BusinessIcon from "@mui/icons-material/Business";
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
+import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
+import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 
 function NavContent() {
     const {t} = useTranslation();
@@ -44,6 +46,12 @@ function NavContent() {
             return true;
         }
         if (currentPath.indexOf("nfts") >= 0 && page === "nfts") {
+            return true;
+        }
+        if (currentPath.indexOf("ranking") >= 0 && page === "ranking") {
+            return true;
+        }
+        if (currentPath.indexOf("seasons") >= 0 && page === "seasons") {
             return true;
         }
         return false;
@@ -78,7 +86,7 @@ function NavContent() {
                         className={classnames("button-dapp-menu", {active: isActive})}
                     >
                         <div className="dapp-menu-item">
-                            <DashboardIcon  sx={{color: "white", marginRight: "8px"}} />
+                            <DashboardIcon sx={{color: "white", marginRight: "8px"}} />
                             <p>{t("Dashboard")}</p>
                         </div>
                     </Link>
@@ -94,6 +102,20 @@ function NavContent() {
                         <div className="dapp-menu-item">
                             <BusinessIcon sx={{color: "white", marginRight: "8px"}} />
                             <p>{t("Business")}</p>
+                        </div>
+                    </Link>
+
+                    <Link
+                        component={NavLink}
+                        to="/ranking"
+                        isActive={(match: any, location: any) => {
+                            return checkPage(location, "ranking");
+                        }}
+                        className={classnames("button-dapp-menu", {active: isActive})}
+                    >
+                        <div className="dapp-menu-item">
+                            <MilitaryTechIcon sx={{color: "white", marginRight: "8px"}} />
+                            <p>{t("Ranking")}</p>
                         </div>
                     </Link>
 
@@ -174,6 +196,19 @@ function NavContent() {
                 <Link href="https://nostradao.gitbook.io/nostradao/" target="_blank">
                     <img alt="" src={DocsIcon} />
                     <p>{t("Docs")}</p>
+                </Link>
+            </div>
+            <div className="dapp-menu-doc-link">
+                <Link
+                    component={NavLink}
+                    to="/seasons"
+                    isActive={(match: any, location: any) => {
+                        return checkPage(location, "seasons");
+                    }}
+                    className={classnames("button-dapp-menu", {active: isActive})}
+                >
+                    <AutoAwesomeMotionIcon style={{marginRight: 10, color: "white"}} />
+                    <p>{t("Seasons")}</p>
                 </Link>
             </div>
             <Social />

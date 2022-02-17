@@ -1,0 +1,116 @@
+.seasons-view {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    width: 89%;
+    max-width: 833px;
+    margin: auto;
+    background: rgba(36, 39, 41, 0.1);
+    border-radius: 10px;  
+    .seasons-card{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 2;
+        
+        @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+          background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(100px);
+        }
+      
+        /* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
+        @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+          background: #181B1C;
+        }
+  
+        border-radius: 10px;
+        padding: 13px;
+  
+        .card-title {
+          font-family: Montserrat Medium;
+          font-weight: 500;
+          font-size: 20px;
+          color: rgba(255, 255, 255, 0.6);
+        }
+    
+        .card-value {
+          font-family: Montserrat Bold;
+          font-weight: bold;
+          font-size: 24px;
+          font-weight: bold;
+          color: #FFFFFF;
+        }
+      
+
+      
+    }
+    
+    
+  }
+  .seasons-image-wrapper {
+    display:flex;
+    align-items: center;
+    justify-content: center;    
+  }
+
+  .seasons-card-wallet-notification{
+    text-align: center;
+
+    .seasons-card-wallet-connect-btn{
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0px 0px 10px rgba(44, 39, 109, 0.1);
+      border-radius: 10px;
+      padding: 14px 58px;
+      cursor: pointer;
+      margin: auto;
+      max-width: 280px;
+      margin-top: 20px;
+    
+      p{
+        font-family: Montserrat SemiBold;
+        font-weight: 600;
+        font-size: 18px;
+        color: #FFFFFF;
+      }
+    }
+
+    .seasons-card-wallet-desc-text{
+      font-family: Montserrat Light;
+      font-weight: 300;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+  }
+
+  .seasons-card-header{
+    .seasons-card-header-title{
+      font-family: Montserrat Bold;
+      font-weight: bold;
+      font-size: 20px;
+      color: #FFFFFF;
+      margin: 8px;
+    }
+  }
+
+  .overlay {
+    position:absolute;
+    z-index: 9999;
+  }
+
+  @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .MuiBackdrop-root {
+      background: rgba(100, 100, 100, 0.1) !important;
+      backdrop-filter: blur(33px) !important;
+      -webkit-backdrop-filter: blur(33px) !important;
+    }
+  }
+
+  /* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
+  @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .MuiBackdrop-root {
+      background: rgba(0, 0, 0, 0.8);
+    }
+  }

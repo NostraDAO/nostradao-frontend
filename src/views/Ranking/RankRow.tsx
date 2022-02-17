@@ -1,6 +1,6 @@
 import {priceUnits, trim} from "../../helpers";
 import {Paper, TableRow, TableCell, Slide, Link} from "@material-ui/core";
-import "./nft-row.scss";
+import "./rank-row.scss";
 import {Skeleton} from "@material-ui/lab";
 // import {IAllBondData} from "../../hooks/bonds";
 import {useTranslation} from "react-i18next";
@@ -20,7 +20,7 @@ export interface NftList {
     nft: INft[];
 }
 
- export function RankRow(props) {
+export function RankRow(props) {
     const {t} = useTranslation();
     return (
         <TableRow>
@@ -35,4 +35,3 @@ export interface NftList {
         </TableRow>
     );
 }
-

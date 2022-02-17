@@ -50,7 +50,6 @@ function NFTList() {
                                             <TableCell align="right">
                                                 <p className="choose-bond-view-card-table-title">{t("Purchased")}</p>
                                             </TableCell>
-                                            <TableCell align="right"></TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>

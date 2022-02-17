@@ -29,7 +29,7 @@ export function NFTRow(props) {
                     <p className="bond-name-title">{props.name}</p>
                 </div>
             </TableCell>
-            <TableCell align="left">
+            <TableCell align="right">
                 <p className="bond-name-title">{props.type}</p>
             </TableCell>
         </TableRow>

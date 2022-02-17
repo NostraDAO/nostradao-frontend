@@ -6,14 +6,15 @@ import "./ranking.scss";
 import {Skeleton} from "@material-ui/lab";
 import {IReduxState} from "../../store/slices/state.interface";
 import {useTranslation} from "react-i18next";
-import { RankRow } from "./RankRow";
+import {RankRow} from "./RankRow";
+import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
+
 const businessArray = [];
 
 function Ranking() {
     const {t} = useTranslation();
     const isSmallScreen = useMediaQuery("(max-width: 733px)"); // change to breakpoint query
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
-
 
     return (
         <div className="choose-bond-view">
@@ -36,15 +37,16 @@ function Ranking() {
                                     <TableHead>
                                         <TableRow>
                                             <TableCell align="center">
-                                                <p className="choose-bond-view-card-table-title">{t("Item")}</p>
+                                                <p className="choose-bond-view-card-table-title">
+                                                    <MilitaryTechIcon fontSize="large" />{" "}
+                                                </p>
                                             </TableCell>
                                             <TableCell align="center">
-                                                <p className="choose-bond-view-card-table-title">{t("Type")}</p>
+                                                <p className="choose-bond-view-card-table-title">{t("Business")}</p>
                                             </TableCell>
-                                            <TableCell align="right">
-                                                <p className="choose-bond-view-card-table-title">{t("Purchased")}</p>
+                                            <TableCell align="center">
+                                                <p className="choose-bond-view-card-table-title">{t("Amount minted")}</p>
                                             </TableCell>
-                                            <TableCell align="right"></TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -64,7 +66,7 @@ function Ranking() {
                     <Grid container item spacing={2}>
                         {businessArray.map(business => (
                             <Grid item xs={12} key={business.name}>
-                                <RankRow name={business.name}  /> 
+                                <RankRow name={business.name} />
                             </Grid>
                         ))}
                     </Grid>
