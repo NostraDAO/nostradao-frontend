@@ -17,7 +17,7 @@ export const loadAppDetails = createAsyncThunk(
     "app/loadAppDetails",
     //@ts-ignore
     async ({networkID, provider}: ILoadAppDetails) => {
-        const mimPrice = getTokenPrice("MIM");
+        const daiPrice = getTokenPrice("DAI");
         const addresses = getAddresses(networkID);
 
         const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, IStaking, provider);
@@ -26,7 +26,7 @@ export const loadAppDetails = createAsyncThunk(
         const sBossContract = new ethers.Contract(addresses.sBOSS_ADDRESS, sBoss, provider);
         const bossContract = new ethers.Contract(addresses.BOSS_ADDRESS, BossERC20Token, provider);
 
-        const marketPrice = ((await getMarketPrice(networkID, provider)) / Math.pow(10, 9)) * mimPrice;
+        const marketPrice = ((await getMarketPrice(networkID, provider)) / Math.pow(10, 9)) * daiPrice;
 
         const totalSupply = (await bossContract.totalSupply()) / Math.pow(10, 9);
         const circSupply = (await sBossContract.circulatingSupply()) / Math.pow(10, 9);
@@ -42,12 +42,12 @@ export const loadAppDetails = createAsyncThunk(
         const tokenAmounts = await Promise.all(tokenAmountsPromises);
         const rfvTreasury = tokenAmounts.reduce((tokenAmount0, tokenAmount1) => tokenAmount0 + tokenAmount1, 0);
 
-        const timeBondsAmountsPromises = allBonds.map(bond => bond.getBossAmount(networkID, provider));
-        const timeBondsAmounts = await Promise.all(timeBondsAmountsPromises);
-        const timeAmount = timeBondsAmounts.reduce((timeAmount0, timeAmount1) => timeAmount0 + timeAmount1, 0);
-        const timeSupply = totalSupply - timeAmount;
+        const bossBondsAmountsPromises = allBonds.map(bond => bond.getBossAmount(networkID, provider));
+        const bossBondsAmounts = await Promise.all(bossBondsAmountsPromises);
+        const bossAmount = bossBondsAmounts.reduce((bossAmount0, bossAmount1) => bossAmount0 + bossAmount1, 0);
+        const bossSupply = totalSupply - bossAmount;
 
-        const rfv = rfvTreasury / timeSupply;
+        const rfv = rfvTreasury / bossSupply;
 
         const epoch = await stakingContract.epoch();
         const stakingReward = epoch.distribute;

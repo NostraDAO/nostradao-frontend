@@ -20,7 +20,7 @@ export interface NftList {
     nft: INft[];
 }
 
-export function NFTRow(props) {
+ export function RankRow(props) {
     const {t} = useTranslation();
     return (
         <TableRow>
@@ -35,3 +35,4 @@ export function NFTRow(props) {
         </TableRow>
     );
 }
+
