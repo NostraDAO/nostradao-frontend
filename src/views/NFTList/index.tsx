@@ -7,6 +7,20 @@ import {Skeleton} from "@material-ui/lab";
 import {IReduxState} from "../../store/slices/state.interface";
 import {useTranslation} from "react-i18next";
 
+// interface nftProps {
+//     id: string;
+//     name: string;
+// }
+
+// interface nftPropsArray {
+//     [key: string]: nftProps;
+// }
+
+// const NFTRow : nftPropsArray = [
+//     "0" : {id: "1", name: "teste"},
+//     "1": {id: "2", name: "teste"},
+// ];
+
 function NFTList() {
     const {t} = useTranslation();
     const isSmallScreen = useMediaQuery("(max-width: 733px)"); // change to breakpoint query
@@ -50,8 +64,7 @@ function NFTList() {
                                     </TableHead>
                                     <TableBody>
                                         {ownedNFTs.map(nft => (
-                                            // <NFTTableData key={nft.name} nft={nft} />
-                                            <div></div>
+                                            // <NFTRow key={nft.name} nft={nft} />
                                         ))}
                                     </TableBody>
                                 </Table>
@@ -66,7 +79,7 @@ function NFTList() {
                     <Grid container item spacing={2}>
                         {ownedNFTs.map(nft => (
                             <Grid item xs={12} key={nft.name}>
-                                {/* <NFTDataCard key={nft.name} bond={bond} /> */}
+                                {/* <NFTRow key={nft.name} bond={bond} /> */}
                             </Grid>
                         ))}
                     </Grid>

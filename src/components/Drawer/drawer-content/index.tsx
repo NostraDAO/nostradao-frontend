@@ -1,10 +1,10 @@
+/* eslint-disable prettier/prettier */
 import {useCallback, useState} from "react";
 import {NavLink} from "react-router-dom";
 import Social from "./social";
 import StakeIcon from "../../../assets/icons/stake.svg";
 import BondIcon from "../../../assets/icons/bond.svg";
 import NostraIcon from "../../../assets/icons/fedora.png";
-import DashboardIcon from "../../../assets/icons/dashboard.svg";
 import {trim, shorten} from "../../../helpers";
 import {useAddress} from "../../../hooks";
 import useBonds from "../../../hooks/bonds";
@@ -15,6 +15,10 @@ import DocsIcon from "../../../assets/icons/stake.svg";
 import GlobeIcon from "../../../assets/icons/wonderglobe.svg";
 import classnames from "classnames";
 import {useTranslation} from "react-i18next";
+import Icon from "@material-ui/core/Icon";
+import BusinessIcon from "@mui/icons-material/Business";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 
 function NavContent() {
     const {t} = useTranslation();
@@ -74,7 +78,7 @@ function NavContent() {
                         className={classnames("button-dapp-menu", {active: isActive})}
                     >
                         <div className="dapp-menu-item">
-                            <img alt="" src={DashboardIcon} />
+                            <DashboardIcon  sx={{color: "white", marginRight: "8px"}} />
                             <p>{t("Dashboard")}</p>
                         </div>
                     </Link>
@@ -88,7 +92,7 @@ function NavContent() {
                         className={classnames("button-dapp-menu", {active: isActive})}
                     >
                         <div className="dapp-menu-item">
-                            <img alt="" src={DashboardIcon} />
+                            <BusinessIcon sx={{color: "white", marginRight: "8px"}} />
                             <p>{t("Business")}</p>
                         </div>
                     </Link>
@@ -102,7 +106,7 @@ function NavContent() {
                         className={classnames("button-dapp-menu", {active: isActive})}
                     >
                         <div className="dapp-menu-item">
-                            <img alt="" src={DashboardIcon} />
+                            <FaceRetouchingNaturalIcon sx={{color: "white", marginRight: "8px"}} />
                             <p>{t("My NFTs")}</p>
                         </div>
                     </Link>
