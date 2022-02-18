@@ -8,3 +8,4 @@ export {default as Business} from "./Business";
 export {default as NFTList} from "./NFTList";
 export {default as Ranking} from "./Ranking";
 export {default as Seasons} from "./Seasons";
+export {default as Announcements} from "./Announcements";

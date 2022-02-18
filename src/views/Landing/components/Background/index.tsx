@@ -9,7 +9,9 @@ function Background() {
             <div className="landing-background-blobs-top">
                 <img alt="" src={BlobsTop} />
             </div>
-            <img alt="" src={Gangster} style={{filter: "blur(8px)"}} />
+            <div className="landing-background-wrapper">
+                <img alt="" src={Gangster} style={{filter: "blur(2px)"}} />
+            </div>
         </div>
     );
 }

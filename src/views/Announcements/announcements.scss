@@ -1,4 +1,4 @@
-.seasons-view {
+.announ-view {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -8,7 +8,7 @@
     margin: auto;
     background: rgba(36, 39, 41, 0.1);
     border-radius: 10px;  
-    .seasons-card{
+    .announ-card{
         display: flex;
         flex-direction: column;
         position: relative;
@@ -53,16 +53,16 @@
     
     
   }
-  .seasons-image-wrapper {
+  .announ-image-wrapper {
     display:flex;
     align-items: center;
     justify-content: center;    
   }
 
-  .seasons-card-wallet-notification{
+  .announ-card-wallet-notification{
     text-align: center;
 
-    .seasons-card-wallet-connect-btn{
+    .announ-card-wallet-connect-btn{
       background: rgba(255, 255, 255, 0.2);
       box-shadow: 0px 0px 10px rgba(44, 39, 109, 0.1);
       border-radius: 10px;
@@ -80,7 +80,7 @@
       }
     }
 
-    .seasons-card-wallet-desc-text{
+    .announ-card-wallet-desc-text{
       font-family: Montserrat Light;
       font-weight: 300;
       font-size: 14px;
@@ -90,8 +90,8 @@
     }
   }
 
-  .seasons-card-header{
-    .seasons-card-header-title{
+  .announ-card-header{
+    .announ-card-header-title{
       font-family: Montserrat Bold;
       font-weight: bold;
       font-size: 20px;

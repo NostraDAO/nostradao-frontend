@@ -4,6 +4,17 @@
     right: 0;
     left: 0;
     bottom: 0;
+    z-index: 1;
+    overflow: auto;
+
+    .landing-background-wrapper {
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        img {
+            width: 40%;
+        }
+    }
 
     .landing-background-blobs-top{
         position: absolute;

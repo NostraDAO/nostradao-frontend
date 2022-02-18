@@ -63,9 +63,9 @@ function Header(props) {
                         )}
                     </Popper>
                 </Box>
-                <div className="landing-header-nav-text">
+                {/* <div className="landing-header-nav-text">
                     <Toggle theme={theme} toggleTheme={toggleTheme} />
-                </div>
+                </div> */}
             </div>
         </div>
     );

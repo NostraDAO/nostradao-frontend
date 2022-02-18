@@ -9,7 +9,7 @@ import {IReduxState} from "../store/slices/state.interface";
 import Loading from "../components/Loader";
 import useBonds from "../hooks/bonds";
 import ViewBase from "../components/ViewBase";
-import {Stake, ChooseBond, Bond, Dashboard, NotFound, Calculator, Business, NFTList, Ranking, Seasons} from "../views";
+import {Stake, ChooseBond, Bond, Dashboard, NotFound, Calculator, Business, NFTList, Ranking, Seasons, Announcements} from "../views";
 import "./style.scss";
 import useTokens from "../hooks/tokens";
 
@@ -149,6 +149,10 @@ function App() {
 
                 <Route path="/seasons">
                     <Seasons />
+                </Route>
+
+                <Route path="/announcements">
+                    <Announcements />
                 </Route>
 
                 <Route component={NotFound} />

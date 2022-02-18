@@ -24,13 +24,17 @@ export function RankRow(props) {
     const {t} = useTranslation();
     return (
         <TableRow>
-            <TableCell align="left">
+            <TableCell align="center">
                 <div className="bond-name">
                     <p className="bond-name-title">{props.name}</p>
                 </div>
             </TableCell>
-            <TableCell align="left">
+            <TableCell align="center">
                 <p className="bond-name-title">{props.type}</p>
+            </TableCell>
+
+            <TableCell align="center">
+                <p className="bond-name-title">{props.minted}</p>
             </TableCell>
         </TableRow>
     );

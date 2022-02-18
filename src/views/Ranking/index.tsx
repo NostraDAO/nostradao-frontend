@@ -8,8 +8,26 @@ import {IReduxState} from "../../store/slices/state.interface";
 import {useTranslation} from "react-i18next";
 import {RankRow} from "./RankRow";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
+import TrophyIcon from "@mui/icons-material/EmojiEvents";
+import Stack from "@mui/material/Stack";
 
-const businessArray = [];
+const businessArray = [
+    {
+        name: "Business 1",
+        type: "BarberShop",
+        minted: 2000000,
+    },
+    {
+        name: "Business 2",
+        type: "Diner",
+        minted: 1000000,
+    },
+    {
+        name: "Business 3",
+        type: "Restaurant",
+        minted: 1000000,
+    },
+];
 
 function Ranking() {
     const {t} = useTranslation();
@@ -32,6 +50,16 @@ function Ranking() {
 
                     {!isSmallScreen && (
                         <Grid container item>
+                            <Stack direction="row" alignItems="center" spacing={4} className="choose-bond-view-card-header">
+                                <div>
+                                    {" "}
+                                    <TrophyIcon fontSize="large" style={{color: "white"}} />{" "}
+                                </div>
+                                <div>
+                                    {" "}
+                                    <p className="choose-bond-view-card-title">Winner: </p>{" "}
+                                </div>
+                            </Stack>
                             <TableContainer className="choose-bond-view-card-table">
                                 <Table>
                                     <TableHead>
@@ -51,7 +79,7 @@ function Ranking() {
                                     </TableHead>
                                     <TableBody>
                                         {businessArray.map(business => (
-                                            <RankRow name={business.name} />
+                                            <RankRow name={business.name} type={business.type} minted={business.minted} />
                                         ))}
                                     </TableBody>
                                 </Table>
@@ -63,6 +91,16 @@ function Ranking() {
 
             {isSmallScreen && (
                 <div className="choose-bond-view-card-container">
+                    <Stack direction="row" alignItems="center" spacing={2} className="choose-bond-view-card-header">
+                        <div>
+                            {" "}
+                            <TrophyIcon fontSize="large" style={{color: "white"}} />{" "}
+                        </div>
+                        <div>
+                            {" "}
+                            <p className="choose-bond-view-card-title">Winner: </p>{" "}
+                        </div>
+                    </Stack>
                     <Grid container item spacing={2}>
                         {businessArray.map(business => (
                             <Grid item xs={12} key={business.name}>

@@ -124,6 +124,12 @@ function Dashboard() {
                                 <p className="card-value">{isAppLoading ? <Skeleton width="250px" /> : `${trim(Number(app.runway), 1)} ${t("Holders")}`}</p>
                             </div>
                         </Grid>
+                        <Grid item lg={6} md={6} sm={6} xs={12}>
+                            <div className="dashboard-card">
+                                <p className="card-title">{t("Current Prize for Season 1")}</p>
+                                <p className="card-value">{isAppLoading ? <Skeleton width="250px" /> : "$" + `${trim(Number(app.runway), 1)} ${t("")}`}</p>
+                            </div>
+                        </Grid>
                     </Grid>
                 </Zoom>
             </div>

@@ -21,6 +21,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
+import CampaignIcon from '@mui/icons-material/Campaign';
 
 function NavContent() {
     const {t} = useTranslation();
@@ -54,6 +55,9 @@ function NavContent() {
         if (currentPath.indexOf("seasons") >= 0 && page === "seasons") {
             return true;
         }
+        if (currentPath.indexOf("announcements") >= 0 && page === "announcements") {
+            return true;
+        }
         return false;
     }, []);
 
@@ -77,6 +81,20 @@ function NavContent() {
 
             <div className="dapp-menu-links">
                 <div className="dapp-nav">
+                    <Link
+                        component={NavLink}
+                        to="/announcements"
+                        isActive={(match: any, location: any) => {
+                            return checkPage(location, "announcements");
+                        }}
+                        className={classnames("button-dapp-menu", {active: isActive})}
+                    >
+                        <div className="dapp-menu-item">
+                            <CampaignIcon sx={{color: "white", marginRight: "8px"}} />
+                            <p>{t("Announcements")}</p>
+                        </div>
+                    </Link>
+
                     <Link
                         component={NavLink}
                         to="/dashboard"

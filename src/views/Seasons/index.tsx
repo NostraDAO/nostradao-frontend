@@ -32,11 +32,13 @@ function Seasons(props: any) {
                     <Grid className="seasons-card-grid" container direction="column" spacing={2}>
                         <Grid item>
                             <div className="seasons-card-header">
-                                <p className="seasons-card-header-title">{t("Choose a Business")} </p>
+                                <p className="seasons-card-header-title">{t("Seasons")} </p>
                             </div>
                         </Grid>
                         <Grid item>
-                                <div className="seasons-card-action-area">
+                            <div className="seasons-card-content">
+                                <p className="card-title">{t("Season 1")} </p>
+                                <p className="card-description">{t("Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum, distinctio! ")} </p>
                                 </div>
                         </Grid>
                     </Grid>
