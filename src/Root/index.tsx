@@ -8,10 +8,10 @@ import "../i18n/config";
 
 function Root() {
     const isApp = (): boolean => {
-        // if (window.location.hash !== " ") {
-        //     return true;
-        // }
-        return false; //window.location.host.includes("app");
+        if (window.location.hash !== "dashboard") {
+            return true;
+        }
+        //return true; window.location.host.includes("app");
     };
     const [loading, setLoading] = useState(true);
 
