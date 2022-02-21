@@ -11,7 +11,7 @@ function Root() {
         // if (window.location.hash !== " ") {
         //     return true;
         // }
-        return true; //window.location.host.includes("app");
+        return false; //window.location.host.includes("app");
     };
     const [loading, setLoading] = useState(true);
 
