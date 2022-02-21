@@ -9,3 +9,4 @@ export {default as NFTList} from "./NFTList";
 export {default as Ranking} from "./Ranking";
 export {default as Seasons} from "./Seasons";
 export {default as Announcements} from "./Announcements";
+export {default as Landing} from "./Landing";

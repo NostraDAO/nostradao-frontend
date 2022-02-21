@@ -112,10 +112,6 @@ function App() {
                     <Dashboard />
                 </Route>
 
-                <Route exact path="/">
-                    <Redirect to="/stake" />
-                </Route>
-
                 <Route path="/stake">
                     <Stake />
                 </Route>

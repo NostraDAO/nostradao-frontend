@@ -1,15 +1,20 @@
 import React, {useEffect, useState} from "react";
 import App from "./App";
 import Landing from "./Landing";
-import {HashRouter} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import {loadTokenPrices} from "../helpers";
 import Loading from "../components/Loader";
 import "../i18n/config";
 
 function Root() {
     const isApp = (): boolean => {
-        if (window.location.hash !== "dashboard") {
+        if (window.location.href.includes("dashboard") || window.location.href.includes("stake")) {
+            console.log("entrou no dashboard");
             return true;
+        }
+        if (window.location.href.includes("")) {
+            console.log("entrou no vazio");
+            return false;
         }
         //return true; window.location.host.includes("app");
     };
@@ -22,9 +27,9 @@ function Root() {
     if (loading) return <Loading />;
 
     const app = () => (
-        <HashRouter>
+        <BrowserRouter>
             <App />
-        </HashRouter>
+        </BrowserRouter>
     );
 
     return isApp() ? app() : <Landing />;
