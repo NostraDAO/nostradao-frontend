@@ -211,7 +211,7 @@ function NavContent() {
                 </div>
             </div>
             <div className="dapp-menu-doc-link">
-                <Link href="https://nostradao.gitbook.io/nostradao/" target="_blank">
+                <Link href="http://bit.ly/NostraCity" target="_blank">
                     <img alt="" src={DocsIcon} />
                     <p>{t("Docs")}</p>
                 </Link>

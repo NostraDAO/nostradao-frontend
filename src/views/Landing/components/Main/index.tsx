@@ -23,7 +23,7 @@ function Main() {
                         <p>{t("Enter App")}</p>
                     </div>
                 </Link>
-                <Link href="https://nostradao.gitbook.io/nostradao/" target="_blank" rel="noreferrer">
+                <Link href="http://bit.ly/NostraCity" target="_blank" rel="noreferrer">
                     <div className="landing-main-btn">
                         <p>{t("Documentation")}</p>
                     </div>
