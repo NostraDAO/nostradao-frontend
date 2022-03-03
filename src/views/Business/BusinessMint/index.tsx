@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from "@material-ui/core/styles";
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   root: {

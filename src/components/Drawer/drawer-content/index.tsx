@@ -40,9 +40,9 @@ function NavContent() {
         if (currentPath.indexOf("bonds") >= 0 && page === "bonds") {
             return true;
         }
-        if (currentPath.indexOf("calculator") >= 0 && page === "calculator") {
-            return true;
-        }
+        // if (currentPath.indexOf("calculator") >= 0 && page === "calculator") {
+        //     return true;
+        // }
         if (currentPath.indexOf("business") >= 0 && page === "business") {
             return true;
         }
@@ -195,7 +195,7 @@ function NavContent() {
                         ))}
                     </div>
 
-                    <Link
+                    {/* <Link
                         component={NavLink}
                         to="/calculator"
                         isActive={(match: any, location: any) => {
@@ -207,7 +207,7 @@ function NavContent() {
                             <img alt="" src={GlobeIcon} />
                             <p>{t("Calculator")}</p>
                         </div>
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
             <div className="dapp-menu-doc-link">

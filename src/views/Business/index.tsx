@@ -32,6 +32,8 @@ import Areas from "./areas.json";
 import {BusinessMint} from "./BusinessMint";
 import Input from "@mui/material/Input";
 
+
+
 const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -80,8 +82,7 @@ function Business(props: any) {
     }
 
     function handleMint(){
-        console.log('minted');
-    }
+     }
 
     return (
         <div className="business-view">
